@@ -87,18 +87,19 @@ def NETWORK(x, input_shape=[32,32,3]):
         with tf.variable_scope("gap"):
             gap = global_average_pool_6x6(conv7);
 
-        with tf.variable_scope("fcl1"):
-            conv4_flat = tf.reshape(conv4, [-1, 32 * 32 * 32])
-            output = fcl(conv4_flat, [32*32*32, 10], [10])
-            softmax = tf.nn.softmax(output)
+        # with tf.variable_scope("fcl1"):
+        #     conv1_flat = tf.reshape(conv1, [-1, 32 * 32 * 96])
+        #     output = fcl(conv1_flat, [32*32*96, 10], [10])
+        #     softmax = tf.nn.softmax(output)
 
-        # with tf.variable_scope("softmax"):
-        #     softmax = tf.nn.softmax(gap)
+        with tf.variable_scope("softmax"):
+            gap_flat = tf.reshape(gap, [-1, 10]) # change the shape from ?,1,1,10 to ?,10
+            softmax = tf.nn.softmax(gap_flat)
 
     return softmax
 
 def next_batch(imgs, labels, batch, batch_size):
-    batch_xs = imgs[batch*batch_size : (batch+1)*batch_size]
+    batch_xs = imgs[batch * batch_size : (batch+1) * batch_size]
     batch_ys = labels[batch * batch_size: (batch + 1) * batch_size]
     return batch_xs, batch_ys
 
