@@ -20,11 +20,25 @@ The CNN model used here differs from standard CNN in several key aspects:
 1. The pooling layers are replaced with convolutional layers with stride two.
 2. Small convolutional layers with k < 5 are used, which can greatly reduce the number of parameters in a network and thus serve as a form of regularization.
 3. If the image area covered by units in the topmost convolutional layer covers a portion of the image large enough to recognize its content (i.e. the object we want to recognize) then fully connected layers can also be replaced by simple 1-by-1 convolutions.
-4. A global average pooling is used. For normal CNN, 
+4. A global average pooling is used.
 
 ## Derived Model
+![](https://leanote.com/api/file/getImage?fileId=59dbf4b1ab64415777000403)
 ### Strided-CNN-C
 A model in which max-pooling is removed and the stride of the convolution layers preceding the max-pool layers is increased by 1 (to ensure that the next layer covers the same spatial region of the input image as before). 
 
 ### All-CNN-C
 A model in which max-pooling is replaced by a convolution layer.
+
+## Optimization
+### Layer-sequential unit-variance (LSUV) initialization
+After the success of CNNs in IVSRC 2012 (Krizhevsky et al. (2012)), initialization with Gaussian noise with mean equal to zero and standard deviation set to 0.01 and adding bias equal to one for some layers become very popular. However, it is not possible to train very deep network from scratch with it (Simonyan & Zisserman (2015)). The problem is caused by the activation (and/or) gradient magnitude in final layers (He et al. (2015)). If each layer, not properly initialized, scales input by k, the final scale would be kL, where L is a number of layers. Values of k > 1 lead to extremely large values of output layers, k < 1 leads to a diminishing signal and gradient.
+
+Glorot & Bengio (2010) proposed a formula for estimating the standard deviation on the basis of the number of input and output channels of the layers under assumption of no non-linearity between layers. 
+
+Layer-sequential unit-variance (LSUV) initialization is a data-driven weights initialization that extends the orthonormal initialization Saxe et al. (2014) to an iterative procedure. There are two main steps:
+
+1. First, fill the weights with Gaussian noise with unit variance. 
+2. Second, decompose them to orthonormal basis with QR or SVD- decomposition and replace weights with one of the components.
+
+![](https://leanote.com/api/file/getImage?fileId=59dbf6c1ab6441555200040c)
