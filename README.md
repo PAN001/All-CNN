@@ -36,9 +36,10 @@ After the success of CNNs in IVSRC 2012 (Krizhevsky et al. (2012)), initializati
 
 Glorot & Bengio (2010) proposed a formula for estimating the standard deviation on the basis of the number of input and output channels of the layers under assumption of no non-linearity between layers. 
 
-Layer-sequential unit-variance (LSUV) initialization is a data-driven weights initialization that extends the orthonormal initialization Saxe et al. (2014) to an iterative procedure. There are two main steps:
+Layer-sequential unit-variance (LSUV) initialization is a data-driven weights initialization that extends the orthonormal initialization Saxe et al. (2014) to an iterative procedure. The proposed scheme can be viewed as an orthonormal initialization combined with batch normalization performed only on the first mini-batch. There are two main steps:
 
 1. First, fill the weights with Gaussian noise with unit variance. 
-2. Second, decompose them to orthonormal basis with QR or SVD- decomposition and replace weights with one of the components.
+2. Second, decompose them to orthonormal basis with QR or SVD-decomposition and replace weights with one of the components.
+3. Third, estimate output variance of each convolution and inner product layer and scale the weight to make variance equal to one.
 
 ![](https://leanote.com/api/file/getImage?fileId=59dbf6c1ab6441555200040c)

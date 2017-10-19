@@ -12,10 +12,11 @@ def load_cifar10(path):
     for i in range(5):
         with open(path+"/data_batch_"+str(i+1), "rb") as db:
              db_set = pickle.load(db)
-             ds["data_"+str(i+1)], ds["labels_"+str(i+1)] = reshape_cifar10(db_set[b"data"]), db_set[b"labels"]
+             ds["data_"+str(i+1)], ds["labels_"+str(i+1)] = reshape_cifar10(db_set[b"data"]), np.array(db_set[b"labels"])
+
     with open(path+"/test_batch", "rb") as tb:
         test_set = pickle.load(tb)
-        ds["test_data"], ds["test_labels"] = reshape_cifar10(test_set[b"data"]), test_set[b"labels"]
+        ds["test_data"], ds["test_labels"] = reshape_cifar10(test_set[b"data"]), np.array(test_set[b"labels"])
         ds["data_display_" + str(i + 1)] = np.transpose(np.reshape(ds["data_" + str(i + 1)], (len(ds["data_" + str(i + 1)]), 3, 32, 32)), (0, 2, 3, 1))
         ds["test_data_display"] = np.transpose(np.reshape(ds["test_data"], (len(ds["test_data"]), 3, 32, 32)), (0, 2, 3, 1))
 
