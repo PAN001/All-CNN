@@ -62,11 +62,11 @@ def NETWORK(x, input_shape=[32,32,3]):
             conv4 = conv_relu(conv3, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=2) # # 3*3 filter, 192 input channel, 192 filters (output channel)
             # conv4: ?,8,8,192
 
-        with tf.variable_scope("conv5"):
-            conv5 = conv_relu(conv4, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=1) # # 3*3 filter, 192 input channel, 192 filters (output channel)
-            # conv5: ?,8,8,192
+        # with tf.variable_scope("conv5"):
+        #     conv5 = conv_relu(conv4, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=1) # # 3*3 filter, 192 input channel, 192 filters (output channel)
+        #     # conv5: ?,8,8,192
         with tf.variable_scope("conv6"):
-            conv6 = conv_relu(conv5, kernel_shape=[1, 1, 192, 192], bias_shape=[192], stride=1, padding="VALID") # # 1*1 filter, 192 input channel, 192 filters (output channel)
+            conv6 = conv_relu(conv4, kernel_shape=[1, 1, 192, 192], bias_shape=[192], stride=1, padding="VALID") # # 1*1 filter, 192 input channel, 192 filters (output channel)
             # conv6: ?,8,8,192
         with tf.variable_scope("conv7"):
             conv7 = conv_relu(conv6, kernel_shape=[1, 1, 192, 10], bias_shape=[10], stride=1, padding="VALID") # # 1*1 filter, 192 input channel, 10 filters (output channel)

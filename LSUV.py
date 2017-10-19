@@ -10,7 +10,7 @@ def svd_orthonormal(shape):
         raise RuntimeError("Only shapes of length 2 or more are supported.")
     flat_shape = (shape[0], np.prod(shape[1:]))
     a = np.random.standard_normal(flat_shape)
-    u, _, v = np.linalg.svd(a, full_matrices=False)
+    u, _, v = np.linalg.svd(a, full_matrices = False)
     q = u if u.shape == flat_shape else v
     q = q.reshape(shape)
     return q
