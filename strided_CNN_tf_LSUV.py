@@ -16,7 +16,7 @@ test_step = 50
 batch_size = 256
 seed = 1
 np.random.seed(seed)
-tf.set_random_seed(2)
+tf.set_random_seed(1)
 
 def summary(labels):
     """ Output the summary infomation of the prediction to the standard output
