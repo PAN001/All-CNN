@@ -12,6 +12,7 @@ from next_batch import *
 learning_rate = 1e-3
 training_epochs = 10
 display_step = 1
+test_step = 30
 batch_size = 256
 seed = 1
 np.random.seed(seed)
@@ -274,6 +275,13 @@ for epoch in range(training_epochs):
             print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
             print("Epoch " + str(epoch) + ", Batch " + str(batch) + ", Minibatch Loss = " + str(loss) + ", Training Accuracy = " + "{:.5f}".format(acc))
+
+        if batch % test_step == 0:
+            # Calculate accuracy on test data
+            print("Testing Accuracy:",
+                  sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 1.}))
+
+
 print("Optimization Finished!")
 
 # Calculate accuracy on test data
