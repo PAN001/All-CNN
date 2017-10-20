@@ -12,7 +12,7 @@ from next_batch import *
 learning_rate = 1e-3
 training_epochs = 10
 display_step = 1
-test_step = 30
+test_step = 10
 batch_size = 256
 seed = 1
 np.random.seed(seed)
