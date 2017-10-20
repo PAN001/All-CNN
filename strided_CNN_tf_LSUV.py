@@ -12,7 +12,7 @@ from next_batch import *
 learning_rate = 1e-3
 training_epochs = 10
 display_step = 1
-batch_size = 128
+batch_size = 256
 seed = 1
 np.random.seed(seed)
 tf.set_random_seed(seed)
@@ -178,8 +178,8 @@ with tf.name_scope('cost'):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax, labels=labels))
 
 with tf.name_scope('optimizer'):
-    # optimizer = tf.train.RMSPropOptimizer(learning_rate, decay=0.0, momentum=0.0, epsilon=1e-8,).minimize(cost) # train
-    optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
+    optimizer = tf.train.RMSPropOptimizer(0.01, decay=0.001, momentum=0.0, epsilon=1e-8,).minimize(cost) # train
+    # optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
 with tf.name_scope('accuracy'):
     correct_prediction = tf.equal(tf.argmax(softmax, 1), tf.argmax(labels, 1))
