@@ -184,7 +184,7 @@ for layerCnt in layers:
     # pre-initialize with orthonormal matrices
     s, u, v = tf.svd(tf.transpose(locals()[weightsName], [2,3,0,1]))
     assign_weight = (locals()[weightsName]).assign(tf.transpose(u, [2,3,0,1])) # update orthonormal weights
-    output = sess.run(locals()[layerName], feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
+    output = sess.run(locals()[layerName], feed_dict={X: batch_LSUV, Y: training_labels_shuffled, keep_prob: 0.5})  ## run one forward pass
     # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
     var = np.var(output)
     print("starting var is: ", var)
@@ -195,12 +195,12 @@ for layerCnt in layers:
     while (abs(target_var - var) > margin):
         # update weights based on the variance of the output
         weights_update = tf.assign(locals()[weightsName], tf.div(locals()[weightsName], tf.sqrt(var)))
-        sess.run(weights_update, feed_dict={X: batch_LSUV})
+        sess.run(weights_update, feed_dict={X: batch_LSUV, keep_prob: 0.5})
 
         # mean, var = tf.nn.moments(locals()[layerName], axes=[0,1,2,3]) # get the variance
 
         output = sess.run(locals()[layerName],
-                          feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
+                          feed_dict={X: batch_LSUV, Y: training_labels_shuffled, keep_prob: 0.5})  ## run one forward pass
         # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
         var = np.var(output)
         print("cur var is: ", var)
