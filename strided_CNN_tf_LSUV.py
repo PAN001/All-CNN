@@ -13,7 +13,7 @@ learning_rate = 1e-3
 training_epochs = 10
 display_step = 1
 test_step = 50
-batch_size = 128
+batch_size = 256
 seed = 1
 np.random.seed(seed)
 tf.set_random_seed(2)
