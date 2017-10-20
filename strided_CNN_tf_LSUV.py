@@ -15,7 +15,7 @@ display_step = 1
 batch_size = 128
 seed = 1
 np.random.seed(seed)
-
+tf.set_random_seed(seed)
 
 def summary(labels):
     """ Output the summary infomation of the prediction to the standard output
@@ -190,57 +190,55 @@ accuracy = tf.reduce_mean(correct_prediction)
 sess = tf.InteractiveSession()
 sess.run(tf.global_variables_initializer()) # has to be here
 
-# LSUV normalization
-margin = 1e-6
-max_iter = 10
-layers_cnt = 0
-layers = range(1, 8)
-training_data_shuffled, training_labels_shuffled = shuffle(ds["training_data"], ds["training_labels"])
-training_data_shuffled_normalized = training_data_shuffled / 255.0  # normalized
-batch_LSUV = training_data_shuffled_normalized[0:batch_size]
-for layerCnt in layers:
-    layerName = "conv" + str(layerCnt)
-    weightsName = "weights" + str(layerCnt)
-
-    # # as layers with few weights tend to have a zero variance, only do LSUV for complicated layers
-    # if np.prod(layer.get_output_shape_at(0)[1:]) < 32:
-    #     print(layer.name, 'with output shape fewer than 32, not inited with LSUV')
-    #     continue
-
-    print('LSUV initializing', layerName)
-    layers_cnt += 1
-
-    # pre-initialize with orthonormal matrices
-    s, u, v = tf.svd(tf.transpose(locals()[weightsName], [2,3,0,1]))
-    assign_weight = (locals()[weightsName]).assign(tf.transpose(u, [2,3,0,1])) # update orthonormal weights
-    output = sess.run(locals()[layerName], feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
-    # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
-    var = np.var(output)
-    print("starting var is: ", var)
-
-    iter = 0
-    target_var = 1.0 # the targeted variance
-
-    while (abs(target_var - var) > margin):
-        # update weights based on the variance of the output
-        weights_update = tf.assign(locals()[weightsName], tf.div(locals()[weightsName], tf.sqrt(var)))
-        sess.run(weights_update, feed_dict={X: batch_LSUV})
-
-        # mean, var = tf.nn.moments(locals()[layerName], axes=[0,1,2,3]) # get the variance
-
-        output = sess.run(locals()[layerName],
-                          feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
-        # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
-        var = np.var(output)
-        print("cur var is: ", var)
-
-        iter = iter + 1
-        if iter > max_iter:
-            break
-
-print('LSUV: total layers initialized', layers_cnt)
-
-
+# # LSUV normalization
+# margin = 1e-6
+# max_iter = 10
+# layers_cnt = 0
+# layers = range(1, 8)
+# training_data_shuffled, training_labels_shuffled = shuffle(ds["training_data"], ds["training_labels"])
+# training_data_shuffled_normalized = training_data_shuffled / 255.0  # normalized
+# batch_LSUV = training_data_shuffled_normalized[0:batch_size]
+# for layerCnt in layers:
+#     layerName = "conv" + str(layerCnt)
+#     weightsName = "weights" + str(layerCnt)
+#
+#     # # as layers with few weights tend to have a zero variance, only do LSUV for complicated layers
+#     # if np.prod(layer.get_output_shape_at(0)[1:]) < 32:
+#     #     print(layer.name, 'with output shape fewer than 32, not inited with LSUV')
+#     #     continue
+#
+#     print('LSUV initializing', layerName)
+#     layers_cnt += 1
+#
+#     # pre-initialize with orthonormal matrices
+#     s, u, v = tf.svd(tf.transpose(locals()[weightsName], [2,3,0,1]))
+#     assign_weight = (locals()[weightsName]).assign(tf.transpose(u, [2,3,0,1])) # update orthonormal weights
+#     output = sess.run(locals()[layerName], feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
+#     # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
+#     var = np.var(output)
+#     print("starting var is: ", var)
+#
+#     iter = 0
+#     target_var = 1.0 # the targeted variance
+#
+#     while (abs(target_var - var) > margin):
+#         # update weights based on the variance of the output
+#         weights_update = tf.assign(locals()[weightsName], tf.div(locals()[weightsName], tf.sqrt(var)))
+#         sess.run(weights_update, feed_dict={X: batch_LSUV})
+#
+#         # mean, var = tf.nn.moments(locals()[layerName], axes=[0,1,2,3]) # get the variance
+#
+#         output = sess.run(locals()[layerName],
+#                           feed_dict={X: batch_LSUV, Y: training_labels_shuffled})  ## run one forward pass
+#         # mean, var = tf.nn.moments(locals()[layerName], axes=[0, 1, 2, 3])  # get the variance
+#         var = np.var(output)
+#         print("cur var is: ", var)
+#
+#         iter = iter + 1
+#         if iter > max_iter:
+#             break
+#
+# print('LSUV: total layers initialized', layers_cnt)
 
 total_batch = int(50000/batch_size)
 
@@ -265,6 +263,9 @@ for epoch in range(training_epochs):
             # conv1_activation = sess.run(conv1, feed_dict={X: batch_xs, Y: batch_ys})
             # print "conv1 activation: ", conv1_activation
             # print "conv5 activation: ", sess.run(conv5, feed_dict={X: batch_xs, Y: batch_ys})
+
+            conv1_weights = locals()["weights1"]
+            print conv1_weights.eval()[0][0][0]
             pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
             print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
