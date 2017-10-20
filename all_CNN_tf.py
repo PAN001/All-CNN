@@ -93,9 +93,13 @@ with tf.name_scope("All-CNN"):
     with tf.variable_scope("conv3"):
         conv3, weights3 = conv_relu(conv2, kernel_shape=[3, 3, 96, 192], bias_shape=[192],
                                     stride=2)  # # 3*3 filter, 96 input channel, 192 filters (output channel)
+
+    with tf.variable_scope("dropout1"):
+        conv3_drop = tf.nn.dropout(conv3, keep_prob)
+
         # conv3: ?,16,16,192
     with tf.variable_scope("conv4"):
-        conv4, weights4 = conv_relu(conv3, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
+        conv4, weights4 = conv_relu(conv3_drop, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
                                     stride=1)  # # 3*3 filter, 192 input channel, 192 filters (output channel)
         # conv4: ?,8,8,192
     with tf.variable_scope("conv5"):
@@ -106,10 +110,12 @@ with tf.name_scope("All-CNN"):
         conv6, weights6 = conv_relu(conv5, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
                                     stride=2)  # # 1*1 filter, 192 input channel, 192 filters (output channel)
 
+    with tf.variable_scope("dropout2"):
+        conv6_drop = tf.nn.dropout(conv6, keep_prob)
 
-        # conv6: ?,6,6,192
+            # conv6: ?,6,6,192
     with tf.variable_scope("conv7"):
-        conv7, weights7 = conv_relu(conv6, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=1,
+        conv7, weights7 = conv_relu(conv6_drop, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=1,
                                     padding="VALID")  # # 1*1 filter, 192 input channel, 192 filters (output channel)
         # conv7: ?,6,6,10
 
@@ -222,31 +228,31 @@ for epoch in range(training_epochs):
         print summary(batch_ys)
 
         # batch_ys_onehot = tf.one_hot(batch_ys, 10, axis=-1, name="targets", dtype="int64")
-        sess.run(optimizer, feed_dict={X: batch_xs, Y: batch_ys})
+        sess.run(optimizer, feed_dict={X: batch_xs, Y: batch_ys, keep_prob: 0.5})
         # batch_ys = tf.one_hot(batch_ys, 10, axis=-1, name="targets", dtype="int64") # covert to one-hot
         if (batch % display_step == 0):
             # conv1_activation = sess.run(conv1, feed_dict={X: batch_xs, Y: batch_ys})
             # print "conv1 activation: ", conv1_activation
             # print "conv5 activation: ", sess.run(conv5, feed_dict={X: batch_xs, Y: batch_ys})
 
-            conv1_weights = locals()["weights1"]
-            print conv1_weights.eval()[0][0][0]
+            # conv1_weights = locals()["weights1"]
+            # print conv1_weights.eval()[0][0][0]
 
             conv6_weights = locals()["weights6"]
             print conv6_weights.eval()[0][0][0]
 
-            pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
+            pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys, keep_prob: 0.5})
             print np.argmax(pred, axis = 1)
-            loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
+            loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys, keep_prob: 0.5})
             print("Epoch " + str(epoch) + ", Batch " + str(batch) + ", Minibatch Loss = " + str(loss) + ", Training Accuracy = " + "{:.5f}".format(acc))
 
         if batch % test_step == 0:
             # Calculate accuracy on test data
             print("Testing Accuracy:",
-                  sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 1.}))
+                  sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 0.5}))
 
 
 print("Optimization Finished!")
 
 # Calculate accuracy on test data
-print("Testing Accuracy:", sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 1.}))
+print("Testing Accuracy:", sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 0.5}))
