@@ -178,7 +178,7 @@ with tf.name_scope('cost'):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax, labels=labels))
 
 with tf.name_scope('optimizer'):
-    optimizer = tf.train.RMSPropOptimizer(0.01, decay=0.001, momentum=0.0, epsilon=1e-8,).minimize(cost) # train
+    optimizer = tf.train.RMSPropOptimizer(0.1, decay=0.001, momentum=0.0, epsilon=1e-8,).minimize(cost) # train
     # optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
 with tf.name_scope('accuracy'):
@@ -266,6 +266,10 @@ for epoch in range(training_epochs):
 
             conv1_weights = locals()["weights1"]
             print conv1_weights.eval()[0][0][0]
+
+            conv6_weights = locals()["weights6"]
+            print conv6_weights.eval()[0][0][0]
+
             pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
             print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
