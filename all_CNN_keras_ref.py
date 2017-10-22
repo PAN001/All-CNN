@@ -1,4 +1,5 @@
 from __future__ import print_function
+from __future__ import division
 import tensorflow as tf
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
@@ -10,6 +11,10 @@ from keras import backend as K
 from keras.models import Model
 from keras.layers.core import Lambda
 from keras.callbacks import ModelCheckpoint
+from shuffle import *
+from next_batch import *
+from LSUV import *
+
 # import pandas
 # import cv2
 import numpy as np
@@ -111,6 +116,11 @@ X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
+
+# initialize the model using LSUV
+training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+batch_xs_init = training_data_shuffled[0:batch_size]
+LSUV_init(model, batch_xs_init)
 
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
