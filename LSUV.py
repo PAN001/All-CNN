@@ -9,7 +9,9 @@ def svd_orthonormal(shape):
     print(shape)
     if len(shape) < 2:
         raise RuntimeError("Only shapes of length 2 or more are supported.")
+    print(shape)
     flat_shape = (shape[0], np.prod(shape[1:]))
+    print(flat_shape)
     a = np.random.standard_normal(flat_shape)
     # a = np.random.normal(0, 0.01, flat_shape)
     u, _, v = np.linalg.svd(a, full_matrices = False)
@@ -59,7 +61,7 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
             # update weights based on the variance of the output
             weights_all = layer.get_weights()
             weights = np.array(weights_all[0])
-            print(weights)
+            # print(weights)
             biases = np.array(weights_all[1])
             # if np.abs(np.sqrt(var1)) < 1e-7: break  # avoid zero division
 

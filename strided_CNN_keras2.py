@@ -39,29 +39,29 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
 
-model.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3)))
+model.add(Convolution2D(96, 3, 3, border_mode = 'same', input_shape=(32, 32, 3)))
 model.add(Activation('relu'))
-model.add(Convolution2D(96, 3, 3, border_mode='same'))
+
+model.add(Convolution2D(96, 3, 3,border_mode='same', subsample = (2,2)))
 model.add(Activation('relu'))
-model.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
-model.add(Dropout(0.5))
 
 model.add(Convolution2D(192, 3, 3, border_mode='same'))
 model.add(Activation('relu'))
-model.add(Convolution2D(192, 3, 3, border_mode='same'))
-model.add(Activation('relu'))
-model.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
-model.add(Dropout(0.5))
 
-model.add(Convolution2D(192, 3, 3, border_mode='same'))
+model.add(Convolution2D(192, 3, 3,border_mode='same', subsample = (2,2)))
 model.add(Activation('relu'))
-model.add(Convolution2D(192, 1, 1, border_mode='valid'))
+
+model.add(Convolution2D(192, 3, 3, border_mode = 'same'))
 model.add(Activation('relu'))
+
+model.add(Convolution2D(192, 1, 1,border_mode='valid'))
+model.add(Activation('relu'))
+
 model.add(Convolution2D(10, 1, 1, border_mode='valid'))
 
 model.add(GlobalAveragePooling2D())
 model.add(Activation('softmax'))
-# model = make_parallel(model, 4)
+
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
@@ -72,10 +72,10 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
-# initialize the model using LSUV
-training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-batch_xs_init = training_data_shuffled[0:batch_size]
-LSUV_init(model, batch_xs_init)
+# # initialize the model using LSUV
+# training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+# batch_xs_init = training_data_shuffled[0:batch_size]
+# LSUV_init(model, batch_xs_init)
 
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
@@ -90,7 +90,7 @@ datagen = ImageDataGenerator(
     vertical_flip=False)
 
 datagen.fit(X_train)
-filepath = "keras_allconv.hdf5"
+filepath = "keras_stridedcnn.hdf5"
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
                              mode='max')
 
@@ -109,4 +109,4 @@ history_callback = model.fit_generator(datagen.flow(X_train, Y_train,
 #
 # pandas.DataFrame(history_callback.history).to_csv("history.csv")
 
-model.save('keras_allconv.h5')
+model.save('keras_stridedcnn.h5')

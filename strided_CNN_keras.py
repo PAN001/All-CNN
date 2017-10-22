@@ -71,12 +71,12 @@ model.add(Activation('softmax'))
 rmsprop = RMSprop(lr=learning_rate, rho=0.0, epsilon=1e-08, decay=0.0)
 model.compile(loss='categorical_crossentropy', optimizer=rmsprop, metrics=['accuracy'])
 
-# initialize the model using LSUV
-training_data_shuffled, training_labels_oh_shuffled = shuffle(ds["training_data"], ds["training_labels_oh"])
-training_data_shuffled_normalized = training_data_shuffled.astype('float32')
-training_data_shuffled_normalized = training_data_shuffled_normalized / 255.0  # normalized
-batch_xs_init = training_data_shuffled_normalized[0:batch_size]
-LSUV_init(model, batch_xs_init)
+# # initialize the model using LSUV
+# training_data_shuffled, training_labels_oh_shuffled = shuffle(ds["training_data"], ds["training_labels_oh"])
+# training_data_shuffled_normalized = training_data_shuffled.astype('float32')
+# training_data_shuffled_normalized = training_data_shuffled_normalized / 255.0  # normalized
+# batch_xs_init = training_data_shuffled_normalized[0:batch_size]
+# LSUV_init(model, batch_xs_init)
 
 # print summary
 print (model.summary())
