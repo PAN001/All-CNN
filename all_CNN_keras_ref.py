@@ -84,13 +84,13 @@ datagen = ImageDataGenerator(
     samplewise_std_normalization=False,  # divide each input by its std
     zca_whitening=False,  # apply ZCA whitening
     rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
-    # width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-    # height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-    # horizontal_flip=True,  # randomly flip images
+    width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+    height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+    horizontal_flip=True,  # randomly flip images
     vertical_flip=False)
 
 datagen.fit(X_train)
-filepath = "keras_allconv.hdf5"
+filepath = "keras_allconv_LSUV.hdf5"
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
                              mode='max')
 
@@ -109,4 +109,4 @@ history_callback = model.fit_generator(datagen.flow(X_train, Y_train,
 #
 # pandas.DataFrame(history_callback.history).to_csv("history.csv")
 
-model.save('keras_allconv.h5')
+model.save('keras_allconv_LSUV.h5')
