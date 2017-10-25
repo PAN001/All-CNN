@@ -34,8 +34,6 @@ def summary(labels):
 
     return summary
 
-
-
 def global_average_pool_6x6(x):
     # average pooling on 6*6 block (full size of the input feature map), for each input (first 1), for each feature map (last 1)
     return tf.nn.avg_pool(x, ksize=[1, 6, 6, 1],
@@ -72,7 +70,7 @@ def fcl(x, input_size, output_size, dropout=0.0): #Fully connected layer
 
 
 # load data
-path = "./cifar-10-batches-py/"
+path = "./cifar-10-batches-py"
 ds = load_cifar10(path)
 
 X = tf.placeholder("float", [None] + [32,32,3], name="input")

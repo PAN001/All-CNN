@@ -112,6 +112,6 @@ history_callback = model.fit_generator(datagen.flow(X_train, Y_train,
 # print
 # np.argmax(out)
 #
-# pandas.DataFrame(history_callback.history).to_csv("history.csv")
+pandas.DataFrame(history_callback.history).to_csv("history.csv")
 
 model.save('keras_allconv_LSUV.h5')
