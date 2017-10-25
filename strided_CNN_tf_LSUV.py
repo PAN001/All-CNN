@@ -23,6 +23,9 @@ def summary(labels):
 
     Args:
         prediction (list): prediction values
+
+    Returns:
+        summary: the summary of labels
     """
 
     summary = {}
@@ -35,11 +38,17 @@ def summary(labels):
     return summary
 
 def global_average_pool_6x6(x):
+    """ Global average layer
+    """
+
     # average pooling on 6*6 block (full size of the input feature map), for each input (first 1), for each feature map (last 1)
     return tf.nn.avg_pool(x, ksize=[1, 6, 6, 1],
                         strides=[1, 6, 6, 1], padding='SAME')
 
 def conv_relu(x, kernel_shape, bias_shape, stride=1, padding="SAME"):
+    """ Convolutional layer
+    """
+
     # Create variable named "weights".
     weights = tf.get_variable("weights",
         shape=kernel_shape,
@@ -55,7 +64,10 @@ def conv_relu(x, kernel_shape, bias_shape, stride=1, padding="SAME"):
 
     return tf.nn.relu(tf.add(conv, biases)), weights
 
-def fcl(x, input_size, output_size, dropout=0.0): #Fully connected layer
+def fcl(x, input_size, output_size, dropout=0.0):
+    """ Fully connected layer
+    """
+
     # Create variable named "weights".
     weights = tf.get_variable("weights",
         # [input_size, output_size],
@@ -67,18 +79,15 @@ def fcl(x, input_size, output_size, dropout=0.0): #Fully connected layer
         initializer=tf.constant_initializer(0.0))
     return tf.nn.relu(tf.add(tf.matmul(x, weights), biases))
 
-
-
 # load data
 path = "./cifar-10-batches-py"
 ds = load_cifar10(path)
-
 X = tf.placeholder("float", [None] + [32,32,3], name="input")
 Y = tf.placeholder("int64", [None], name="labels")
 labels = tf.one_hot(Y, 10, axis=-1, name="targets", dtype="int64")
 keep_prob = tf.placeholder("float")
 
-
+# condigure the model
 with tf.name_scope("Strided-CNN"):
     with tf.variable_scope("conv1"):
         conv1, weights1 = conv_relu(X, kernel_shape=[3, 3, 3, 96], bias_shape=[96], stride=1) # # 3*3 filter, 3 input channel, 96 filters (output channel)
@@ -170,10 +179,11 @@ with tf.name_scope("Strided-CNN"):
 #         gap_flat = tf.reshape(gap, [-1, 10])  # change the shape from ?,1,1,10 to ?,10
 #         softmax = tf.nn.softmax(gap_flat)
 
-#  tf.nn.softmax_cross_entropy_with_logits internally applies the softmax on the model's unnormalized model prediction and sums across all classes,
-# and tf.reduce_mean takes the average over these sums.
+
 
 with tf.name_scope('cost'):
+    # tf.nn.softmax_cross_entropy_with_logits internally applies the softmax on the model's unnormalized model prediction and sums across all classes,
+    # and tf.reduce_mean takes the average over these sums.
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax, labels=labels))
 
 with tf.name_scope('optimizer'):
@@ -185,7 +195,7 @@ with tf.name_scope('accuracy'):
     correct_prediction = tf.cast(correct_prediction, tf.float32)
 accuracy = tf.reduce_mean(correct_prediction)
 
-
+# start the session
 sess = tf.InteractiveSession()
 sess.run(tf.global_variables_initializer()) # has to be here
 
@@ -241,6 +251,7 @@ print('LSUV: total layers initialized', layers_cnt)
 
 total_batch = int(50000/batch_size)
 
+# train the model
 for epoch in range(training_epochs):
     training_data_shuffled, training_labels_shuffled = shuffle(ds["training_data"], ds["training_labels"])
 
@@ -249,7 +260,8 @@ for epoch in range(training_epochs):
     training_data_shuffled_normalized = training_data_shuffled / 255.0  # normalized
     # ds["training_data"] = training_data_shuffled
     # ds["training_labels"] = training_labels_shuffled
-    # Loop over all batches
+
+    # loop over all batches
     print"epoch: ", epoch
     for batch in range(0, total_batch):
         batch_xs, batch_ys = next_batch(training_data_shuffled_normalized, training_labels_shuffled, batch, batch_size) # Get data
