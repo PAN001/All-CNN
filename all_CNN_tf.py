@@ -89,44 +89,44 @@ with tf.name_scope("All-CNN"):
     with tf.variable_scope("conv2"):
         conv2, weights2 = conv_relu(conv1, kernel_shape=[3, 3, 96, 96], bias_shape=[96],
                                     stride=1)  # # 3*3 filter, 96 input channel, 96 filters (output channel)
-        # conv2: ?,16,16,96
+        # conv2: ?,32,32,96
     with tf.variable_scope("conv3"):
         conv3, weights3 = conv_relu(conv2, kernel_shape=[3, 3, 96, 192], bias_shape=[192],
                                     stride=2)  # # 3*3 filter, 96 input channel, 192 filters (output channel)
+        # conv3: ?,16,16,192
+
 
     with tf.variable_scope("dropout1"):
         conv3_drop = tf.nn.dropout(conv3, keep_prob)
 
-        # conv3: ?,16,16,192
+
     with tf.variable_scope("conv4"):
         conv4, weights4 = conv_relu(conv3_drop, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
                                     stride=1)  # # 3*3 filter, 192 input channel, 192 filters (output channel)
-        # conv4: ?,8,8,192
+        # conv4: ?,16,16,192
     with tf.variable_scope("conv5"):
         conv5, weights5 = conv_relu(conv4, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
                                     stride=1)  # # 3*3 filter, 192 input channel, 192 filters (output channel)
-        # conv5: ?,6,6,192
+        # conv5: ?,16,16,192
     with tf.variable_scope("conv6"):
         conv6, weights6 = conv_relu(conv5, kernel_shape=[3, 3, 192, 192], bias_shape=[192],
                                     stride=2)  # # 1*1 filter, 192 input channel, 192 filters (output channel)
+        # conv6: ?,8,8,192
 
     with tf.variable_scope("dropout2"):
         conv6_drop = tf.nn.dropout(conv6, keep_prob)
 
-            # conv6: ?,6,6,192
     with tf.variable_scope("conv7"):
         conv7, weights7 = conv_relu(conv6_drop, kernel_shape=[3, 3, 192, 192], bias_shape=[192], stride=1,
                                     padding="VALID")  # # 1*1 filter, 192 input channel, 192 filters (output channel)
         # conv7: ?,6,6,10
 
     with tf.variable_scope("conv8"):
-        conv8, weights8 = conv_relu(conv7, kernel_shape=[1, 1, 192, 192], bias_shape=[192], stride=1,
-                                    padding="VALID")  # # 1*1 filter, 192 input channel, 192 filters (output channel)
-        # conv8: ?,6,6,10
+        conv8, weights8 = conv_relu(conv7, kernel_shape=[1, 1, 192, 192], bias_shape=[192], stride=1)  # # 1*1 filter, 192 input channel, 192 filters (output channel)
+        # conv8: ?,6,6,192
 
     with tf.variable_scope("conv9"):
-        conv9, weights9 = conv_relu(conv8, kernel_shape=[1, 1, 192, 10], bias_shape=[10], stride=1,
-                                    padding="VALID")  # # 1*1 filter, 192 input channel, 10 filters (output channel)
+        conv9, weights9 = conv_relu(conv8, kernel_shape=[1, 1, 192, 10], bias_shape=[10], stride=1)  # # 1*1 filter, 192 input channel, 10 filters (output channel)
         # conv9: ?,6,6,10
 
 

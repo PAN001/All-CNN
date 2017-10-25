@@ -282,7 +282,7 @@ for epoch in range(training_epochs):
             # print conv6_weights.eval()[0][0][0]
 
             pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
-            print np.argmax(pred, axis = 1)
+            # print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
             print("Epoch " + str(epoch) + ", Batch " + str(batch) + ", Minibatch Loss = " + str(loss) + ", Training Accuracy = " + "{:.5f}".format(acc))
 
