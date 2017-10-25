@@ -13,7 +13,7 @@ learning_rate = 1e-3
 training_epochs = 10
 display_step = 1
 test_step = 50
-batch_size = 256
+batch_size = 32
 seed = 1
 np.random.seed(seed)
 tf.set_random_seed(1)
@@ -270,23 +270,23 @@ for epoch in range(training_epochs):
         # batch_ys_onehot = tf.one_hot(batch_ys, 10, axis=-1, name="targets", dtype="int64")
         sess.run(optimizer, feed_dict={X: batch_xs, Y: batch_ys})
         # batch_ys = tf.one_hot(batch_ys, 10, axis=-1, name="targets", dtype="int64") # covert to one-hot
-        if (batch % display_step == 0):
+        if batch % display_step == 0:
             # conv1_activation = sess.run(conv1, feed_dict={X: batch_xs, Y: batch_ys})
             # print "conv1 activation: ", conv1_activation
             # print "conv5 activation: ", sess.run(conv5, feed_dict={X: batch_xs, Y: batch_ys})
 
             conv1_weights = locals()["weights1"]
-            print conv1_weights.eval()[0][0][0]
+            # print conv1_weights.eval()[0][0][0]
 
             conv6_weights = locals()["weights6"]
-            print conv6_weights.eval()[0][0][0]
+            # print conv6_weights.eval()[0][0][0]
 
             pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
-            print np.argmax(pred, axis = 1)
+            # print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
             print("Epoch " + str(epoch) + ", Batch " + str(batch) + ", Minibatch Loss = " + str(loss) + ", Training Accuracy = " + "{:.5f}".format(acc))
 
-        if batch % test_step == 0:
+        if batch % test_step == 0 and batch != 0:
             # Calculate accuracy on test data
             print("Testing Accuracy:",
                   sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 1.}))
