@@ -23,6 +23,5 @@ cifar-10-batches-py/
 cifar-10-batches-py/*
 MNIST_data/
 MNIST_data/*
-*.hdf5
 *.tar
 *.tar.gz
