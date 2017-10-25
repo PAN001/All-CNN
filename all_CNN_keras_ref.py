@@ -1,6 +1,7 @@
 from __future__ import print_function
 from __future__ import division
 import tensorflow as tf
+import h5py
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
@@ -67,15 +68,19 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 
 print(model.summary())
 
+# load pretrainied model
+weights_path = "keras_allconv_LSUV.hdf5"
+model.load_weights(weights_path)
+
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
-# initialize the model using LSUV
-training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-batch_xs_init = training_data_shuffled[0:batch_size]
-LSUV_init(model, batch_xs_init)
+# # initialize the model using LSUV
+# training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+# batch_xs_init = training_data_shuffled[0:batch_size]
+# LSUV_init(model, batch_xs_init)
 
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
