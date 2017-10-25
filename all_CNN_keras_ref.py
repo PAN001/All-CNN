@@ -62,6 +62,7 @@ model.add(Convolution2D(10, 1, 1, border_mode='valid'))
 
 model.add(GlobalAveragePooling2D())
 model.add(Activation('softmax'))
+
 # model = make_parallel(model, 4)
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
