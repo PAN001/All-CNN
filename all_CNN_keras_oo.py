@@ -167,7 +167,7 @@ if is_training:
     history_callback = model.fit_generator(datagen_train.flow(X_train, Y_train,batch_size=batch_size),
                                            steps_per_epoch=X_train.shape[0]/batch_size,
                                            epochs=epoches, validation_data=datagen_test.flow(X_test, Y_test, batch_size=batch_size), callbacks=callbacks_list,
-                                           verbose=1)
+                                           verbose=1, validation_steps=X_train.shape[0]/batch_size, shuffle=True)
 
     # im = cv2.resize(cv2.imread('image.jpg'), (224, 224)).astype(np.float32)
     # out = model.predict(im)
