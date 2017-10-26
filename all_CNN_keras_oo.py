@@ -133,8 +133,8 @@ classes = 10
 initializer = "LSUV"
 batch_size = 32
 epoches = 2
-retrain = True
-is_training = True
+retrain = False
+is_training = False
 is_bn = False
 id = "LSUV_norm_shift_flip_zca"
 old_weights_path = "all_cnn_best_weights_2.hdf5"
@@ -198,7 +198,7 @@ datagen_test = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False, # divide each input by its std
-    zca_whitening=True # apply ZCA whitening)
+    zca_whitening=False # apply ZCA whitening)
 )
 
 # initialize the model
