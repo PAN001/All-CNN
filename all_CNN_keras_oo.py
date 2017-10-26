@@ -175,7 +175,7 @@ datagen_train = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=False,  # apply ZCA whitening
+    zca_whitening=True,  # apply ZCA whitening
     rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
     height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
@@ -188,7 +188,7 @@ datagen_test = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=False # apply ZCA whitening)
+    zca_whitening=True # apply ZCA whitening)
 )
 
 # initialize the model

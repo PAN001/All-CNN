@@ -44,7 +44,7 @@ In short, the weight initialization is of great important for training a network
 Without knowing about the training data, one good way of initialization is to assign the weights from a Gaussian distribution which has zero mean and some finite variance. 
 
 # Glorot normal initializer (Xavier Initialization)
-The motivation for Xavier initialization in neural networks is to initialize the weights of the network so that the neuron activation functions are not starting out in saturated or dead regions. In other words, we want to initialize the weights with random values that are not "too small" and not "too large". Specifically, it draws samples from a truncated normal distribution centered on 0 with `stddev = sqrt(2 / (fan_in + fan_out))` where fan_in is the number of input units in the weight tensor and fan_out is the number of output units in the weight tensor.
+The motivation for Xavier initialization in neural networks is to initialize the weights of the network so that the neuron activation functions are not starting out in saturated or dead regions. In other words, we want to initialize the weights with random values that are not "too small" and not "too large". Specifically, it draws samples from a truncated normal distribution centered on 0 with `stddev = sqrt(2 / (fan_in + fan_out))` where `fan_in is` the number of input units in the weight tensor and `fan_out` is the number of output units in the weight tensor.
 
 # LSUV
 Layer-sequential unit-variance (LSUV) initialization is an extension of  orthonormal initialization Saxe et al. (2014) to an iterative procedure proposed by Mishkin et al. (2015). First, it fills the weights with Gaussian noise with unit variance. Second, decompose them to orthonormal basis with QR or SVD-decomposition and replace weights with one of the components. The LSUV process then estimates output variance of each convolution and inner product layer and scales the weight to make variance equal to one. The proposed scheme can be viewed as an orthonormal initialization combined with batch normal- ization performed only on the first mini-batch.
@@ -62,7 +62,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 In my first experiment, I compared the effectiveness of LSUV and normal weight initialization. 
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), width_shift_range=0.1, height_shift_range=0.1, horizontal_flip
-- experiment#2: zca_whitening, GCN
+- experiment#2: zca_whitening
 
 # Reference
 Mishkin, Dmytro and Jiri Matas. “All you need is a good init.” CoRR abs/1511.06422 (2015): n. pag.
