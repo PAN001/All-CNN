@@ -125,7 +125,7 @@ classes = 10
 
 initializer = "glorot_uniform"
 batch_size = 32
-epoches = 1
+epoches = 2
 retrain = True
 is_training = True
 id = "glorot_uniform"
@@ -142,7 +142,7 @@ val_losses_epoch_path = id + "/" + "all_cnn_val_losses_epoch_" + id + ".acc"
 accs_batch_path = "all_cnn_accs_batch_" + id + ".acc"
 losses_batch_path = "all_cnn_losses_batch_" + id + ".loss"
 
-size = 500
+size = 50000
 acc_figure_path = "acc_" + id + ".png"
 loss_figure_path = "loss_" + id + ".png"
 
