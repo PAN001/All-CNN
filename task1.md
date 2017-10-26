@@ -113,7 +113,7 @@ It draws samples from a uniform distribution within `[-limit, limit]` where `lim
 
 # Data Augmentation
 ## ZCA Whitening
-
+Whitening is a transformation of data in such a way that its covariance matrix is the identity matrix. Hence whitening decorrelates features. It is used as a preprocessing method.
 
 # Experiments
 Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epoches for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergency on test set. The experiments are mainly focued on the following three parameters:
