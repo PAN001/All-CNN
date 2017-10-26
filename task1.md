@@ -73,7 +73,7 @@ Conventional convolutional neural networks perform convolution in the lower laye
 However, the fully connected layers are prone to overfitting, thus hampering the generalization ability of the overall network. 
 
 The paper [3] proposed a global average pooling to replace the traditional fully connected layers in CNN. The idea is to generate one feature map for each corresponding category of the classification task in the last mlpconv layer. 
-![Global Average Pooling](https://github.com/PAN001/Strided-CNN/blob/master/gap.png)
+![Global Average Pooling](https://github.com/PAN001/Strided-CNN/blob/master/gap.png?raw=true "Global Average Pooling")
 
 For example, in the case of classification with 10 categories (CIFAR10, MNIST), and Tensorflow environment, if the output from the end of last convolution is a `3D 8,8,128` tensor, in the traditional method, it is flattened into a 1D vector of size `8x8x128`. And then one or several fully connected layers are added and at the end, a softmax layer that reduces the size to 10 classification categories and applies the softmax operator.
 
