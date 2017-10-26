@@ -16,6 +16,7 @@ from shuffle import *
 from LSUV import *
 import argparse
 import pandas
+import matplotlib
 import matplotlib.pyplot as plt
 import pylab as pl
 
@@ -74,7 +75,7 @@ args = parser.parse_args()
 
 # encironment configuration
 K.set_image_dim_ordering('tf')
-plt.use('Agg') # for server using plt
+matplotlib.use('Agg') # for server using plt
 
 classes = 10
 
