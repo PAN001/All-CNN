@@ -17,6 +17,8 @@ from LSUV import *
 import argparse
 import pandas
 import matplotlib.pyplot as plt
+import pylab as pl
+
 # import cv2
 import numpy as np
 
@@ -89,7 +91,9 @@ old_weights_path = "keras_allconv_LSUV.hdf5"
 new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
 history_path = "all_cnn_history" + id + ".csv"
-size = 300
+size = 1000
+acc_path = "acc_" + id + ".png"
+loss_path = "loss_" + id + ".png"
 
 
 # load data
@@ -117,7 +121,7 @@ datagen_train = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=True,  # apply ZCA whitening
+    zca_whitening=False,  # apply ZCA whitening
     rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
     height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
@@ -130,7 +134,7 @@ datagen_test = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=True # apply ZCA whitening)
+    zca_whitening=False # apply ZCA whitening)
 )
 
 # initialize the model
@@ -185,8 +189,9 @@ if is_training:
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
-    
+    # plt.show()
+    plt.savefig(acc_path)
+
     # summarize history for loss
     plt.plot(history_callback.history['loss'])
     plt.plot(history_callback.history['val_loss'])
@@ -194,7 +199,9 @@ if is_training:
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+    # plt.show()
+    plt.savefig(loss_path)
+
 else:
     print("read weights from the pretrained")
     model.load_weights(old_weights_path)
