@@ -145,12 +145,12 @@ if is_training:
         # load pretrainied model
         print("read weights from the pretrained")
         model.load_weights(old_weights_path)
-    else:
-        # initialize the model using LSUV
-        print("retrain the model")
-        training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-        batch_xs_init = training_data_shuffled[0:batch_size]
-        LSUV_init(model, batch_xs_init)
+    # else:
+    #     # initialize the model using LSUV
+    #     print("retrain the model")
+    #     training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+    #     batch_xs_init = training_data_shuffled[0:batch_size]
+    #     LSUV_init(model, batch_xs_init)
 
     print("start training")
     datagen_train.fit(X_train) # compute the internal data stats
