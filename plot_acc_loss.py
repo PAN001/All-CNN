@@ -130,9 +130,9 @@ id = "LSUV_norm_shift_flip"
 accs_batch_path_LSUV_nsf = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
 losses_batch_path_LSUV_nsf = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
-id = "he_uniform"
-accs_batch_path_he = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
-losses_batch_path_he = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+id = "LSUV_norm_shift_flip_zca"
+accs_batch_path_LSUV_norm_shift_flip_zca = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+losses_batch_path_LSUV_norm_shift_flip_zca = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
 
 with open(accs_batch_path_LSUV_nopp, "rb") as fp:
@@ -147,36 +147,36 @@ with open(accs_batch_path_LSUV_nsf, "rb") as fp:
 with open(losses_batch_path_LSUV_nsf, "rb") as fp:
     losses_batch_LSUV_nsf = pickle.load(fp)
 
-with open(accs_batch_path_he, "rb") as fp:
-    accs_batch_he = pickle.load(fp)
+with open(accs_batch_path_LSUV_norm_shift_flip_zca, "rb") as fp:
+    accs_batch_LSUV_norm_shift_flip_zca = pickle.load(fp)
 
-with open(losses_batch_path_he, "rb") as fp:
-    losses_batch_he = pickle.load(fp)
+with open(losses_batch_path_LSUV_norm_shift_flip_zca, "rb") as fp:
+    losses_batch_LSUV_norm_shift_flip_zca = pickle.load(fp)
 
 # acc
 fig = plt.figure(1, figsize=(40, 5))
 plt.plot(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], accs_batch_LSUV_nopp[0:-1:5])
 plt.plot(range(0, len(accs_batch_LSUV_nsf))[0:-1:5], accs_batch_LSUV_nsf[0:-1:5])
-# plt.plot(range(0, len(accs_batch_he))[0:-1:5], accs_batch_he[0:-1:5])
+plt.plot(range(0, len(accs_batch_LSUV_norm_shift_flip_zca))[0:-1:5], accs_batch_LSUV_norm_shift_flip_zca[0:-1:5])
 # plt.xticks(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], range(0, len(accs_batch_LSUV_nopp))[0:-1:500])
-plt.title('Exp1: model accuracy per batch')
+plt.title('Exp2: model accuracy per batch')
 plt.ylabel('acc')
 plt.xlabel('batch')
-plt.legend(['no preprocessing', 'shift, flip and normalization'], loc='upper left')
-plt.show()
-# plt.savefig("exp1_acc.png")
+plt.legend(['no preprocessing', 'shift, flip and normalization', 'shift, flip, normalization and zca whitening'], loc='upper left')
+# plt.show()
+plt.savefig("exp2_acc.png")
 
 
 # loss
 fig = plt.figure(2, figsize=(40, 5))
 plt.plot(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], losses_batch_LSUV_nopp[0:-1:5])
 plt.plot(range(0, len(losses_batch_LSUV_nsf))[0:-1:5], losses_batch_LSUV_nsf[0:-1:5])
-# plt.plot(range(0, len(losses_batch_he))[0:-1:5], losses_batch_he[0:-1:5])
-plt.xticks(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], range(0, len(losses_batch_LSUV_nopp))[0:-1:5])
-plt.title('Exp1: model loss per batch')
+plt.plot(range(0, len(losses_batch_LSUV_norm_shift_flip_zca))[0:-1:5], losses_batch_LSUV_norm_shift_flip_zca[0:-1:5])
+# plt.xticks(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], range(0, len(losses_batch_LSUV_nopp))[0:-1:5])
+plt.title('Exp2: model loss per batch')
 plt.ylabel('loss')
 plt.xlabel('batch')
-plt.legend(['no preprocessing', 'shift, flip and normalization'], loc='upper left')
-plt.show()
-# plt.savefig("exp1_loss.png")
+plt.legend(['no preprocessing', 'shift, flip and normalization', 'shift, flip, normalization and zca whitening'], loc='upper left')
+# plt.show()
+plt.savefig("exp2_loss.png")
 

@@ -54,7 +54,7 @@ The idea of a data-driven weight initialization, rather than theoretical computa
 ## He Uniform Initialization
 It draws samples from a uniform distribution within `[-limit, limit]` where `limit` is `sqrt(6 / fan_in)` where `fan_in` is the number of input units in the weight[2].
 
-# Image Preprocessing
+# Data Augmentation
 ## ZCA Whitening
 
 
@@ -64,7 +64,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 1. Different ways of weight initialization
 2. Different training strateies
 3. Different training optimizers
-4. Different ways of image preprocessing    
+4. Different ways of data augmentation   
 
 ## Experiment1: weight initialization
 
@@ -72,14 +72,14 @@ Due to the lack of GPU resources and long training process, I have no choice but
 |--------------|-----------------------------------------------------------------------------------------------|
 | Training     | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov                                              |
 | Optimizer    | dropout                                                                                       |
-| Prepocessing | horizontal and vertical shift within the range of 10%, horizontal flipping, zca whitening |
+| Data Augmentation | horizontal and vertical shift within the range of 10%, horizontal flipping, zca whitening |
 
 In the first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared. As figures shown below, LSUV achieves best performance in first 3000 batches.
 
 ![Experiment1: model accuracy on training set](exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
 ![Experiment1: model loss on training set](exp1_loss.png?raw=true "Experiment1: model loss on training set")
 
-## Experiment2: image preprocessing
+## Experiment2: Data Augmentation
 
 | Parameter   | Setting                                          |
 |-------------|--------------------------------------------------|
@@ -87,7 +87,10 @@ In the first experiment, I compared the effectiveness of different initializatio
 | Optimizer   | dropout                                          |
 | Initializer | LSUV                                             |
 
-In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, LSUV achieves best performance in first 3000 batches.
+In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening helps the model coverge more quickly in first 3000 batches. 
+
+![Experiment2: model accuracy on training set](exp2_acc.png?raw=true "Experiment1: model accuracy on training set")
+![Experiment2: model loss on training set](exp2_loss.png?raw=true "Experiment1: model loss on training set")
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
