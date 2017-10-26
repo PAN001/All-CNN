@@ -136,7 +136,7 @@ epoches = 2
 retrain = True
 is_training = True
 is_bn = False
-id = "LSUV_nopp"
+id = "LSUV_norm_shift_flip"
 old_weights_path = "all_cnn_best_weights_2.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = id + "/" + "all_cnn_final_weights_" + id + ".h5"
@@ -173,8 +173,8 @@ Y_test = np_utils.to_categorical(Y_test, classes)
 # normalize the images
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
-# X_train /= 255
-# X_test /= 255
+X_train /= 255
+X_test /= 255
 
 # image preprocessing
 datagen_train = ImageDataGenerator(
@@ -182,13 +182,13 @@ datagen_train = ImageDataGenerator(
     # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
-    samplewise_std_normalization=False  # divide each input by its std
+    samplewise_std_normalization=False,  # divide each input by its std
     # zca_whitening=True,  # apply ZCA whitening
     # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
-    # width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-    # height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-    # horizontal_flip=True,  # randomly flip images
-    # vertical_flip=True
+    width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+    height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+    horizontal_flip=True,  # randomly flip images
+    vertical_flip=True
 )
 
 datagen_test = ImageDataGenerator(
