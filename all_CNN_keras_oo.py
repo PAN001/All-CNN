@@ -136,7 +136,7 @@ epoches = 2
 retrain = True
 is_training = True
 is_bn = False
-id = "LSUV_norm_shift_flip"
+id = "LSUV_norm_shift_flip_zca"
 old_weights_path = "all_cnn_best_weights_2.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = id + "/" + "all_cnn_final_weights_" + id + ".h5"
@@ -156,6 +156,7 @@ loss_figure_path = "loss_" + id + ".png"
 
 # create the directory for the experiment
 if not os.path.exists(id):
+    print(id + " directory is created")
     os.makedirs(id)
 
 # load data
@@ -183,7 +184,7 @@ datagen_train = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    # zca_whitening=True,  # apply ZCA whitening
+    zca_whitening=True,  # apply ZCA whitening
     # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
     height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
@@ -197,7 +198,7 @@ datagen_test = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False  # divide each input by its std
-    # zca_whitening=True # apply ZCA whitening)
+    zca_whitening=True # apply ZCA whitening)
 )
 
 # initialize the model
