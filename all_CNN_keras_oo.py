@@ -84,8 +84,9 @@ epoches = 5
 retrain = False
 is_training = True
 id = "test"
-weights_path = "keras_allconv_best_weights_" + id + ".hdf5"
-final_weights_path = "keras_allconv_final_weights_" + id + ".h5"
+old_weights_path = "keras_allconv_LSUV.hdf5"
+new_best_weights_path = "keras_allconv_best_weights_" + id + ".hdf5"
+new_final_weights_path = "keras_allconv_final_weights_" + id + ".h5"
 history_path = "keras_allconv_history" + id + ".csv"
 size = 1000
 
@@ -134,7 +135,7 @@ if is_training:
     if not retrain:
         # load pretrainied model
         print("read weights from the pretrained")
-        model.load_weights(weights_path)
+        model.load_weights(old_weights_path)
     else:
         # initialize the model using LSUV
         print("retrain the model")
@@ -146,7 +147,7 @@ if is_training:
     datagen.fit(X_train) # compute the internal data stats
 
     # save the best model after every epoch
-    checkpoint = ModelCheckpoint(weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
+    checkpoint = ModelCheckpoint(new_best_weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
                                  mode='max')
 
     callbacks_list = [checkpoint]
@@ -164,11 +165,11 @@ if is_training:
     # np.argmax(out)
     #
     pandas.DataFrame(history_callback.history).to_csv(history_path)
-    model.save(final_weights_path)
+    model.save(new_final_weights_path)
 
 else:
     print("read weights from the pretrained")
-    model.load_weights(weights_path)
+    model.load_weights(old_weights_path)
 
     datagen.fit(X_test)  # compute the internal data stats
     loss, acc = model.evaluate_generator(datagen.flow(X_test, Y_test,batch_size=batch_size),
