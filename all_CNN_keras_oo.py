@@ -81,7 +81,7 @@ classes = 10
 
 batch_size = 32
 epoches = 4
-retrain = False
+retrain = True
 is_training = True
 id = "test"
 old_weights_path = "keras_allconv_LSUV.hdf5"
