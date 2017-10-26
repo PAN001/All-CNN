@@ -2,9 +2,6 @@ from __future__ import division
 
 # import numpy as np
 import tensorflow as tf
-from tqdm import tqdm
-# import pickle
-# from convDefs import*
 from read_cifar10 import *
 from shuffle import *
 from next_batch import *
@@ -179,8 +176,6 @@ with tf.name_scope("Strided-CNN"):
 #         gap_flat = tf.reshape(gap, [-1, 10])  # change the shape from ?,1,1,10 to ?,10
 #         softmax = tf.nn.softmax(gap_flat)
 
-
-
 with tf.name_scope('cost'):
     # tf.nn.softmax_cross_entropy_with_logits internally applies the softmax on the model's unnormalized model prediction and sums across all classes,
     # and tf.reduce_mean takes the average over these sums.
@@ -210,11 +205,6 @@ batch_LSUV = training_data_shuffled_normalized[0:batch_size]
 for layerCnt in layers:
     layerName = "conv" + str(layerCnt)
     weightsName = "weights" + str(layerCnt)
-
-    # # as layers with few weights tend to have a zero variance, only do LSUV for complicated layers
-    # if np.prod(layer.get_output_shape_at(0)[1:]) < 32:
-    #     print(layer.name, 'with output shape fewer than 32, not inited with LSUV')
-    #     continue
 
     print('LSUV initializing', layerName)
     layers_cnt += 1
@@ -258,8 +248,6 @@ for epoch in range(training_epochs):
     # normalization
     training_data_shuffled_normalized = training_data_shuffled.astype('float32')
     training_data_shuffled_normalized = training_data_shuffled / 255.0  # normalized
-    # ds["training_data"] = training_data_shuffled
-    # ds["training_labels"] = training_labels_shuffled
 
     # loop over all batches
     print"epoch: ", epoch
@@ -275,13 +263,13 @@ for epoch in range(training_epochs):
             # print "conv1 activation: ", conv1_activation
             # print "conv5 activation: ", sess.run(conv5, feed_dict={X: batch_xs, Y: batch_ys})
 
-            conv1_weights = locals()["weights1"]
+            # conv1_weights = locals()["weights1"]
             # print conv1_weights.eval()[0][0][0]
 
-            conv6_weights = locals()["weights6"]
+            # conv6_weights = locals()["weights6"]
             # print conv6_weights.eval()[0][0][0]
 
-            pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
+            # pred = sess.run(softmax, feed_dict={X: batch_xs, Y: batch_ys})
             # print np.argmax(pred, axis = 1)
             loss, acc = sess.run([cost, accuracy], feed_dict={X: batch_xs, Y: batch_ys})
             print("Epoch " + str(epoch) + ", Batch " + str(batch) + ", Minibatch Loss = " + str(loss) + ", Training Accuracy = " + "{:.5f}".format(acc))
@@ -290,7 +278,6 @@ for epoch in range(training_epochs):
             # Calculate accuracy on test data
             print("Testing Accuracy:",
                   sess.run(accuracy, feed_dict={X: ds["test_data"], Y: ds["test_labels"], keep_prob: 1.}))
-
 
 print("Optimization Finished!")
 

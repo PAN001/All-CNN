@@ -5,7 +5,7 @@ import h5py
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
-from keras.layers import Dropout, Activation, Convolution2D, GlobalAveragePooling2D, merge
+from keras.layers import Dropout, Activation, Convolution2D, GlobalAveragePooling2D, merge, BatchNormalization
 from keras.utils import np_utils
 from keras.optimizers import SGD
 from keras import backend as K
@@ -38,24 +38,36 @@ class AllCNN(Sequential):
         # build the network architecture
         if initializer != "LSUV":
             self.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3), kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same', kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
             if is_dropout:
                 self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
             if is_dropout:
                 self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 1, 1, border_mode='valid', kernel_initializer=initializer))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(10, 1, 1, border_mode='valid', kernel_initializer=initializer))
 
@@ -63,24 +75,36 @@ class AllCNN(Sequential):
             self.add(Activation('softmax'))
         else:
             self.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3)))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same'))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
             if is_dropout:
                 self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
             if is_dropout:
                 self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 1, 1, border_mode='valid'))
+            if is_bn:
+                self.add(BatchNormalization())
             self.add(Activation('relu'))
             self.add(Convolution2D(10, 1, 1, border_mode='valid'))
 
@@ -151,9 +175,9 @@ batch_size = 32
 epoches = 2
 retrain = True
 is_training = True
-is_bn = False
+is_bn = True
 is_dropout = False
-id = "LSUV_no_dropout"
+id = "test"
 old_weights_path = "all_cnn_weights_0.90_0.51.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 whole_model_path = id + "/" + "all_cnn_whole_model_" + id + ".h5"
