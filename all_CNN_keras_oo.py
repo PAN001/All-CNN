@@ -27,54 +27,57 @@ class AllCNN(Sequential):
     """AllCNN encapsulates the All-CNN.
     """
 
-    def __init__(self, seed = 24, is_init_fixed = True):
+    def __init__(self, seed = 24, initializer = "glorot_uniform", is_init_fixed = True):
         Sequential.__init__(self)
         self.seed = seed
 
         # build the network architecture
-        self.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3)))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(96, 3, 3, border_mode='same'))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
-        self.add(Dropout(0.5))
+        if initializer != "LSUV":
+            self.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3), kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(96, 3, 3, border_mode='same', kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
+            self.add(Dropout(0.5))
 
-        self.add(Convolution2D(192, 3, 3, border_mode='same'))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(192, 3, 3, border_mode='same'))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
-        self.add(Dropout(0.5))
+            self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
+            self.add(Dropout(0.5))
 
-        self.add(Convolution2D(192, 3, 3, border_mode='same'))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(192, 1, 1, border_mode='valid'))
-        self.add(Activation('relu'))
-        self.add(Convolution2D(10, 1, 1, border_mode='valid'))
+            self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 1, 1, border_mode='valid', kernel_initializer=initializer))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(10, 1, 1, border_mode='valid', kernel_initializer=initializer))
 
-        self.add(GlobalAveragePooling2D())
-        self.add(Activation('softmax'))
+            self.add(GlobalAveragePooling2D())
+            self.add(Activation('softmax'))
+        else:
+            self.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3)))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(96, 3, 3, border_mode='same'))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
+            self.add(Dropout(0.5))
 
-def zca_whitening_matrix(X):
-    """
-    Function to compute ZCA whitening matrix (aka Mahalanobis whitening).
-    INPUT:  X: [M x N] matrix.
-        Rows: Variables
-        Columns: Observations
-    OUTPUT: ZCAMatrix: [M x M] matrix
-    """
-    # Covariance matrix [column-wise variables]: Sigma = (X-mu)' * (X-mu) / N
-    sigma = np.cov(X, rowvar=True) # [M x M]
-    # Singular Value Decomposition. X = U * np.diag(S) * V
-    U,S,V = np.linalg.svd(sigma)
-        # U: [M x M] eigenvectors of sigma.
-        # S: [M x 1] eigenvalues of sigma.
-        # V: [M x M] transpose of U
-    # Whitening constant: prevents division by zero
-    epsilon = 1e-5
-    # ZCA Whitening matrix: U * Lambda * U'
-    ZCAMatrix = np.dot(U, np.dot(np.diag(1.0/np.sqrt(S + epsilon)), U.T)) # [M x M]
-    return ZCAMatrix
+            self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
+            self.add(Dropout(0.5))
+
+            self.add(Convolution2D(192, 3, 3, border_mode='same'))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(192, 1, 1, border_mode='valid'))
+            self.add(Activation('relu'))
+            self.add(Convolution2D(10, 1, 1, border_mode='valid'))
+
+            self.add(GlobalAveragePooling2D())
+            self.add(Activation('softmax'))
 
 # def main():
 parser = argparse.ArgumentParser()
@@ -107,6 +110,7 @@ classes = 10
 # is_training = args.is_training
 # weights_path = args.weights_path
 
+initializer = "glorot_uniform"
 batch_size = 32
 epoches = 20
 retrain = True
@@ -178,14 +182,15 @@ if is_training:
         print("read weights from the pretrained")
         model.load_weights(old_weights_path)
     else:
-        # initialize the model using LSUV
-        print("retrain the model")
-        # training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-        # batch_xs_init = training_data_shuffled[0:batch_size]
+        if initializer == "LSUV":
+            # initialize the model using LSUV
+            print("retrain the model")
+            # training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+            # batch_xs_init = training_data_shuffled[0:batch_size]
 
-        for x_batch, y_batch in datagen_train.flow(X_train, Y_train, batch_size=batch_size): # make use of image processing utility provided by ImageDataGenerator
-            LSUV_init(model, x_batch)
-            break
+            for x_batch, y_batch in datagen_train.flow(X_train, Y_train, batch_size=batch_size): # make use of image processing utility provided by ImageDataGenerator
+                LSUV_init(model, x_batch)
+                break
 
     print("start training")
 
