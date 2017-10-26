@@ -95,7 +95,7 @@ old_weights_path = "keras_allconv_LSUV.hdf5"
 new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
 history_path = "all_cnn_history" + id + ".csv"
-size = 5000
+size = 50000
 acc_path = "acc_" + id + ".png"
 loss_path = "loss_" + id + ".png"
 
