@@ -72,7 +72,10 @@ parser.add_argument("-train", dest="is_training", action='store_true', default=F
                     help="whether to train or test")
 args = parser.parse_args()
 
+# encironment configuration
 K.set_image_dim_ordering('tf')
+plt.use('Agg') # for server using plt
+
 classes = 10
 
 # parameters
