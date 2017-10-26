@@ -80,15 +80,15 @@ classes = 10
 # weights_path = args.weights_path
 
 batch_size = 32
-epoches = 1
+epoches = 4
 retrain = False
 is_training = True
 id = "test"
 old_weights_path = "keras_allconv_LSUV.hdf5"
-new_best_weights_path = "keras_allconv_best_weights_" + id + ".hdf5"
-new_final_weights_path = "keras_allconv_final_weights_" + id + ".h5"
-history_path = "keras_allconv_history" + id + ".csv"
-size = 1000
+new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
+new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
+history_path = "all_cnn_history" + id + ".csv"
+size = 300
 
 
 # load data
