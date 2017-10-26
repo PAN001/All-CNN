@@ -154,7 +154,7 @@ with open(losses_batch_path_LSUV_norm_shift_flip_zca, "rb") as fp:
     losses_batch_LSUV_norm_shift_flip_zca = pickle.load(fp)
 
 # acc
-fig = plt.figure(1, figsize=(40, 5))
+fig = plt.figure(1, figsize=(40, 10))
 plt.plot(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], accs_batch_LSUV_nopp[0:-1:5])
 plt.plot(range(0, len(accs_batch_LSUV_nsf))[0:-1:5], accs_batch_LSUV_nsf[0:-1:5])
 plt.plot(range(0, len(accs_batch_LSUV_norm_shift_flip_zca))[0:-1:5], accs_batch_LSUV_norm_shift_flip_zca[0:-1:5])
@@ -168,7 +168,7 @@ plt.savefig("exp2_acc.png")
 
 
 # loss
-fig = plt.figure(2, figsize=(40, 5))
+fig = plt.figure(2, figsize=(40, 10))
 plt.plot(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], losses_batch_LSUV_nopp[0:-1:5])
 plt.plot(range(0, len(losses_batch_LSUV_nsf))[0:-1:5], losses_batch_LSUV_nsf[0:-1:5])
 plt.plot(range(0, len(losses_batch_LSUV_norm_shift_flip_zca))[0:-1:5], losses_batch_LSUV_norm_shift_flip_zca[0:-1:5])
