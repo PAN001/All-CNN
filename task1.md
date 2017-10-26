@@ -194,7 +194,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 1. Different ways of weight initialization
 2. Different ways of data augmentation   
 3. Different training optimizers
-4. Different training strategies
+4. Different training modes
 
 ## Experiment1: weight initialization
 
@@ -227,14 +227,28 @@ In the second experiment, I compared the effectiveness of different image prepro
 
 | Parameter         | Setting                                               |
 |-------------------|-------------------------------------------------------|
+| Optimizer         | None                                                  |
+| Data Augmentation | horizontal and vertical shift within the range of 10% |
+| Initializer       | LSUV                                                  |
+
+In the second experiment, I compared the effectiveness of different training modes. Specifically, sgd, RMSProp and Adam are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
+
+![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
+![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
+
+
+## Experiment4: Training Mode
+
+| Parameter         | Setting                                               |
+|-------------------|-------------------------------------------------------|
 | Training          | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov      |
 | Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer       | LSUV                                                  |
 
 In the second experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
 
-![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
-![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
+![Experiment4: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_acc.png?raw=true "Experiment4: model accuracy on training set")
+![Experiment4: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_loss.png?raw=true "Experiment4: model loss on training set")
 
 <!-- - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening -->

@@ -181,25 +181,78 @@ import pickle
 # plt.savefig("exp2_loss.png")
 
 
-# exp3
-id = "LSUV_dropout"
-accs_batch_path_LSUV_dropout = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
-losses_batch_path_LSUV_dropout = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+# # exp3
+# id = "LSUV_dropout"
+# accs_batch_path_LSUV_dropout = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+# losses_batch_path_LSUV_dropout = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+#
+# id = "LSUV_no_dropout"
+# accs_batch_path_LSUV_no_dropout = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+# losses_batch_path_LSUV_no_dropout = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+#
+# id = "LSUV_bn"
+# accs_batch_path_LSUV_bn = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+# losses_batch_path_LSUV_bn = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+#
+#
+# with open(accs_batch_path_LSUV_dropout, "rb") as fp:
+#     accs_batch_LSUV_dropout = pickle.load(fp)
+#
+# with open(losses_batch_path_LSUV_dropout, "rb") as fp:
+#     losses_batch_LSUV_dropout = pickle.load(fp)
+#
+# with open(accs_batch_path_LSUV_no_dropout, "rb") as fp:
+#     accs_batch_LSUV_no_dropout = pickle.load(fp)
+#
+# with open(losses_batch_path_LSUV_no_dropout, "rb") as fp:
+#     losses_batch_LSUV_no_dropout = pickle.load(fp)
+#
+# with open(accs_batch_path_LSUV_bn, "rb") as fp:
+#     accs_batch_LSUV_bn = pickle.load(fp)
+#
+# with open(losses_batch_path_LSUV_bn, "rb") as fp:
+#     losses_batch_LSUV_bn = pickle.load(fp)
+#
+# # acc
+# fig = plt.figure(1, figsize=(40, 10))
+# plt.plot(range(0, len(accs_batch_LSUV_no_dropout))[0:-1:5], accs_batch_LSUV_no_dropout[0:-1:5])
+# plt.plot(range(0, len(accs_batch_LSUV_dropout))[0:-1:5], accs_batch_LSUV_dropout[0:-1:5])
+# plt.plot(range(0, len(accs_batch_LSUV_bn))[0:-1:5], accs_batch_LSUV_bn[0:-1:5])
+# # plt.xticks(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], range(0, len(accs_batch_LSUV_nopp))[0:-1:500])
+# plt.title('Exp3: model accuracy per batch')
+# plt.ylabel('acc')
+# plt.xlabel('batch')
+# plt.legend(['baseline', 'dropout', 'bn'], loc='upper left')
+# # plt.show()
+# plt.savefig("exp3_acc.png")
+#
+#
+# # loss
+# fig = plt.figure(2, figsize=(40, 10))
+# plt.plot(range(0, len(losses_batch_LSUV_no_dropout))[0:-1:5], losses_batch_LSUV_no_dropout[0:-1:5])
+# plt.plot(range(0, len(losses_batch_LSUV_dropout))[0:-1:5], losses_batch_LSUV_dropout[0:-1:5])
+# plt.plot(range(0, len(losses_batch_LSUV_bn))[0:-1:5], losses_batch_LSUV_bn[0:-1:5])
+# # plt.xticks(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], range(0, len(losses_batch_LSUV_nopp))[0:-1:5])
+# plt.title('Exp3: model loss per batch')
+# plt.ylabel('loss')
+# plt.xlabel('batch')
+# plt.legend(['baseline', 'dropout', 'bn'], loc='upper left')
+# # plt.show()
+# plt.savefig("exp3_loss.png")
 
+# exp4
 id = "LSUV_no_dropout"
 accs_batch_path_LSUV_no_dropout = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
 losses_batch_path_LSUV_no_dropout = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
-id = "LSUV_bn"
-accs_batch_path_LSUV_bn = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
-losses_batch_path_LSUV_bn = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
+id = "LSUV_rmsp"
+accs_batch_path_LSUV_rmsp = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+losses_batch_path_LSUV_rmsp = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
-with open(accs_batch_path_LSUV_dropout, "rb") as fp:
-    accs_batch_LSUV_dropout = pickle.load(fp)
-
-with open(losses_batch_path_LSUV_dropout, "rb") as fp:
-    losses_batch_LSUV_dropout = pickle.load(fp)
+id = "LSUV_Adam"
+accs_batch_path_LSUV_adam = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+losses_batch_path_LSUV_adam = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
 with open(accs_batch_path_LSUV_no_dropout, "rb") as fp:
     accs_batch_LSUV_no_dropout = pickle.load(fp)
@@ -207,35 +260,41 @@ with open(accs_batch_path_LSUV_no_dropout, "rb") as fp:
 with open(losses_batch_path_LSUV_no_dropout, "rb") as fp:
     losses_batch_LSUV_no_dropout = pickle.load(fp)
 
-with open(accs_batch_path_LSUV_bn, "rb") as fp:
-    accs_batch_LSUV_bn = pickle.load(fp)
+with open(accs_batch_path_LSUV_rmsp, "rb") as fp:
+    accs_batch_LSUV_rmsp = pickle.load(fp)
 
-with open(losses_batch_path_LSUV_bn, "rb") as fp:
-    losses_batch_LSUV_bn = pickle.load(fp)
+with open(losses_batch_path_LSUV_rmsp, "rb") as fp:
+    losses_batch_LSUV_rmsp = pickle.load(fp)
+
+with open(accs_batch_path_LSUV_adam, "rb") as fp:
+    accs_batch_LSUV_adam = pickle.load(fp)
+
+with open(losses_batch_path_LSUV_adam, "rb") as fp:
+    losses_batch_LSUV_adam = pickle.load(fp)
 
 # acc
 fig = plt.figure(1, figsize=(40, 10))
 plt.plot(range(0, len(accs_batch_LSUV_no_dropout))[0:-1:5], accs_batch_LSUV_no_dropout[0:-1:5])
-plt.plot(range(0, len(accs_batch_LSUV_dropout))[0:-1:5], accs_batch_LSUV_dropout[0:-1:5])
-plt.plot(range(0, len(accs_batch_LSUV_bn))[0:-1:5], accs_batch_LSUV_bn[0:-1:5])
+plt.plot(range(0, len(accs_batch_LSUV_rmsp))[0:-1:5], accs_batch_LSUV_rmsp[0:-1:5])
+plt.plot(range(0, len(accs_batch_LSUV_adam))[0:-1:5], accs_batch_LSUV_adam[0:-1:5])
 # plt.xticks(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], range(0, len(accs_batch_LSUV_nopp))[0:-1:500])
-plt.title('Exp3: model accuracy per batch')
+plt.title('Exp4: model accuracy per batch')
 plt.ylabel('acc')
 plt.xlabel('batch')
-plt.legend(['baseline', 'dropout', 'bn'], loc='upper left')
+plt.legend(['sgd', 'rmsp', 'adam'], loc='upper left')
 # plt.show()
-plt.savefig("exp3_acc.png")
+plt.savefig("exp4_acc.png")
 
 
 # loss
 fig = plt.figure(2, figsize=(40, 10))
 plt.plot(range(0, len(losses_batch_LSUV_no_dropout))[0:-1:5], losses_batch_LSUV_no_dropout[0:-1:5])
-plt.plot(range(0, len(losses_batch_LSUV_dropout))[0:-1:5], losses_batch_LSUV_dropout[0:-1:5])
-plt.plot(range(0, len(losses_batch_LSUV_bn))[0:-1:5], losses_batch_LSUV_bn[0:-1:5])
+plt.plot(range(0, len(losses_batch_LSUV_rmsp))[0:-1:5], losses_batch_LSUV_rmsp[0:-1:5])
+plt.plot(range(0, len(losses_batch_LSUV_adam))[0:-1:5], losses_batch_LSUV_adam[0:-1:5])
 # plt.xticks(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], range(0, len(losses_batch_LSUV_nopp))[0:-1:5])
-plt.title('Exp3: model loss per batch')
+plt.title('Exp4: model loss per batch')
 plt.ylabel('loss')
 plt.xlabel('batch')
-plt.legend(['baseline', 'dropout', 'bn'], loc='upper left')
+plt.legend(['sgd', 'rmsp', 'adam'], loc='upper left')
 # plt.show()
-plt.savefig("exp3_loss.png")
+plt.savefig("exp4_loss.png")
