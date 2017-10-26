@@ -302,7 +302,7 @@ if is_training:
     # # plt.savefig(loss_figure_path)
 
 else:
-    print("read weights from the pretrained")
+    print("read weights from the pretrained: ", old_weights_path)
     model.load_weights(old_weights_path)
 
     datagen_test.fit(X_test)  # compute the internal data stats
