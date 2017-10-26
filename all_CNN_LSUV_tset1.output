@@ -1,0 +1,1265 @@
+Last login: Wed Oct 25 11:02:01 on ttys000
+-bash: /etc/profile: line 1: unexpected EOF while looking for matching ``'
+-bash: /etc/profile: line 2: syntax error: unexpected end of file
+-bash-3.2$ andrew
+Last login: Wed Oct 25 10:59:14 2017 from c-73-79-4-116.hsd1.pa.comcast.net
+		Welcome to the Carnegie Mellon University
+			Linux timeshare pool
+		
+		now running Red Hat Enterprise Linux 7		
+
+These machines are a shared resource. Please be considerate of other users.  
+Usage guidelines and policies available at: 
+http://www.cmu.edu/computing/network/guidelines/servers.html
+
+Please note: These machines reboot nightly.
+
+-bash-4.2$ myve
+-bash: myve: command not found
+-bash-4.2$ bash
+bash-4.2$ myve
+(myVE) bash-4.2$ ls
+bin	 Documents  index  Pictures  public  Templates	www
+Desktop  Downloads  Music  private   Public  Videos
+(myVE) bash-4.2$ cd private/
+(myVE) bash-4.2$ ls
+CMU15513  ResNet  Search-Engines  Strided-CNN
+(myVE) bash-4.2$ cd Strided-CNN/
+(myVE) bash-4.2$ ls
+all_CNN_keras_ref.output  keras_allconv_LSUV.hdf5  README.md
+all_CNN_keras_ref.py	  LSUV.py		   shuffle.py
+all_cnn.output		  LSUV.pyc		   shuffle.pyc
+all_CNN_tf.py		  mnist_cnn.py		   strided_CNN_keras2.py
+all_cnn_weights.hdf5	  mnist.py		   strided_CNN_keras.py
+a.out			  next_batch.py		   strided_CNN_tf_LSUV.py
+CNN_keras_LSUV.output	  next_batch.pyc	   strided_CNN_tf.py
+demo.py			  read_cifar10.py	   test1.txt
+keras_allconv.hdf5	  reading		   weights.hdf5
+(myVE) bash-4.2$ cat all_CNN_keras_ref.output
+(myVE) bash-4.2$ ls -lh
+total 47M
+-rw-r--r-- 1 yichenp users    0 Oct 25 10:59 all_CNN_keras_ref.output
+-rw-r--r-- 1 yichenp users 4.0K Oct 22 21:52 all_CNN_keras_ref.py
+-rw-r--r-- 1 yichenp users  64K Oct 22 00:18 all_cnn.output
+-rw-r--r-- 1 yichenp users  11K Oct 20 13:09 all_CNN_tf.py
+-rw-r--r-- 1 yichenp users  11M Oct 21 02:24 all_cnn_weights.hdf5
+-rw-r--r-- 1 yichenp users 4.0M Oct 22 04:34 a.out
+-rw-r--r-- 1 yichenp users    0 Oct 24 13:14 CNN_keras_LSUV.output
+-rw-r--r-- 1 yichenp users  345 Oct 20 02:30 demo.py
+-rw-r--r-- 1 yichenp users  11M Oct 22 23:52 keras_allconv.hdf5
+-rw-r--r-- 1 yichenp users  11M Oct 25 06:24 keras_allconv_LSUV.hdf5
+-rw-r--r-- 1 yichenp users 3.0K Oct 22 18:21 LSUV.py
+-rw-r--r-- 1 yichenp users 2.7K Oct 22 18:22 LSUV.pyc
+-rw-r--r-- 1 yichenp users 2.7K Oct 20 02:30 mnist_cnn.py
+-rw-r--r-- 1 yichenp users  988 Oct 20 02:30 mnist.py
+-rw-r--r-- 1 yichenp users  240 Oct 20 02:30 next_batch.py
+-rw-r--r-- 1 yichenp users  477 Oct 22 18:22 next_batch.pyc
+-rw-r--r-- 1 yichenp users 1.4K Oct 20 02:30 read_cifar10.py
+drwxr-xr-x 2 yichenp users 2.0K Oct 20 02:30 reading
+-rw-r--r-- 1 yichenp users 4.7K Oct 20 02:30 README.md
+-rw-r--r-- 1 yichenp users  247 Oct 20 02:30 shuffle.py
+-rw-r--r-- 1 yichenp users  547 Oct 22 18:22 shuffle.pyc
+-rw-r--r-- 1 yichenp users 3.9K Oct 22 18:21 strided_CNN_keras2.py
+-rw-r--r-- 1 yichenp users 3.7K Oct 22 18:21 strided_CNN_keras.py
+-rw-r--r-- 1 yichenp users  13K Oct 20 10:25 strided_CNN_tf_LSUV.py
+-rw-r--r-- 1 yichenp users 6.4K Oct 20 02:30 strided_CNN_tf.py
+-rw-r--r-- 1 yichenp users 607K Oct 20 02:30 test1.txt
+-rw-r--r-- 1 yichenp users  11M Oct 22 04:20 weights.hdf5
+(myVE) bash-4.2$ ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 06:47 ?        00:00:05 /usr/lib/systemd/systemd --swi
+root          2      0  0 06:47 ?        00:00:00 [kthreadd]
+root          3      2  0 06:47 ?        00:00:00 [ksoftirqd/0]
+root          5      2  0 06:47 ?        00:00:00 [kworker/0:0H]
+root          8      2  0 06:47 ?        00:00:00 [migration/0]
+root          9      2  0 06:47 ?        00:00:00 [rcu_bh]
+root         10      2  0 06:47 ?        00:00:10 [rcu_sched]
+root         11      2  0 06:47 ?        00:00:00 [watchdog/0]
+root         12      2  0 06:47 ?        00:00:00 [watchdog/1]
+root         13      2  0 06:47 ?        00:00:00 [migration/1]
+root         14      2  0 06:47 ?        00:00:00 [ksoftirqd/1]
+root         16      2  0 06:47 ?        00:00:00 [kworker/1:0H]
+root         17      2  0 06:47 ?        00:00:00 [kworker/u386:0]
+root         18      2  0 06:47 ?        00:00:00 [watchdog/2]
+root         19      2  0 06:47 ?        00:00:00 [migration/2]
+root         20      2  0 06:47 ?        00:00:00 [ksoftirqd/2]
+root         22      2  0 06:47 ?        00:00:00 [kworker/2:0H]
+root         23      2  0 06:47 ?        00:00:00 [watchdog/3]
+root         24      2  0 06:47 ?        00:00:00 [migration/3]
+root         25      2  0 06:47 ?        00:00:00 [ksoftirqd/3]
+root         27      2  0 06:47 ?        00:00:00 [kworker/3:0H]
+root         28      2  0 06:47 ?        00:00:00 [watchdog/4]
+root         29      2  0 06:47 ?        00:00:00 [migration/4]
+root         30      2  0 06:47 ?        00:00:00 [ksoftirqd/4]
+root         31      2  0 06:47 ?        00:00:00 [kworker/4:0]
+root         32      2  0 06:47 ?        00:00:00 [kworker/4:0H]
+root         33      2  0 06:47 ?        00:00:00 [watchdog/5]
+root         34      2  0 06:47 ?        00:00:00 [migration/5]
+root         35      2  0 06:47 ?        00:00:00 [ksoftirqd/5]
+root         37      2  0 06:47 ?        00:00:00 [kworker/5:0H]
+root         38      2  0 06:47 ?        00:00:00 [watchdog/6]
+root         39      2  0 06:47 ?        00:00:00 [migration/6]
+root         40      2  0 06:47 ?        00:00:00 [ksoftirqd/6]
+root         42      2  0 06:47 ?        00:00:00 [kworker/6:0H]
+root         43      2  0 06:47 ?        00:00:00 [watchdog/7]
+root         44      2  0 06:47 ?        00:00:00 [migration/7]
+root         45      2  0 06:47 ?        00:00:00 [ksoftirqd/7]
+root         47      2  0 06:47 ?        00:00:00 [kworker/7:0H]
+root         48      2  0 06:47 ?        00:00:00 [watchdog/8]
+root         49      2  0 06:47 ?        00:00:00 [migration/8]
+root         50      2  0 06:47 ?        00:00:05 [ksoftirqd/8]
+root         52      2  0 06:47 ?        00:00:00 [kworker/8:0H]
+root         53      2  0 06:47 ?        00:00:00 [watchdog/9]
+root         54      2  0 06:47 ?        00:00:00 [migration/9]
+root         55      2  0 06:47 ?        00:00:00 [ksoftirqd/9]
+root         57      2  0 06:47 ?        00:00:00 [kworker/9:0H]
+root         58      2  0 06:47 ?        00:00:00 [watchdog/10]
+root         59      2  0 06:47 ?        00:00:00 [migration/10]
+root         60      2  0 06:47 ?        00:00:00 [ksoftirqd/10]
+root         62      2  0 06:47 ?        00:00:00 [kworker/10:0H]
+root         63      2  0 06:47 ?        00:00:00 [watchdog/11]
+root         64      2  0 06:47 ?        00:00:00 [migration/11]
+root         65      2  0 06:47 ?        00:00:00 [ksoftirqd/11]
+root         67      2  0 06:47 ?        00:00:00 [kworker/11:0H]
+root         68      2  0 06:47 ?        00:00:00 [watchdog/12]
+root         69      2  0 06:47 ?        00:00:00 [migration/12]
+root         70      2  0 06:47 ?        00:00:00 [ksoftirqd/12]
+root         72      2  0 06:47 ?        00:00:00 [kworker/12:0H]
+root         73      2  0 06:47 ?        00:00:00 [watchdog/13]
+root         74      2  0 06:47 ?        00:00:00 [migration/13]
+root         75      2  0 06:47 ?        00:00:00 [ksoftirqd/13]
+root         77      2  0 06:47 ?        00:00:00 [kworker/13:0H]
+root         78      2  0 06:47 ?        00:00:00 [watchdog/14]
+root         79      2  0 06:47 ?        00:00:00 [migration/14]
+root         80      2  0 06:47 ?        00:00:00 [ksoftirqd/14]
+root         81      2  0 06:47 ?        00:00:00 [kworker/14:0]
+root         82      2  0 06:47 ?        00:00:00 [kworker/14:0H]
+root         83      2  0 06:47 ?        00:00:00 [watchdog/15]
+root         84      2  0 06:47 ?        00:00:00 [migration/15]
+root         85      2  0 06:47 ?        00:00:00 [ksoftirqd/15]
+root         87      2  0 06:47 ?        00:00:00 [kworker/15:0H]
+root         88      2  0 06:47 ?        00:00:00 [watchdog/16]
+root         89      2  0 06:47 ?        00:00:00 [migration/16]
+root         90      2  0 06:47 ?        00:00:00 [ksoftirqd/16]
+root         91      2  0 06:47 ?        00:00:00 [kworker/16:0]
+root         92      2  0 06:47 ?        00:00:00 [kworker/16:0H]
+root         93      2  0 06:47 ?        00:00:00 [watchdog/17]
+root         94      2  0 06:47 ?        00:00:00 [migration/17]
+root         95      2  0 06:47 ?        00:00:00 [ksoftirqd/17]
+root         96      2  0 06:47 ?        00:00:00 [kworker/17:0]
+root         97      2  0 06:47 ?        00:00:00 [kworker/17:0H]
+root         98      2  0 06:47 ?        00:00:00 [watchdog/18]
+root         99      2  0 06:47 ?        00:00:00 [migration/18]
+root        100      2  0 06:47 ?        00:00:00 [ksoftirqd/18]
+root        101      2  0 06:47 ?        00:00:00 [kworker/18:0]
+root        102      2  0 06:47 ?        00:00:00 [kworker/18:0H]
+root        103      2  0 06:47 ?        00:00:00 [watchdog/19]
+root        104      2  0 06:47 ?        00:00:00 [migration/19]
+root        105      2  0 06:47 ?        00:00:00 [ksoftirqd/19]
+root        107      2  0 06:47 ?        00:00:00 [kworker/19:0H]
+root        108      2  0 06:47 ?        00:00:00 [watchdog/20]
+root        109      2  0 06:47 ?        00:00:00 [migration/20]
+root        110      2  0 06:47 ?        00:00:00 [ksoftirqd/20]
+root        111      2  0 06:47 ?        00:00:00 [kworker/20:0]
+root        112      2  0 06:47 ?        00:00:00 [kworker/20:0H]
+root        113      2  0 06:47 ?        00:00:00 [watchdog/21]
+root        114      2  0 06:47 ?        00:00:00 [migration/21]
+root        115      2  0 06:47 ?        00:00:00 [ksoftirqd/21]
+root        116      2  0 06:47 ?        00:00:00 [kworker/21:0]
+root        117      2  0 06:47 ?        00:00:00 [kworker/21:0H]
+root        118      2  0 06:47 ?        00:00:00 [watchdog/22]
+root        119      2  0 06:47 ?        00:00:00 [migration/22]
+root        120      2  0 06:47 ?        00:00:00 [ksoftirqd/22]
+root        121      2  0 06:47 ?        00:00:00 [kworker/22:0]
+root        122      2  0 06:47 ?        00:00:00 [kworker/22:0H]
+root        123      2  0 06:47 ?        00:00:00 [watchdog/23]
+root        124      2  0 06:47 ?        00:00:00 [migration/23]
+root        125      2  0 06:47 ?        00:00:00 [ksoftirqd/23]
+root        127      2  0 06:47 ?        00:00:00 [kworker/23:0H]
+root        128      2  0 06:47 ?        00:00:00 [watchdog/24]
+root        129      2  0 06:47 ?        00:00:00 [migration/24]
+root        130      2  0 06:47 ?        00:00:00 [ksoftirqd/24]
+root        131      2  0 06:47 ?        00:00:00 [kworker/24:0]
+root        132      2  0 06:47 ?        00:00:00 [kworker/24:0H]
+root        133      2  0 06:47 ?        00:00:00 [watchdog/25]
+root        134      2  0 06:47 ?        00:00:00 [migration/25]
+root        135      2  0 06:47 ?        00:00:00 [ksoftirqd/25]
+root        137      2  0 06:47 ?        00:00:00 [kworker/25:0H]
+root        138      2  0 06:47 ?        00:00:00 [watchdog/26]
+root        139      2  0 06:47 ?        00:00:00 [migration/26]
+root        140      2  0 06:47 ?        00:00:00 [ksoftirqd/26]
+root        141      2  0 06:47 ?        00:00:00 [kworker/26:0]
+root        142      2  0 06:47 ?        00:00:00 [kworker/26:0H]
+root        143      2  0 06:47 ?        00:00:00 [watchdog/27]
+root        144      2  0 06:47 ?        00:00:00 [migration/27]
+root        145      2  0 06:47 ?        00:00:00 [ksoftirqd/27]
+root        147      2  0 06:47 ?        00:00:00 [kworker/27:0H]
+root        148      2  0 06:47 ?        00:00:00 [watchdog/28]
+root        149      2  0 06:47 ?        00:00:00 [migration/28]
+root        150      2  0 06:47 ?        00:00:00 [ksoftirqd/28]
+root        151      2  0 06:47 ?        00:00:00 [kworker/28:0]
+root        152      2  0 06:47 ?        00:00:00 [kworker/28:0H]
+root        153      2  0 06:47 ?        00:00:00 [watchdog/29]
+root        154      2  0 06:47 ?        00:00:00 [migration/29]
+root        155      2  0 06:47 ?        00:00:00 [ksoftirqd/29]
+root        157      2  0 06:47 ?        00:00:00 [kworker/29:0H]
+root        158      2  0 06:47 ?        00:00:00 [watchdog/30]
+root        159      2  0 06:47 ?        00:00:00 [migration/30]
+root        160      2  0 06:47 ?        00:00:00 [ksoftirqd/30]
+root        161      2  0 06:47 ?        00:00:00 [kworker/30:0]
+root        162      2  0 06:47 ?        00:00:00 [kworker/30:0H]
+root        163      2  0 06:47 ?        00:00:00 [watchdog/31]
+root        164      2  0 06:47 ?        00:00:00 [migration/31]
+root        165      2  0 06:47 ?        00:00:00 [ksoftirqd/31]
+root        166      2  0 06:47 ?        00:00:00 [kworker/31:0]
+root        167      2  0 06:47 ?        00:00:00 [kworker/31:0H]
+root        168      2  0 06:47 ?        00:00:00 [watchdog/32]
+root        169      2  0 06:47 ?        00:00:00 [migration/32]
+root        170      2  0 06:47 ?        00:00:00 [ksoftirqd/32]
+root        171      2  0 06:47 ?        00:00:00 [kworker/32:0]
+root        172      2  0 06:47 ?        00:00:00 [kworker/32:0H]
+root        173      2  0 06:47 ?        00:00:00 [watchdog/33]
+root        174      2  0 06:47 ?        00:00:00 [migration/33]
+root        175      2  0 06:47 ?        00:00:00 [ksoftirqd/33]
+root        176      2  0 06:47 ?        00:00:00 [kworker/33:0]
+root        177      2  0 06:47 ?        00:00:00 [kworker/33:0H]
+root        178      2  0 06:47 ?        00:00:00 [watchdog/34]
+root        179      2  0 06:47 ?        00:00:00 [migration/34]
+root        180      2  0 06:47 ?        00:00:00 [ksoftirqd/34]
+root        182      2  0 06:47 ?        00:00:00 [kworker/34:0H]
+root        183      2  0 06:47 ?        00:00:00 [watchdog/35]
+root        184      2  0 06:47 ?        00:00:00 [migration/35]
+root        185      2  0 06:47 ?        00:00:00 [ksoftirqd/35]
+root        186      2  0 06:47 ?        00:00:00 [kworker/35:0]
+root        187      2  0 06:47 ?        00:00:00 [kworker/35:0H]
+root        188      2  0 06:47 ?        00:00:00 [watchdog/36]
+root        189      2  0 06:47 ?        00:00:00 [migration/36]
+root        190      2  0 06:47 ?        00:00:00 [ksoftirqd/36]
+root        191      2  0 06:47 ?        00:00:00 [kworker/36:0]
+root        192      2  0 06:47 ?        00:00:00 [kworker/36:0H]
+root        193      2  0 06:47 ?        00:00:00 [watchdog/37]
+root        194      2  0 06:47 ?        00:00:00 [migration/37]
+root        195      2  0 06:47 ?        00:00:00 [ksoftirqd/37]
+root        196      2  0 06:47 ?        00:00:00 [kworker/37:0]
+root        197      2  0 06:47 ?        00:00:00 [kworker/37:0H]
+root        198      2  0 06:47 ?        00:00:00 [watchdog/38]
+root        199      2  0 06:47 ?        00:00:00 [migration/38]
+root        200      2  0 06:47 ?        00:00:00 [ksoftirqd/38]
+root        201      2  0 06:47 ?        00:00:00 [kworker/38:0]
+root        202      2  0 06:47 ?        00:00:00 [kworker/38:0H]
+root        203      2  0 06:47 ?        00:00:00 [watchdog/39]
+root        204      2  0 06:47 ?        00:00:00 [migration/39]
+root        205      2  0 06:47 ?        00:00:00 [ksoftirqd/39]
+root        206      2  0 06:47 ?        00:00:00 [kworker/39:0]
+root        207      2  0 06:47 ?        00:00:00 [kworker/39:0H]
+root        210      2  0 06:47 ?        00:00:00 [kdevtmpfs]
+root        211      2  0 06:47 ?        00:00:00 [netns]
+root        212      2  0 06:47 ?        00:00:00 [khungtaskd]
+root        213      2  0 06:47 ?        00:00:00 [writeback]
+root        214      2  0 06:47 ?        00:00:00 [kintegrityd]
+root        215      2  0 06:47 ?        00:00:00 [bioset]
+root        216      2  0 06:47 ?        00:00:00 [kblockd]
+root        217      2  0 06:47 ?        00:00:00 [md]
+root        218      2  0 06:47 ?        00:00:00 [kworker/35:1]
+root        223      2  0 06:47 ?        00:00:00 [kswapd0]
+root        224      2  0 06:47 ?        00:00:00 [kswapd1]
+root        225      2  0 06:47 ?        00:00:00 [ksmd]
+root        226      2  0 06:47 ?        00:00:00 [khugepaged]
+root        227      2  0 06:47 ?        00:00:00 [crypto]
+root        235      2  0 06:47 ?        00:00:00 [kthrotld]
+root        236      2  0 06:47 ?        00:00:00 [kworker/0:1]
+root        237      2  0 06:47 ?        00:00:00 [kworker/u386:1]
+root        238      2  0 06:47 ?        00:00:00 [kmpath_rdacd]
+root        242      2  0 06:47 ?        00:00:00 [kpsmoused]
+root        243      2  0 06:47 ?        00:00:00 [ipv6_addrconf]
+root        263      2  0 06:47 ?        00:00:00 [deferwq]
+root        264      2  0 06:47 ?        00:00:00 [kworker/u384:1]
+root        296      2  0 06:47 ?        00:00:00 [kworker/30:1]
+root        298      2  0 06:47 ?        00:00:00 [kauditd]
+root        354      2  0 06:47 ?        00:00:00 [kworker/6:1]
+root        362      2  0 06:47 ?        00:00:00 [kworker/8:1]
+root        384      2  0 06:47 ?        00:00:00 [kworker/5:1]
+root        474      2  0 06:47 ?        00:00:00 [scsi_eh_0]
+root        475      2  0 06:47 ?        00:00:00 [scsi_tmf_0]
+root        478      2  0 06:47 ?        00:00:00 [kworker/25:1]
+root        480      2  0 06:47 ?        00:00:00 [ata_sff]
+root        483      2  0 06:47 ?        00:00:00 [kworker/18:1]
+root        484      2  0 06:47 ?        00:00:00 [kworker/3:1]
+root        487      2  0 06:47 ?        00:00:00 [kworker/2:1]
+root        488      2  0 06:47 ?        00:00:00 [kworker/10:1]
+root        493      2  0 06:47 ?        00:00:00 [kworker/17:1]
+root        494      2  0 06:47 ?        00:00:00 [kworker/26:1]
+root        495      2  0 06:47 ?        00:00:00 [kworker/24:1]
+root        496      2  0 06:47 ?        00:00:00 [kworker/29:1]
+root        497      2  0 06:47 ?        00:00:00 [kworker/19:1]
+root        498      2  0 06:47 ?        00:00:00 [kworker/33:1]
+root        499      2  0 06:47 ?        00:00:00 [kworker/32:1]
+root        501      2  0 06:47 ?        00:00:00 [kworker/36:1]
+root        502      2  0 06:47 ?        00:00:00 [kworker/39:1]
+root        505      2  0 06:47 ?        00:00:00 [kworker/27:1]
+root        506      2  0 06:47 ?        00:00:00 [kworker/20:1]
+root        515      2  0 06:47 ?        00:00:00 [scsi_eh_1]
+root        516      2  0 06:47 ?        00:00:00 [scsi_tmf_1]
+root        517      2  0 06:47 ?        00:00:00 [scsi_eh_2]
+root        518      2  0 06:47 ?        00:00:00 [scsi_tmf_2]
+root        519      2  0 06:47 ?        00:00:00 [scsi_eh_3]
+root        520      2  0 06:47 ?        00:00:00 [scsi_tmf_3]
+root        521      2  0 06:47 ?        00:00:00 [scsi_eh_4]
+root        522      2  0 06:47 ?        00:00:00 [scsi_tmf_4]
+root        526      2  0 06:47 ?        00:00:00 [scsi_eh_5]
+root        527      2  0 06:47 ?        00:00:00 [scsi_tmf_5]
+root        528      2  0 06:47 ?        00:00:00 [scsi_eh_6]
+root        529      2  0 06:47 ?        00:00:00 [scsi_tmf_6]
+root        530      2  0 06:47 ?        00:00:00 [scsi_eh_7]
+root        531      2  0 06:47 ?        00:00:00 [scsi_tmf_7]
+root        532      2  0 06:47 ?        00:00:00 [scsi_eh_8]
+root        533      2  0 06:47 ?        00:00:00 [scsi_tmf_8]
+root        534      2  0 06:47 ?        00:00:00 [scsi_eh_9]
+root        535      2  0 06:47 ?        00:00:00 [scsi_tmf_9]
+root        536      2  0 06:47 ?        00:00:00 [scsi_eh_10]
+root        537      2  0 06:47 ?        00:00:00 [scsi_tmf_10]
+root        541      2  0 06:47 ?        00:00:00 [kworker/u385:8]
+root        542      2  0 06:47 ?        00:00:00 [kworker/u385:9]
+root        553      2  0 06:47 ?        00:00:00 [ttm_swap]
+root        572      2  0 06:47 ?        00:00:00 [kworker/37:2]
+root        582      2  0 06:47 ?        00:00:00 [bioset]
+root        583      2  0 06:47 ?        00:00:00 [xfsalloc]
+root        584      2  0 06:47 ?        00:00:00 [xfs_mru_cache]
+root        585      2  0 06:47 ?        00:00:00 [xfs-buf/sda2]
+root        586      2  0 06:47 ?        00:00:00 [xfs-data/sda2]
+root        587      2  0 06:47 ?        00:00:00 [xfs-conv/sda2]
+root        588      2  0 06:47 ?        00:00:00 [xfs-cil/sda2]
+root        589      2  0 06:47 ?        00:00:00 [xfs-reclaim/sda]
+root        590      2  0 06:47 ?        00:00:00 [xfs-log/sda2]
+root        591      2  0 06:47 ?        00:00:00 [xfs-eofblocks/s]
+root        592      2  0 06:47 ?        00:00:03 [xfsaild/sda2]
+root        641      2  0 06:47 ?        00:00:00 [kworker/34:1]
+root        665      1  0 06:47 ?        00:00:01 /usr/lib/systemd/systemd-journ
+root        697      2  0 06:47 ?        00:00:00 [rpciod]
+root        698      2  0 06:47 ?        00:00:00 [xprtiod]
+root        700      1  0 06:47 ?        00:00:00 /usr/sbin/lvmetad -f
+root        711      2  0 06:47 ?        00:00:00 [afs_pagecopy]
+root        720      1  0 06:47 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root        721      2  0 06:47 ?        00:00:00 [kworker/3:1H]
+root        722      2  0 06:47 ?        00:00:00 [kworker/24:1H]
+root        953      2  0 06:47 ?        00:00:00 [kworker/21:1]
+root       1041      2  0 06:47 ?        00:00:00 [kworker/1:1H]
+root       1043      2  0 06:47 ?        00:00:00 [kworker/7:1H]
+root       1044      2  0 06:47 ?        00:00:00 [kvm-irqfd-clean]
+root       1051      2  0 06:47 ?        00:00:00 [edac-poller]
+root       1067      2  0 06:47 ?        00:00:00 [xfs-buf/sda1]
+root       1068      2  0 06:47 ?        00:00:00 [xfs-data/sda1]
+root       1069      2  0 06:47 ?        00:00:00 [xfs-conv/sda1]
+root       1070      2  0 06:47 ?        00:00:00 [xfs-cil/sda1]
+root       1071      2  0 06:47 ?        00:00:00 [xfs-reclaim/sda]
+root       1072      2  0 06:47 ?        00:00:00 [xfs-log/sda1]
+root       1073      2  0 06:47 ?        00:00:00 [xfs-eofblocks/s]
+root       1074      2  0 06:47 ?        00:00:00 [xfsaild/sda1]
+root       1082      2  0 06:47 ?        00:00:00 [kworker/11:1H]
+root       1086      2  0 06:47 ?        00:00:00 [kworker/13:1H]
+root       1102      1  0 06:47 ?        00:00:00 /sbin/auditd
+root       1106   1102  0 06:47 ?        00:00:00 /sbin/audispd
+root       1107   1106  0 06:47 ?        00:00:00 /usr/sbin/sedispatch
+polkitd    1131      1  0 06:47 ?        00:00:00 /usr/lib/polkit-1/polkitd --no
+nscd       1133      1  0 06:47 ?        00:00:01 /usr/sbin/nscd
+root       1136      1  0 06:47 ?        00:00:00 /usr/sbin/alsactl -s -n 19 -c 
+avahi      1148      1  0 06:47 ?        00:00:00 avahi-daemon: running [linux-2
+libstor+   1149      1  0 06:47 ?        00:00:00 /usr/bin/lsmd -d
+root       1154      1  0 06:47 ?        00:00:00 /usr/sbin/gpm -m /dev/input/mi
+avahi      1158   1148  0 06:47 ?        00:00:00 avahi-daemon: chroot helper
+root       1164      1  0 06:47 ?        00:00:00 /usr/sbin/gssproxy -D
+root       1197      1  0 06:47 ?        00:00:00 /usr/sbin/abrtd -d -s
+root       1202      1  0 06:47 ?        00:00:01 /usr/sbin/rsyslogd -n
+dbus       1204      1  0 06:47 ?        00:00:01 /bin/dbus-daemon --system --ad
+root       1230      1  0 06:47 ?        00:00:00 /usr/bin/abrt-watch-log -F BUG
+root       1231      1  0 06:47 ?        00:00:00 /usr/sbin/smartd -n -q never
+root       1233      1  0 06:47 ?        00:00:00 /usr/lib/systemd/systemd-login
+root       1236      1  0 06:47 ?        00:00:01 /sbin/rngd -f
+root       1239      1  0 06:47 ?        00:00:03 /usr/sbin/irqbalance --foregro
+root       1268      1  0 06:47 ?        00:00:01 /usr/sbin/NetworkManager --no-
+root       1280      1  0 06:47 ?        00:00:00 /bin/bash /usr/sbin/ksmtuned
+root       1285      1  0 06:47 ?        00:00:00 /usr/sbin/mcelog --ignorenodev
+root       1300      1  0 06:47 ?        00:00:00 /usr/sbin/acpid
+root       1329      1  0 06:47 ?        00:00:00 /usr/sbin/rpc.gssd
+chrony     1349      1  0 06:47 ?        00:00:00 /usr/sbin/chronyd
+root       1353      2  0 06:47 ?        00:00:00 [kworker/0:1H]
+root       1422   1268  0 06:47 ?        00:00:00 /sbin/dhclient -d -q -sf /usr/
+root       1437      2  0 06:47 ?        00:00:00 [kworker/15:1H]
+root       1438      2  0 06:47 ?        00:00:00 [kworker/19:1H]
+root       1705      1  0 06:47 ?        00:00:01 /usr/bin/python -Es /usr/sbin/
+root       1707      1  0 06:47 ?        00:00:00 /usr/sbin/cupsd -f
+root       1709      1  0 06:47 ?        00:00:00 /usr/sbin/sshd -D
+root       1714      1  0 06:47 ?        00:00:00 /usr/bin/rhsmcertd
+root       1718      1  0 06:47 ?        00:00:10 /usr/sbin/snmpd -LS0-6d -f
+root       1722      1  0 06:47 ?        00:00:00 /usr/sbin/xinetd -stayalive -p
+root       1760      2  0 06:47 ?        00:00:00 [afs_callback]
+root       1762      2  0 06:47 ?        00:00:05 [afs_rxlistener]
+root       1763      2  0 06:47 ?        00:00:00 [afs_rxevent]
+root       1764      1  0 06:47 ?        00:00:00 /usr/vice/etc/afsd -dynroot -f
+root       1788      2  0 06:47 ?        00:00:00 [afsd]
+root       1790      2  0 06:47 ?        00:00:00 [afs_checkserver]
+root       1791      2  0 06:47 ?        00:00:01 [afs_background]
+root       1793      2  0 06:47 ?        00:00:01 [afs_background]
+root       1795      2  0 06:47 ?        00:00:01 [afs_background]
+root       1797      2  0 06:47 ?        00:00:01 [afs_background]
+colord     1928      1  0 06:47 ?        00:00:00 /usr/libexec/colord
+root       1932      1  0 06:47 ?        00:00:00 /usr/libexec/postfix/master -w
+root       1934      2  0 06:47 ?        00:00:01 [afs_cachetrim]
+postfix    1937   1932  0 06:47 ?        00:00:00 qmgr -l -t unix -u
+root       1939      1  0 06:47 ?        00:00:00 /usr/sbin/libvirtd
+root       1942      1  0 06:47 ?        00:00:00 /usr/sbin/crond -n
+root       1944      1  0 06:47 ?        00:00:00 /usr/sbin/atd -f
+root       1955      1  0 06:47 ?        00:00:00 rhnsd
+root       1996      1  0 06:47 ?        00:00:00 [kmemsrv_master] accepting
+root       2007      1  0 06:47 tty1     00:00:00 /sbin/agetty --noclear tty1 li
+nobody     2072      1  0 06:47 ?        00:00:00 /usr/sbin/dnsmasq --conf-file=
+root       2073   2072  0 06:47 ?        00:00:00 /usr/sbin/dnsmasq --conf-file=
+root       2074   1996  0 06:47 ?        00:00:08 [kmemsrv_child] 128.2.4.26:549
+root       2331      2  0 06:48 ?        00:00:00 [kworker/38:1H]
+root       2333      2  0 06:48 ?        00:00:00 [kworker/23:1H]
+root       2343      2  0 06:48 ?        00:00:00 [kworker/2:1H]
+root       2352      2  0 06:48 ?        00:00:00 [kworker/u384:2]
+root       2354      2  0 06:48 ?        00:00:00 [kworker/18:1H]
+root       2355      2  0 06:48 ?        00:00:00 [kworker/22:1H]
+root       2357      2  0 06:48 ?        00:00:00 [kworker/8:1H]
+root       2358      2  0 06:48 ?        00:00:00 [kworker/14:1H]
+root       2359      2  0 06:48 ?        00:00:00 [kworker/26:1H]
+root       2360      2  0 06:48 ?        00:00:00 [kworker/30:1H]
+root       2361      2  0 06:48 ?        00:00:00 [kworker/34:1H]
+root       2413      2  0 06:48 ?        00:00:00 [kworker/6:1H]
+root       2420      2  0 06:48 ?        00:00:00 [kworker/4:1H]
+root       2691      2  0 06:50 ?        00:00:00 [kworker/12:1H]
+root       2885   1709  0 06:53 ?        00:00:00 sshd: waltert [priv]
+waltert    2894   2885  0 06:53 ?        00:00:00 sshd: waltert@notty
+waltert    2895   2894  0 06:53 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root       3046      2  0 06:54 ?        00:00:00 [kworker/10:1H]
+root       4118      2  0 06:55 ?        00:00:00 [kworker/17:1H]
+root       4367      2  0 06:58 ?        00:00:00 [kworker/5:1H]
+root       9652   1709  0 07:20 ?        00:00:00 sshd: cheyuanl [priv]
+cheyuanl   9666   9652  0 07:20 ?        00:00:11 sshd: cheyuanl@pts/0
+cheyuanl   9667   9666  0 07:20 pts/0    00:00:01 -zsh
+root      10979      2  0 07:25 ?        00:00:00 [kworker/1:2]
+nslcd     13322      1  0 07:30 ?        00:00:02 /usr/sbin/nslcd
+root      29573      2  0 07:50 ?        00:00:00 [kworker/28:2]
+root      29769      2  0 07:53 ?        00:00:00 [kworker/16:1H]
+root      35293      2  0 08:06 ?        00:00:00 [kworker/25:1H]
+root      35819   1709  0 08:13 ?        00:00:00 sshd: asilbaug [priv]
+asilbaug  35832  35819  0 08:13 ?        00:00:00 sshd: asilbaug@notty
+asilbaug  35833  35832  0 08:13 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root      36275      2  0 08:20 ?        00:00:00 [kworker/19:2]
+root      38468   1709  0 08:35 ?        00:00:00 sshd: ken2 [priv]
+ken2      38480  38468  3 08:35 ?        00:04:49 sshd: ken2@pts/10
+ken2      38481  38480  0 08:35 pts/10   00:00:00 -bash
+ken2      38660      1  0 08:35 pts/10   00:00:00 dbus-launch --autolaunch=ba7b3
+ken2      38661      1  0 08:35 ?        00:00:00 /bin/dbus-daemon --fork --prin
+ken2      38720      1  0 08:35 ?        00:00:00 /usr/libexec/gconfd-2
+root      39889      2  0 08:36 ?        00:00:00 [kworker/28:1H]
+root      39907      2  0 08:36 ?        00:00:00 [kworker/21:1H]
+root      47608      2  0 09:01 ?        00:00:00 [kworker/9:1H]
+root      49147      2  0 09:10 ?        00:00:00 [kworker/1:0]
+ken2      49294  38481  1 09:12 pts/10   00:01:57 /usr/lib64/firefox/firefox -P
+ken2      49579  49294  1 09:12 pts/10   00:01:37 /usr/lib64/firefox/plugin-cont
+root      54427      2  0 09:18 ?        00:00:00 [kworker/31:1H]
+root      55182      2  0 09:20 ?        00:00:00 [kworker/29:2]
+root      56513      2  0 09:25 ?        00:00:00 [kworker/27:0]
+root      57813      2  0 09:27 ?        00:00:00 [kworker/6:2]
+root      57839      2  0 09:27 ?        00:00:00 [kworker/5:2]
+root      57842      2  0 09:27 ?        00:00:00 [kworker/9:0]
+root      57846      2  0 09:27 ?        00:00:00 [kworker/15:0]
+root      57870      2  0 09:27 ?        00:00:00 [kworker/13:0]
+root      57915      2  0 09:27 ?        00:00:00 [kworker/12:0]
+root      57980      2  0 09:27 ?        00:00:00 [kworker/4:1]
+root      58030      2  0 09:27 ?        00:00:00 [kworker/38:2]
+root      58033      2  0 09:27 ?        00:00:00 [kworker/2:2]
+root      58037      2  0 09:27 ?        00:00:00 [kworker/7:2]
+root      58082      2  0 09:27 ?        00:00:00 [kworker/11:0]
+root      58089      2  0 09:27 ?        00:00:00 [kworker/14:2]
+root      58092      2  0 09:27 ?        00:00:00 [kworker/0:2]
+rpc       59183      1  0 09:27 ?        00:00:00 /sbin/rpcbind -w
+root      59485   1709  0 09:28 ?        00:00:00 sshd: sccao [priv]
+root      59495   1709  0 09:28 ?        00:00:00 sshd: sccao [priv]
+sccao     59496  59485  0 09:28 ?        00:00:00 sshd: sccao@pts/2
+sccao     59505  59495  0 09:28 ?        00:00:00 sshd: sccao@notty
+sccao     59507  59505  0 09:28 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+sccao     59510  59496  0 09:28 pts/2    00:00:00 -bash
+root      59844      2  0 09:30 ?        00:00:00 [kworker/3:2]
+sccao     59866  59510  0 09:30 pts/2    00:00:00 /usr/bin/rlwrap /usr/local/bin
+sccao     59869  59866  0 09:30 pts/5    00:00:00 /usr/local/depot/smlnj-110.81/
+root      62542   1709  0 09:42 ?        00:00:00 sshd: jingyuax [priv]
+jingyuax  62562  62542  0 09:42 ?        00:00:00 sshd: jingyuax@notty
+jingyuax  62563  62562  0 09:42 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root      63016   1709  0 09:48 ?        00:00:00 sshd: abhinitm [priv]
+abhinitm  63026  63016  0 09:48 ?        00:00:00 sshd: abhinitm@pts/6
+root      63027   1709  0 09:48 ?        00:00:00 sshd: abhinitm [priv]
+abhinitm  63037  63027  0 09:48 ?        00:00:00 sshd: abhinitm@notty
+abhinitm  63039  63037  0 09:48 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+abhinitm  63042  63026  0 09:48 pts/6    00:00:00 -bash
+root      63513   1709  0 09:53 ?        00:00:00 sshd: aparadka [priv]
+aparadka  63526  63513  0 09:53 ?        00:00:00 sshd: aparadka@pts/9
+aparadka  63527  63526  0 09:53 pts/9    00:00:00 -bash
+root      63625   1709  0 09:53 ?        00:00:00 sshd: aarushiw [priv]
+aarushiw  63649  63625  0 09:53 ?        00:00:00 sshd: aarushiw@pts/11
+aarushiw  63650  63649  0 09:53 pts/11   00:00:00 -bash
+ruoyuanl  64549      1  0 10:03 ?        00:00:00 ./tsh
+root      64623   1709  0 10:04 ?        00:00:00 sshd: hvedati [priv]
+hvedati   64635  64623  0 10:04 ?        00:00:00 sshd: hvedati@pts/7
+hvedati   64636  64635  0 10:04 pts/7    00:00:00 -bash
+root      64842   1709  0 10:06 ?        00:00:00 sshd: asilbaug [priv]
+asilbaug  64854  64842  0 10:06 ?        00:00:00 sshd: asilbaug@pts/8
+asilbaug  64856  64854  0 10:06 pts/8    00:00:00 -bash
+postfix   64922   1932  0 10:06 ?        00:00:00 pickup -l -t unix -u
+root      65998      2  0 10:20 ?        00:00:00 [kworker/13:1]
+root      66119   1709  0 10:22 ?        00:00:00 sshd: cvsmith [priv]
+cvsmith   66136  66119  0 10:22 ?        00:00:08 sshd: cvsmith@pts/3
+root      66137   1709  0 10:22 ?        00:00:00 sshd: cvsmith [priv]
+cvsmith   66147  66137  0 10:22 ?        00:00:00 sshd: cvsmith@notty
+cvsmith   66148  66147  0 10:22 ?        00:00:00 csh -c /usr/libexec/openssh/sf
+cvsmith   66165  66148  0 10:22 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+cvsmith   66166  66136  0 10:22 pts/3    00:00:00 -csh
+cvsmith   66384  66166  0 10:23 pts/3    00:00:00 tmux
+cvsmith   66386      1  0 10:23 ?        00:00:04 tmux
+cvsmith   66387  66386  0 10:23 pts/13   00:00:00 -csh
+cvsmith   66405  66386  0 10:23 pts/14   00:00:00 -csh
+root      67606      2  0 10:25 ?        00:00:00 [kworker/34:2]
+root      68753   1709  0 10:26 ?        00:00:00 sshd: kstiles [priv]
+kstiles   68768  68753  0 10:26 ?        00:00:00 sshd: kstiles@pts/16
+root      68769   1709  0 10:26 ?        00:00:00 sshd: kstiles [priv]
+kstiles   68779  68769  0 10:26 ?        00:00:00 sshd: kstiles@notty
+kstiles   68781  68779  0 10:26 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+kstiles   68784  68768  0 10:26 pts/16   00:00:00 -bash
+root      69975   1709  0 10:26 ?        00:00:00 sshd: yilef [priv]
+yilef     69977  69975  0 10:26 ?        00:00:00 sshd: yilef@pts/19
+yilef     69978  69977  0 10:26 pts/19   00:00:00 -bash
+root      70625   1709  0 10:27 ?        00:00:00 sshd: mjparker [priv]
+mjparker  71039  70625  0 10:27 ?        00:00:00 sshd: mjparker@pts/20
+mjparker  71040  71039  0 10:27 pts/20   00:00:00 -bash
+cvsmith   74925      1  0 10:27 pts/13   00:00:00 dbus-launch --autolaunch=ba7b3
+cvsmith   74926      1  0 10:27 ?        00:00:00 /bin/dbus-daemon --fork --prin
+yilef     74985  69978  0 10:28 pts/19   00:00:00 vim lab09.sml
+root      77280   1709  0 10:29 ?        00:00:00 sshd: jzhanson [priv]
+root      77298      2  0 10:29 ?        00:00:00 [kworker/31:1]
+jzhanson  77300  77280  0 10:29 ?        00:00:00 sshd: jzhanson@pts/21
+jzhanson  77301  77300  0 10:29 pts/21   00:00:00 -bash
+jzhanson  77393  77301  0 10:29 pts/21   00:00:00 tmux
+jzhanson  77395      1  0 10:29 ?        00:00:00 tmux
+jzhanson  77396  77395  0 10:29 pts/22   00:00:00 -bash
+jzhanson  77456  77395  0 10:29 pts/23   00:00:00 -bash
+jzhanson  77530  77396  0 10:29 pts/22   00:00:13 vim MkBridges.sml
+root      85788   1709  0 10:35 ?        00:00:00 sshd: nserafin [priv]
+nserafin  85805  85788  0 10:35 ?        00:00:01 sshd: nserafin@pts/24
+nserafin  85807  85805  0 10:35 pts/24   00:00:00 -bash
+nserafin  86814  85807  0 10:35 pts/24   00:00:00 tmux
+nserafin  86816      1  0 10:35 ?        00:00:00 tmux
+nserafin  86817  86816  0 10:35 pts/25   00:00:00 -bash
+nserafin  87902  86816  0 10:36 pts/26   00:00:00 -bash
+nserafin  87989      1  0 10:36 pts/26   00:00:00 dbus-launch --autolaunch=ba7b3
+nserafin  87990      1  0 10:36 ?        00:00:00 /bin/dbus-daemon --fork --prin
+root      90764   1709  0 10:38 ?        00:00:00 sshd: diw2 [priv]
+root      90768   1709  0 10:38 ?        00:00:00 sshd: thofstee [priv]
+diw2      90778  90764  0 10:38 ?        00:00:00 sshd: diw2@pts/1
+diw2      90779  90778  0 10:38 pts/1    00:00:00 -bash
+thofstee  90852  90768  0 10:38 ?        00:00:00 sshd: thofstee@pts/27
+thofstee  90853  90852  0 10:38 pts/27   00:00:00 /bin/sh
+root      91099      1  0 10:38 ?        00:00:00 /usr/lib/udisks2/udisksd --no-
+root      91209      2  0 10:38 ?        00:00:00 [kworker/15:2]
+root      91327      2  0 10:40 ?        00:00:00 [kworker/16:1]
+root      94189   1709  0 10:41 ?        00:00:00 sshd: atesfaye [priv]
+atesfaye  94194  94189  0 10:41 ?        00:00:00 sshd: atesfaye@pts/4
+atesfaye  94195  94194  0 10:41 pts/4    00:00:00 -bash
+root      97289   1709  0 10:42 ?        00:00:00 sshd: xinranl1 [priv]
+xinranl1  97315  97289  0 10:42 ?        00:00:00 sshd: xinranl1@notty
+xinranl1  97316  97315  0 10:42 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root      97324   1709  0 10:42 ?        00:00:00 sshd: xinranl1 [priv]
+xinranl1  97336  97324  0 10:42 ?        00:00:00 sshd: xinranl1@pts/18
+xinranl1  97337  97336  0 10:42 pts/18   00:00:00 -bash
+xinranl1  97577  97337  0 10:42 pts/18   00:00:04 /usr/bin/rlwrap /usr/local/bin
+xinranl1  97580  97577  0 10:42 pts/28   00:00:05 /usr/local/depot/smlnj-110.81/
+root      98844      2  0 10:43 ?        00:00:00 [kworker/12:2]
+root      99103      2  0 10:44 ?        00:00:00 [kworker/36:1H]
+root     103334      2  0 10:46 ?        00:00:00 [kworker/23:2]
+atesfaye 103679  94195  0 10:49 pts/4    00:00:00 vim lab09.sml
+root     103953      2  0 10:51 ?        00:00:00 [kworker/7:0]
+root     104003   1709  0 10:52 ?        00:00:00 sshd: twildenh [priv]
+twildenh 104015 104003  0 10:52 ?        00:00:00 sshd: twildenh@pts/12
+twildenh 104016 104015  0 10:52 pts/12   00:00:00 -bash
+twildenh 104122 104016  0 10:52 pts/12   00:00:00 /usr/bin/rlwrap /usr/local/bin
+twildenh 104125 104122  0 10:52 pts/15   00:00:00 /usr/local/depot/smlnj-110.81/
+root     104188   1709  0 10:53 ?        00:00:00 sshd: qingyanl [priv]
+qingyanl 104201 104188  0 10:53 ?        00:00:00 sshd: qingyanl@pts/29
+qingyanl 104202 104201  0 10:53 pts/29   00:00:00 -bash
+root     104273   1709  0 10:53 ?        00:00:00 sshd: qingyanl [priv]
+qingyanl 104285 104273  0 10:53 ?        00:00:00 sshd: qingyanl@pts/31
+qingyanl 104286 104285  0 10:53 pts/31   00:00:00 -bash
+root     104387   1709  0 10:54 ?        00:00:00 sshd: cvsmith [priv]
+cvsmith  104403 104387  1 10:54 ?        00:00:07 sshd: cvsmith@pts/32
+root     104404      2  0 10:54 ?        00:00:00 [kworker/22:1]
+cvsmith  104406 104403  0 10:54 pts/32   00:00:00 -csh
+root     104478   1709  0 10:54 ?        00:00:00 sshd: dlei [priv]
+dlei     104488 104478  0 10:54 ?        00:00:00 sshd: dlei@pts/33
+root     104489   1709  0 10:54 ?        00:00:00 sshd: dlei [priv]
+dlei     104499 104489  0 10:54 ?        00:00:00 sshd: dlei@notty
+dlei     104503 104488  0 10:54 pts/33   00:00:00 -bash
+dlei     104605 104503  0 10:54 pts/33   00:00:00 vim dll_pt.c0
+root     104642   1709  0 10:54 ?        00:00:00 sshd: yuanzhec [priv]
+yuanzhec 104655 104642  0 10:54 ?        00:00:00 sshd: yuanzhec@pts/30
+yuanzhec 104656 104655  0 10:54 pts/30   00:00:00 -bash
+qingyanl 104854 104286  0 10:55 pts/31   00:00:00 vim g4ip.sml
+yuanzhec 104867 104656  0 10:55 pts/30   00:00:02 vim lab08.sml
+cvsmith  104898 104406  0 10:55 pts/32   00:00:00 tmux
+cvsmith  104900  66386  0 10:55 pts/34   00:00:00 -csh
+root     104938   1709  0 10:55 ?        00:00:00 sshd: christi3 [priv]
+christi3 104951 104938  0 10:55 ?        00:00:00 sshd: christi3@pts/36
+christi3 104952 104951  0 10:55 pts/36   00:00:00 -bash
+root     105195   1709  0 10:56 ?        00:00:00 sshd: moyuelab [priv]
+moyuelab 105232 105195  0 10:56 ?        00:00:01 sshd: moyuelab@pts/37
+moyuelab 105233 105232  0 10:56 pts/37   00:00:00 -bash
+root     105352   1709  0 10:56 ?        00:00:00 sshd: dilsunk [priv]
+dilsunk  105362 105352  0 10:56 ?        00:00:00 sshd: dilsunk@notty
+dilsunk  105363 105362  0 10:56 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root     105436   1709  0 10:56 ?        00:00:00 sshd: chenhuiy [priv]
+chenhuiy 105439 105436  0 10:56 ?        00:00:01 sshd: chenhuiy@pts/38
+chenhuiy 105440 105439  0 10:56 pts/38   00:00:01 /afs/andrew.cmu.edu/usr22/chen
+root     105508   1709  0 10:56 ?        00:00:00 sshd: msjohnso [priv]
+root     105724      2  0 10:56 ?        00:00:00 [kworker/10:0]
+msjohnso 105727 105508  0 10:56 ?        00:00:00 sshd: msjohnso@pts/39
+msjohnso 105728 105727  0 10:56 pts/39   00:00:00 -zsh
+msjohnso 105810 105728  0 10:56 pts/39   00:00:04 emacs -nw MkBridges.sml
+root     105889   1709  0 10:57 ?        00:00:00 sshd: chenhuiy [priv]
+chenhuiy 105891 105889  0 10:57 ?        00:00:03 sshd: chenhuiy@notty
+chenhuiy 105892 105891  0 10:57 ?        00:00:02 /usr/libexec/openssh/sftp-serv
+root     108224      2  0 10:57 ?        00:00:00 [kworker/23:1]
+cvsmith  109881      1  0 10:57 pts/34   00:00:00 dbus-launch --autolaunch=ba7b3
+cvsmith  109882      1  0 10:57 ?        00:00:00 /bin/dbus-daemon --fork --prin
+chenhuiy 110888      1  0 10:57 pts/38   00:00:00 dbus-launch --autolaunch=ba7b3
+chenhuiy 110889      1  0 10:57 ?        00:00:00 /bin/dbus-daemon --fork --prin
+christi3 111062 104952  0 10:58 pts/36   00:00:00 tmux
+christi3 111064      1  0 10:58 ?        00:00:00 tmux
+christi3 111065 111064  0 10:58 pts/17   00:00:00 -bash
+christi3 111142 111064  0 10:58 pts/40   00:00:00 -bash
+christi3 111219 111064  0 10:58 pts/41   00:00:00 -bash
+kstiles  111297  68784  0 10:58 pts/16   00:00:00 /usr/bin/rlwrap /usr/local/bin
+kstiles  111300 111297  0 10:58 pts/42   00:00:00 /usr/local/depot/smlnj-110.81/
+christi3 112278 111219  0 10:58 pts/41   00:00:00 vim merchant.c
+root     113191   1709  0 10:58 ?        00:00:00 sshd: dsokullu [priv]
+root     113196   1709  0 10:58 ?        00:00:00 sshd: jwk1 [priv]
+root     113223      2  0 10:58 ?        00:00:00 [kworker/8:0]
+root     113225   1709  0 10:58 ?        00:00:00 sshd: jwk1 [priv]
+jwk1     113227 113196  0 10:58 ?        00:00:00 sshd: jwk1@pts/43
+jwk1     113242 113225  0 10:58 ?        00:00:00 sshd: jwk1@notty
+root     113243      2  0 10:58 ?        00:00:00 [kworker/25:2]
+jwk1     113246 113242  0 10:58 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+jwk1     113270 113227  0 10:58 pts/43   00:00:00 -bash
+root     113346   1709  0 10:58 ?        00:00:00 sshd: nviggian [priv]
+nviggian 113371 113346  0 10:58 ?        00:00:00 sshd: nviggian@pts/44
+nviggian 113372 113371  0 10:58 pts/44   00:00:00 -bash
+dsokullu 113451 113191  0 10:58 ?        00:00:00 sshd: dsokullu@pts/45
+dsokullu 113455 113451  0 10:58 pts/45   00:00:00 -bash
+dsokullu 113523 113455  0 10:59 pts/45   00:00:00 /usr/bin/rlwrap /usr/local/bin
+dsokullu 113526 113523  0 10:59 pts/46   00:00:00 /usr/local/depot/smlnj-110.81/
+nviggian 113539 113372  0 10:59 pts/44   00:00:00 /usr/bin/rlwrap /usr/local/bin
+nviggian 113542 113539 75 10:59 pts/47   00:04:59 /usr/local/depot/smlnj-110.81/
+root     113576   1709  0 10:59 ?        00:00:00 sshd: yichenp [priv]
+yichenp  113586 113576  0 10:59 ?        00:00:00 sshd: yichenp@pts/48
+yichenp  113587 113586  0 10:59 pts/48   00:00:00 -bash
+root     114636      2  0 10:59 ?        00:00:00 [kworker/9:1]
+root     114651      2  0 10:59 ?        00:00:00 [kworker/11:1]
+moyuelab 116620      1  0 10:59 pts/37   00:00:00 dbus-launch --autolaunch=ba7b3
+moyuelab 116621      1  0 10:59 ?        00:00:00 /bin/dbus-daemon --fork --prin
+christi3 116690 111065  3 11:00 pts/17   00:00:13 vim scheduler.c
+nviggian 119745 113372  0 11:01 pts/44   00:00:00 /usr/bin/rlwrap /usr/local/bin
+nviggian 119748 119745  0 11:01 pts/49   00:00:00 /usr/local/depot/smlnj-110.81/
+chenhuiy 119875 105440  0 11:01 pts/38   00:00:00 /bin/bash ./run.sh
+chenhuiy 120820 119875  0 11:01 pts/38   00:00:00 /bin/sh /afs/cs.cmu.edu/academ
+chenhuiy 120824 120820  2 11:01 pts/38   00:00:06 /afs/cs.cmu.edu/academic/class
+chenhuiy 120849 120824  0 11:01 ?        00:00:00 /afs/cs.cmu.edu/academic/class
+chenhuiy 120850 120849  0 11:01 ?        00:00:00 xterm -Sxx3 -xrm XTerm*utmpInh
+cvsmith  121802 104900  0 11:02 pts/34   00:00:00 /bin/sh /afs/cs.cmu.edu/academ
+cvsmith  121806 121802  8 11:02 pts/34   00:00:17 /afs/cs.cmu.edu/academic/class
+root     121826   1709  0 11:02 ?        00:00:00 sshd: suryas [priv]
+root     121836      2  0 11:02 ?        00:00:00 [kworker/10:2]
+suryas   121838 121826  0 11:02 ?        00:00:00 sshd: suryas@pts/50
+root     121839   1709  0 11:02 ?        00:00:00 sshd: suryas [priv]
+suryas   121850 121839  0 11:02 ?        00:00:00 sshd: suryas@notty
+root     121851      2  0 11:02 ?        00:00:00 [kworker/22:2]
+suryas   121852 121850  0 11:02 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+suryas   121861 121838  0 11:02 pts/50   00:00:00 -bash
+root     121895      1  0 11:02 ?        00:00:00 /usr/sbin/abrt-dbus -t133
+cvsmith  121937 121806  0 11:02 ?        00:00:00 [xterm-slave] <defunct>
+root     122051   1709  0 11:02 ?        00:00:00 sshd: jingzew1 [priv]
+root     122055      2  0 11:02 ?        00:00:00 [kworker/32:1H]
+jingzew1 122065 122051  0 11:02 ?        00:00:00 sshd: jingzew1@pts/51
+jingzew1 122066 122065  0 11:02 pts/51   00:00:00 -bash
+root     122147      2  0 11:02 ?        00:00:00 [kworker/23:0]
+suryas   122170 121861  0 11:02 pts/50   00:00:00 /usr/bin/rlwrap /usr/local/bin
+suryas   122173 122170  0 11:02 pts/52   00:00:00 /usr/local/depot/smlnj-110.81/
+root     122186   1709  0 11:02 ?        00:00:00 sshd: shawke [priv]
+root     122212      2  0 11:02 ?        00:00:00 [kworker/32:2]
+shawke   122214 122186  0 11:02 ?        00:00:00 sshd: shawke@pts/54
+shawke   122215 122214  0 11:02 pts/54   00:00:00 -bash
+shawke   122275 122215  0 11:02 pts/54   00:00:00 /usr/bin/rlwrap /usr/local/bin
+shawke   122278 122275  0 11:02 pts/55   00:00:00 /usr/local/depot/smlnj-110.81/
+root     122330   1709  0 11:03 ?        00:00:00 sshd: jzhong1 [priv]
+root     122333   1709  0 11:03 ?        00:00:00 sshd: acao [priv]
+acao     122343 122333  0 11:03 ?        00:00:00 sshd: acao@notty
+acao     122344 122343  0 11:03 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+jzhong1  122358 122330  0 11:03 ?        00:00:00 sshd: jzhong1@notty
+jzhong1  122359 122358  0 11:03 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+root     122431      2  0 11:03 ?        00:00:00 [kworker/7:1]
+mjparker 123418  71040  0 11:03 pts/20   00:00:00 ./E0
+root     123420   1709  0 11:03 ?        00:00:00 sshd: tschwart [priv]
+root     123429   1709  0 11:03 ?        00:00:00 sshd: tschwart [priv]
+tschwart 123430 123420  0 11:03 ?        00:00:00 sshd: tschwart@pts/35
+tschwart 123440 123429  0 11:03 ?        00:00:00 sshd: tschwart@notty
+tschwart 123441 123440  0 11:03 ?        00:00:00 /usr/libexec/openssh/sftp-serv
+tschwart 123444 123430  0 11:03 pts/35   00:00:00 -bash
+nserafin 123530  87902  0 11:03 pts/26   00:00:00 /bin/sh /afs/cs.cmu.edu/academ
+nserafin 123534 123530 87 11:03 pts/26   00:01:26 /afs/cs.cmu.edu/academic/class
+nserafin 123558 123534  0 11:04 ?        00:00:00 [xterm-slave] <defunct>
+moyuelab 124536 105233  0 11:04 pts/37   00:00:00 /bin/sh /afs/cs.cmu.edu/academ
+moyuelab 124540 124536  5 11:04 pts/37   00:00:04 /afs/cs.cmu.edu/academic/class
+moyuelab 124567 124540  0 11:04 ?        00:00:00 [xterm-slave] <defunct>
+jingzew1 124599 122066  0 11:04 pts/51   00:00:00 vim hw07.sml
+root     124622   1280  0 11:04 ?        00:00:00 sleep 60
+nserafin 124624  86817  0 11:04 pts/25   00:00:00 vim kernel.c
+root     124627   1709  0 11:04 ?        00:00:00 sshd: yichenp [priv]
+yichenp  124636 124627  0 11:04 ?        00:00:00 sshd: yichenp@pts/53
+root     124637      2  0 11:04 ?        00:00:00 [kworker/24:2]
+yichenp  124638 124636  0 11:04 pts/53   00:00:00 -bash
+root     124702      2  0 11:04 ?        00:00:00 [kworker/12:1]
+yichenp  124705 124638  0 11:04 pts/53   00:00:00 bash
+qingyanl 124744 104202  0 11:05 pts/29   00:00:00 vim g4ip.sml
+yichenp  124783 124705  0 11:05 pts/53   00:00:00 ps -ef
+(myVE) bash-4.2$ ps -ef | grep yichenp
+root     113576   1709  0 10:59 ?        00:00:00 sshd: yichenp [priv]
+yichenp  113586 113576  0 10:59 ?        00:00:00 sshd: yichenp@pts/48
+yichenp  113587 113586  0 10:59 pts/48   00:00:00 -bash
+root     124627   1709  0 11:04 ?        00:00:00 sshd: yichenp [priv]
+yichenp  124636 124627  0 11:04 ?        00:00:00 sshd: yichenp@pts/53
+yichenp  124638 124636  0 11:04 pts/53   00:00:00 -bash
+yichenp  124705 124638  0 11:04 pts/53   00:00:00 bash
+yichenp  124803 124705  0 11:05 pts/53   00:00:00 ps -ef
+yichenp  124804 124705  0 11:05 pts/53   00:00:00 grep yichenp
+(myVE) bash-4.2$ ps -ef | grep yichenp
+root     113576   1709  0 10:59 ?        00:00:00 sshd: yichenp [priv]
+yichenp  113586 113576  0 10:59 ?        00:00:00 sshd: yichenp@pts/48
+yichenp  113587 113586  0 10:59 pts/48   00:00:00 -bash
+root     124627   1709  0 11:04 ?        00:00:00 sshd: yichenp [priv]
+yichenp  124636 124627  0 11:04 ?        00:00:00 sshd: yichenp@pts/53
+yichenp  124638 124636  0 11:04 pts/53   00:00:00 -bash
+yichenp  124705 124638  0 11:04 pts/53   00:00:00 bash
+yichenp  124830 124705  0 11:05 pts/53   00:00:00 ps -ef
+yichenp  124831 124705  0 11:05 pts/53   00:00:00 grep yichenp
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ top
+
+top - 11:06:23 up  4:18, 36 users,  load average: 1.85, 1.20, 0.69
+Tasks: 655 total,   3 running, 647 sleeping,   2 stopped,   3 zombie
+%Cpu(s):  1.2 us,  0.1 sy,  2.6 ni, 96.1 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem : 98586672 total, 94127296 free,  2759288 used,  1700096 buff/cache
+KiB Swap:  1048572 total,  1048572 free,        0 used. 95078064 avail Mem 
+
+   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                     
+123534 nserafin  25   5 1219532 280356  30948 R  94.4  0.3   2:08.29 simics-common                                                               
+ 77530 jzhanson  20   0   47376   7204   2884 R  27.8  0.0   0:14.00 vim                                                                         
+  2074 root      20   0  144816   6136   1196 S   5.6  0.0   0:08.36 [kmemsrv_child]                                                             
+121806 cvsmith   25   5 1198356 282592  31028 S   5.6  0.3   0:20.23 simics-common                                                               
+125818 yichenp   20   0  158380   2764   1512 R   5.6  0.0   0:00.13 top                                                                         
+     1 root      20   0  193960   7068   2568 S   0.0  0.0   0:05.64 systemd                                                                     
+     2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                    
+     3 root      20   0       0      0      0 S   0.0  0.0   0:00.03 ksoftirqd/0                                                                 
+     5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H                                                                
+     8 root      rt   0       0      0      0 S   0.0  0.0   0:00.46 migration/0                                                                 
+     9 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh                                                                      
+    10 root      20   0       0      0      0 S   0.0  0.0   0:10.31 rcu_sched                                                                   
+    11 root      rt   0       0      0      0 S   0.0  0.0   0:00.04 watchdog/0                                                                  
+    12 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 watchdog/1                                                                  
+    13 root      rt   0       0      0      0 S   0.0  0.0   0:00.08 migration/1                                                                 
+    14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 ksoftirqd/1                                                                 
+    16 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/1:0H                                                                
+    17 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u386:0                                                              
+    18 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 watchdog/2                                                                  
+    19 root      rt   0       0      0      0 S   0.0  0.0   0:00.07 migration/2                                                                 
+    20 root      20   0       0      0      0 S   0.0  0.0   0:00.10 ksoftirqd/2                                                                 
+    22 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/2:0H                                                                
+    23 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 watchdog/3                                                                  
+    24 root      rt   0       0      0      0 S   0.0  0.0   0:00.07 migration/3                                                                 
+    25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 ksoftirqd/3                                                                 
+    27 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/3:0H                                                                
+    28 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 watchdog/4                                                                  
+    29 root      rt   0       0      0      0 S   0.0  0.0   0:00.09 migration/4                                                                 
+    30 root      20   0       0      0      0 S   0.0  0.0   0:00.04 ksoftirqd/4                                                                 
+    31 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/4:0                                                                 
+    32 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/4:0H                                                                
+    33 root      rt   0       0      0      0 S   0.0  0.0   0:00.03 watchdog/5                                                                  
+    34 root      rt   0       0      0      0 S   0.0  0.0   0:00.08 migration/5                                                                 
+    35 root      20   0       0      0      0 S   0.0  0.0   0:00.00 ksoftirqd/5                                                                 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ ls
+all_CNN_keras_ref.output  a.out			   LSUV.py	  next_batch.pyc   shuffle.pyc		   test1.txt
+all_CNN_keras_ref.py	  CNN_keras_LSUV.output    LSUV.pyc	  read_cifar10.py  strided_CNN_keras2.py   weights.hdf5
+all_cnn.output		  demo.py		   mnist_cnn.py   reading	   strided_CNN_keras.py
+all_CNN_tf.py		  keras_allconv.hdf5	   mnist.py	  README.md	   strided_CNN_tf_LSUV.py
+all_cnn_weights.hdf5	  keras_allconv_LSUV.hdf5  next_batch.py  shuffle.py	   strided_CNN_tf.py
+(myVE) bash-4.2$ vi .gitignore 
+Error detected while processing /afs/andrew.cmu.edu/usr17/yichenp/.vimrc:
+line    2:
+E538: No mouse support: mouse=a
+Press ENTER or type command to continue
+(myVE) bash-4.2$ git add .
+warning: You ran 'git add' with neither '-A (--all)' or '--ignore-removal',
+whose behaviour will change in Git 2.0 with respect to paths you removed.
+Paths like 'read_cifar10.pyc' that are
+removed from your working tree are ignored with this version of Git.
+
+* 'git add --ignore-removal <pathspec>', which is the current default,
+  ignores paths you removed from your working tree.
+
+* 'git add --all <pathspec>' will let you also record the removals.
+
+Run 'git status' to check the paths you removed from your working tree.
+
+fatal: error when closing sha1 file: Disk quota exceeded
+(myVE) bash-4.2$ ls
+all_CNN_keras_ref.output  a.out			   LSUV.py	  next_batch.pyc   shuffle.pyc		   test1.txt
+all_CNN_keras_ref.py	  CNN_keras_LSUV.output    LSUV.pyc	  read_cifar10.py  strided_CNN_keras2.py   weights.hdf5
+all_cnn.output		  demo.py		   mnist_cnn.py   reading	   strided_CNN_keras.py
+all_CNN_tf.py		  keras_allconv.hdf5	   mnist.py	  README.md	   strided_CNN_tf_LSUV.py
+all_cnn_weights.hdf5	  keras_allconv_LSUV.hdf5  next_batch.py  shuffle.py	   strided_CNN_tf.py
+(myVE) bash-4.2$ cd ..
+(myVE) bash-4.2$ ls
+CMU15513  ResNet  Search-Engines  Strided-CNN
+(myVE) bash-4.2$ rm -r Search-Engines/
+rm: remove write-protected regular file ‘Search-Engines/.git/objects/pack/pack-23fc6bc67d159816180afbecfd7606352ae9fa82.pack’? ^C
+(myVE) bash-4.2$ rm -rf Search-Engines/
+(myVE) bash-4.2$ ls
+CMU15513  ResNet  Strided-CNN
+(myVE) bash-4.2$ cd Strided-CNN/
+(myVE) bash-4.2$ git add .
+warning: You ran 'git add' with neither '-A (--all)' or '--ignore-removal',
+whose behaviour will change in Git 2.0 with respect to paths you removed.
+Paths like 'read_cifar10.pyc' that are
+removed from your working tree are ignored with this version of Git.
+
+* 'git add --ignore-removal <pathspec>', which is the current default,
+  ignores paths you removed from your working tree.
+
+* 'git add --all <pathspec>' will let you also record the removals.
+
+Run 'git status' to check the paths you removed from your working tree.
+
+(myVE) bash-4.2$ git commit -m "update trained model"
+[master dab0b02] update trained model
+ 5 files changed, 1 deletion(-)
+ create mode 100644 all_cnn_weights.hdf5
+ create mode 100644 keras_allconv.hdf5
+ create mode 100644 keras_allconv_LSUV.hdf5
+ create mode 100644 weights.hdf5
+(myVE) bash-4.2$ git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Counting objects: 9, done.
+Delta compression using up to 40 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 38.92 MiB | 7.88 MiB/s, done.
+Total 7 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To git@github.com:PAN001/Strided-CNN.git
+   179498c..dab0b02  master -> master
+(myVE) bash-4.2$ pwd
+/afs/andrew.cmu.edu/usr17/yichenp/private/Strided-CNN
+(myVE) bash-4.2$ git log
+commit dab0b02389cab63f9c3b0d57e327fe32a77079a5
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Wed Oct 25 11:07:20 2017 -0400
+
+    update trained model
+
+commit 179498c2ccb963b35364cbbd6ffc9077c708c067
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Wed Oct 25 11:01:41 2017 -0400
+
+    update
+
+commit 8a927132ddd3fe54b428df1b044563506fda51b3
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 21:52:04 2017 -0400
+
+    update
+
+commit e222a78c93c4899fd52d468f7785eb107f9bb5cc
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 18:25:08 2017 -0400
+
+    update
+
+commit ae6404651556791bf3ef8d1fdc3be00e31f40196
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 18:13:04 2017 -0400
+
+    update
+
+commit dadf922fd522b7f474155b531d54dc53425d91da
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 02:10:25 2017 -0400
+
+    update
+
+commit 560efc5240b8dbf775379ad5e29f4d47290d95ee
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Fri Oct 20 13:09:16 2017 -0400
+
+    add dropout layer to all
+
+commit a74de03024be1b4bd5b7b05343faadf406374712
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Fri Oct 20 13:08:21 2017 -0400
+
+    add dropout layer to all
+
+commit 4e7544385f415e6aa6096a9100b62013bdfc31f0
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Fri Oct 20 12:58:50 2017 -0400
+
+    add all_cnn tf
+
+commit 641f2c3b199c1fb16d42bf28d77b3578983e27ed
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Fri Oct 20 11:28:50 2017 -0400
+
+    add all conv ref model
+
+commit f394c7e5336cf2b1bde5134881edc67d1bfc77c0
+Author: PAN001 <pan.atopos@gmail.com>
+(myVE) bash-4.2$ pwd
+/afs/andrew.cmu.edu/usr17/yichenp/private/Strided-CNN
+(myVE) bash-4.2$ git pull
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 6 (delta 5), reused 6 (delta 5), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From github.com:PAN001/Strided-CNN
+   dab0b02..795c2cb  master     -> origin/master
+Updating dab0b02..795c2cb
+Fast-forward
+ LSUV.pyc             | Bin 2764 -> 2752 bytes
+ all_CNN_keras_ref.py |  13 +++++++++----
+ next_batch.pyc       | Bin 477 -> 471 bytes
+ shuffle.pyc          | Bin 547 -> 541 bytes
+ 4 files changed, 9 insertions(+), 4 deletions(-)
+(myVE) bash-4.2$ ls
+all_CNN_keras_ref.output  a.out			   LSUV.py	  next_batch.pyc   shuffle.pyc		   test1.txt
+all_CNN_keras_ref.py	  CNN_keras_LSUV.output    LSUV.pyc	  read_cifar10.py  strided_CNN_keras2.py   weights.hdf5
+all_cnn.output		  demo.py		   mnist_cnn.py   reading	   strided_CNN_keras.py
+all_CNN_tf.py		  keras_allconv.hdf5	   mnist.py	  README.md	   strided_CNN_tf_LSUV.py
+all_cnn_weights.hdf5	  keras_allconv_LSUV.hdf5  next_batch.py  shuffle.py	   strided_CNN_tf.py
+(myVE) bash-4.2$ git lof
+git: 'lof' is not a git command. See 'git --help'.
+
+Did you mean this?
+	log
+(myVE) bash-4.2$ git log
+commit 795c2cb0b8200b33d703bcab0bbb03c482fc3f6b
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Wed Oct 25 11:24:33 2017 -0400
+
+    allow training on trained model
+
+commit dab0b02389cab63f9c3b0d57e327fe32a77079a5
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Wed Oct 25 11:07:20 2017 -0400
+
+    update trained model
+
+commit 179498c2ccb963b35364cbbd6ffc9077c708c067
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Wed Oct 25 11:01:41 2017 -0400
+
+    update
+
+commit 8a927132ddd3fe54b428df1b044563506fda51b3
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 21:52:04 2017 -0400
+
+    update
+
+commit e222a78c93c4899fd52d468f7785eb107f9bb5cc
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 18:25:08 2017 -0400
+
+    update
+
+commit ae6404651556791bf3ef8d1fdc3be00e31f40196
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 18:13:04 2017 -0400
+
+    update
+
+commit dadf922fd522b7f474155b531d54dc53425d91da
+Author: PAN001 <pan.atopos@gmail.com>
+Date:   Sun Oct 22 02:10:25 2017 -0400
+
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ 
+(myVE) bash-4.2$ ls
+all_CNN_keras_ref.output  a.out			   LSUV.py	  next_batch.pyc   shuffle.pyc		   test1.txt
+all_CNN_keras_ref.py	  CNN_keras_LSUV.output    LSUV.pyc	  read_cifar10.py  strided_CNN_keras2.py   weights.hdf5
+all_cnn.output		  demo.py		   mnist_cnn.py   reading	   strided_CNN_keras.py
+all_CNN_tf.py		  keras_allconv.hdf5	   mnist.py	  README.md	   strided_CNN_tf_LSUV.py
+all_cnn_weights.hdf5	  keras_allconv_LSUV.hdf5  next_batch.py  shuffle.py	   strided_CNN_tf.py
+(myVE) bash-4.2$ python all_CNN_keras_ref.py 
+Using TensorFlow backend.
+X_train shape: (50000, 32, 32, 3)
+50000 train samples
+10000 test samples
+(32, 32, 3)
+all_CNN_keras_ref.py:43: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(96, (3, 3), padding="same", input_shape=(32, 32, 3...)`
+  model.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(32, 32, 3)))
+all_CNN_keras_ref.py:45: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(96, (3, 3), padding="same")`
+  model.add(Convolution2D(96, 3, 3, border_mode='same'))
+all_CNN_keras_ref.py:47: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(96, (3, 3), padding="same", strides=(2, 2))`
+  model.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
+all_CNN_keras_ref.py:50: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(192, (3, 3), padding="same")`
+  model.add(Convolution2D(192, 3, 3, border_mode='same'))
+all_CNN_keras_ref.py:52: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(192, (3, 3), padding="same")`
+  model.add(Convolution2D(192, 3, 3, border_mode='same'))
+all_CNN_keras_ref.py:54: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(192, (3, 3), padding="same", strides=(2, 2))`
+  model.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
+all_CNN_keras_ref.py:57: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(192, (3, 3), padding="same")`
+  model.add(Convolution2D(192, 3, 3, border_mode='same'))
+all_CNN_keras_ref.py:59: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(192, (1, 1), padding="valid")`
+  model.add(Convolution2D(192, 1, 1, border_mode='valid'))
+all_CNN_keras_ref.py:61: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(10, (1, 1), padding="valid")`
+  model.add(Convolution2D(10, 1, 1, border_mode='valid'))
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_1 (Conv2D)            (None, 32, 32, 96)        2688      
+_________________________________________________________________
+activation_1 (Activation)    (None, 32, 32, 96)        0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 32, 32, 96)        83040     
+_________________________________________________________________
+activation_2 (Activation)    (None, 32, 32, 96)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 16, 16, 96)        83040     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 16, 16, 96)        0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 16, 16, 192)       166080    
+_________________________________________________________________
+activation_3 (Activation)    (None, 16, 16, 192)       0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 16, 16, 192)       331968    
+_________________________________________________________________
+activation_4 (Activation)    (None, 16, 16, 192)       0         
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 8, 8, 192)         331968    
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 8, 8, 192)         0         
+_________________________________________________________________
+conv2d_7 (Conv2D)            (None, 8, 8, 192)         331968    
+_________________________________________________________________
+activation_5 (Activation)    (None, 8, 8, 192)         0         
+_________________________________________________________________
+conv2d_8 (Conv2D)            (None, 8, 8, 192)         37056     
+_________________________________________________________________
+activation_6 (Activation)    (None, 8, 8, 192)         0         
+_________________________________________________________________
+conv2d_9 (Conv2D)            (None, 8, 8, 10)          1930      
+_________________________________________________________________
+global_average_pooling2d_1 ( (None, 10)                0         
+_________________________________________________________________
+activation_7 (Activation)    (None, 10)                0         
+=================================================================
+Total params: 1,369,738
+Trainable params: 1,369,738
+Non-trainable params: 0
+_________________________________________________________________
+None
+2017-10-25 11:26:15.001275: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-10-25 11:26:15.001312: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-10-25 11:26:15.001324: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2017-10-25 11:26:15.001331: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-10-25 11:26:15.001363: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+Epoch 1/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3656 - acc: 0.8761Epoch 00000: val_acc improved from -inf to 0.87220, saving model to keras_allconv_LSUV.hdf5
+1563/1562 [==============================] - 507s - loss: 0.3655 - acc: 0.8762 - val_loss: 0.5043 - val_acc: 0.8722
+Epoch 2/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3829 - acc: 0.8722Epoch 00001: val_acc did not improve
+1563/1562 [==============================] - 507s - loss: 0.3830 - acc: 0.8722 - val_loss: 0.4969 - val_acc: 0.8684
+Epoch 3/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3809 - acc: 0.8708Epoch 00002: val_acc did not improve
+1563/1562 [==============================] - 510s - loss: 0.3810 - acc: 0.8708 - val_loss: 0.4763 - val_acc: 0.8646
+Epoch 4/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3772 - acc: 0.8723Epoch 00003: val_acc improved from 0.87220 to 0.87470, saving model to keras_allconv_LSUV.hdf5
+1563/1562 [==============================] - 511s - loss: 0.3771 - acc: 0.8723 - val_loss: 0.4600 - val_acc: 0.8747
+Epoch 5/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3851 - acc: 0.8685Epoch 00004: val_acc did not improve
+1563/1562 [==============================] - 512s - loss: 0.3853 - acc: 0.8685 - val_loss: 0.4742 - val_acc: 0.8706
+Epoch 6/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3833 - acc: 0.8687Epoch 00005: val_acc did not improve
+1563/1562 [==============================] - 511s - loss: 0.3831 - acc: 0.8688 - val_loss: 0.4916 - val_acc: 0.8669
+Epoch 7/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3840 - acc: 0.8695Epoch 00006: val_acc did not improve
+1563/1562 [==============================] - 510s - loss: 0.3839 - acc: 0.8696 - val_loss: 0.4882 - val_acc: 0.8744
+Epoch 8/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3884 - acc: 0.8697Epoch 00007: val_acc did not improve
+1563/1562 [==============================] - 513s - loss: 0.3884 - acc: 0.8697 - val_loss: 0.5032 - val_acc: 0.8651
+Epoch 9/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3946 - acc: 0.8683Epoch 00008: val_acc did not improve
+1563/1562 [==============================] - 513s - loss: 0.3944 - acc: 0.8683 - val_loss: 0.5112 - val_acc: 0.8645
+Epoch 10/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3886 - acc: 0.8708Epoch 00009: val_acc did not improve
+1563/1562 [==============================] - 512s - loss: 0.3890 - acc: 0.8707 - val_loss: 0.4877 - val_acc: 0.8661
+Epoch 11/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3959 - acc: 0.8657Epoch 00010: val_acc did not improve
+1563/1562 [==============================] - 512s - loss: 0.3962 - acc: 0.8656 - val_loss: 0.5288 - val_acc: 0.8680
+Epoch 12/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3904 - acc: 0.8695Epoch 00011: val_acc did not improve
+1563/1562 [==============================] - 510s - loss: 0.3905 - acc: 0.8695 - val_loss: 0.5676 - val_acc: 0.8609
+Epoch 13/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3870 - acc: 0.8692Epoch 00012: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.3872 - acc: 0.8691 - val_loss: 0.4739 - val_acc: 0.8701
+Epoch 14/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3970 - acc: 0.8658Epoch 00013: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.3968 - acc: 0.8659 - val_loss: 0.5152 - val_acc: 0.8688
+Epoch 15/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3931 - acc: 0.8689Epoch 00014: val_acc did not improve
+1563/1562 [==============================] - 516s - loss: 0.3931 - acc: 0.8689 - val_loss: 0.5393 - val_acc: 0.8643
+Epoch 16/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3963 - acc: 0.8663Epoch 00015: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.3962 - acc: 0.8663 - val_loss: 0.4939 - val_acc: 0.8681
+Epoch 17/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.4000 - acc: 0.8659Epoch 00016: val_acc did not improve
+1563/1562 [==============================] - 515s - loss: 0.3998 - acc: 0.8660 - val_loss: 0.5246 - val_acc: 0.8716
+Epoch 18/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3950 - acc: 0.8681Epoch 00017: val_acc did not improve
+1563/1562 [==============================] - 515s - loss: 0.3948 - acc: 0.8682 - val_loss: 0.5363 - val_acc: 0.8626
+Epoch 19/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3903 - acc: 0.8691Epoch 00018: val_acc did not improve
+1563/1562 [==============================] - 512s - loss: 0.3903 - acc: 0.8691 - val_loss: 0.4941 - val_acc: 0.8704
+Epoch 20/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3918 - acc: 0.8676Epoch 00019: val_acc did not improve
+1563/1562 [==============================] - 510s - loss: 0.3917 - acc: 0.8676 - val_loss: 0.4963 - val_acc: 0.8635
+Epoch 21/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3941 - acc: 0.8681Epoch 00020: val_acc did not improve
+1563/1562 [==============================] - 510s - loss: 0.3941 - acc: 0.8681 - val_loss: 0.6165 - val_acc: 0.8551
+Epoch 22/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3975 - acc: 0.8686  
+
+
+Epoch 00021: val_acc did not improve
+1563/1562 [==============================] - 511s - loss: 0.3975 - acc: 0.8686 - val_loss: 0.5076 - val_acc: 0.8740
+Epoch 23/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3981 - acc: 0.8654Epoch 00022: val_acc did not improve
+1563/1562 [==============================] - 517s - loss: 0.3980 - acc: 0.8653 - val_loss: 0.4957 - val_acc: 0.8680
+Epoch 24/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3934 - acc: 0.8698Epoch 00023: val_acc did not improve
+1563/1562 [==============================] - 516s - loss: 0.3935 - acc: 0.8698 - val_loss: 0.5549 - val_acc: 0.8652
+Epoch 25/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3969 - acc: 0.8675Epoch 00024: val_acc did not improve
+1563/1562 [==============================] - 511s - loss: 0.3972 - acc: 0.8673 - val_loss: 0.5134 - val_acc: 0.8709
+Epoch 26/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.4024 - acc: 0.8658Epoch 00025: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.4022 - acc: 0.8658 - val_loss: 0.5034 - val_acc: 0.8674
+Epoch 27/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.4080 - acc: 0.8632Epoch 00026: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.4081 - acc: 0.8632 - val_loss: 0.5497 - val_acc: 0.8600
+Epoch 28/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.4039 - acc: 0.8677Epoch 00027: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.4037 - acc: 0.8677 - val_loss: 0.5568 - val_acc: 0.8606
+Epoch 29/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3918 - acc: 0.8677Epoch 00028: val_acc did not improve
+1563/1562 [==============================] - 514s - loss: 0.3918 - acc: 0.8677 - val_loss: 0.5157 - val_acc: 0.8736
+Epoch 30/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3986 - acc: 0.8667Epoch 00029: val_acc did not improve
+1563/1562 [==============================] - 517s - loss: 0.3985 - acc: 0.8666 - val_loss: 0.5352 - val_acc: 0.8743
+Epoch 31/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3950 - acc: 0.8689Epoch 00030: val_acc did not improve
+1563/1562 [==============================] - 518s - loss: 0.3949 - acc: 0.8689 - val_loss: 0.5427 - val_acc: 0.8655
+Epoch 32/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3956 - acc: 0.8693Epoch 00031: val_acc did not improve
+1563/1562 [==============================] - 522s - loss: 0.3957 - acc: 0.8693 - val_loss: 0.5930 - val_acc: 0.8617
+Epoch 33/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3985 - acc: 0.8663Epoch 00032: val_acc did not improve
+1563/1562 [==============================] - 521s - loss: 0.3986 - acc: 0.8663 - val_loss: 0.5950 - val_acc: 0.8459
+Epoch 34/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3888 - acc: 0.8706Epoch 00033: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3886 - acc: 0.8706 - val_loss: 0.5671 - val_acc: 0.8589
+Epoch 35/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.4014 - acc: 0.8653Epoch 00034: val_acc did not improve
+1563/1562 [==============================] - 527s - loss: 0.4014 - acc: 0.8653 - val_loss: 0.5146 - val_acc: 0.8633
+Epoch 36/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3892 - acc: 0.8691Epoch 00035: val_acc did not improve
+1563/1562 [==============================] - 523s - loss: 0.3891 - acc: 0.8691 - val_loss: 0.5157 - val_acc: 0.8659
+Epoch 37/350
+1371/1562 [=========================>....] - ETA: 61s - loss: 0.3820 - acc: 0.8724 
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3844 - acc: 0.8719Epoch 00036: val_acc did not improve
+1563/1562 [==============================] - 523s - loss: 0.3847 - acc: 0.8718 - val_loss: 0.4889 - val_acc: 0.8733
+Epoch 38/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3911 - acc: 0.8702Epoch 00037: val_acc improved from 0.87470 to 0.87530, saving model to keras_allconv_LSUV.hdf5
+1563/1562 [==============================] - 525s - loss: 0.3911 - acc: 0.8702 - val_loss: 0.5299 - val_acc: 0.8753
+Epoch 39/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3926 - acc: 0.8686Epoch 00038: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3926 - acc: 0.8686 - val_loss: 0.5389 - val_acc: 0.8671
+Epoch 40/350
+ 301/1562 [====>.........................] - ETA: 405s - loss: 0.3684 - acc: 0.8766
+
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3855 - acc: 0.8710Epoch 00039: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3854 - acc: 0.8710 - val_loss: 0.5077 - val_acc: 0.8688
+Epoch 41/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3887 - acc: 0.8710Epoch 00040: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3886 - acc: 0.8711 - val_loss: 0.5311 - val_acc: 0.8680
+Epoch 42/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3891 - acc: 0.8697Epoch 00041: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3891 - acc: 0.8697 - val_loss: 0.5314 - val_acc: 0.8684
+Epoch 43/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3806 - acc: 0.8742Epoch 00042: val_acc did not improve
+1563/1562 [==============================] - 526s - loss: 0.3805 - acc: 0.8742 - val_loss: 0.5292 - val_acc: 0.8629
+Epoch 44/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3877 - acc: 0.8709Epoch 00043: val_acc did not improve
+1563/1562 [==============================] - 522s - loss: 0.3876 - acc: 0.8709 - val_loss: 0.5406 - val_acc: 0.8622
+Epoch 45/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3907 - acc: 0.8699Epoch 00044: val_acc did not improve
+1563/1562 [==============================] - 522s - loss: 0.3910 - acc: 0.8697 - val_loss: 0.5084 - val_acc: 0.8731
+Epoch 46/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3827 - acc: 0.8723Epoch 00045: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3828 - acc: 0.8723 - val_loss: 0.5160 - val_acc: 0.8726
+Epoch 47/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3871 - acc: 0.8719Epoch 00046: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3870 - acc: 0.8719 - val_loss: 0.4813 - val_acc: 0.8624
+Epoch 48/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3880 - acc: 0.8715  
+
+Epoch 00047: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3879 - acc: 0.8715 - val_loss: 0.5058 - val_acc: 0.8686
+Epoch 49/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3786 - acc: 0.8743Epoch 00048: val_acc did not improve
+1563/1562 [==============================] - 525s - loss: 0.3787 - acc: 0.8743 - val_loss: 0.5314 - val_acc: 0.8647
+Epoch 50/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3903 - acc: 0.8707Epoch 00049: val_acc did not improve
+1563/1562 [==============================] - 525s - loss: 0.3902 - acc: 0.8708 - val_loss: 0.5266 - val_acc: 0.8732
+Epoch 51/350
+1562/1562 [============================>.] - ETA: 0s - loss: 0.3859 - acc: 0.8714Epoch 00050: val_acc did not improve
+1563/1562 [==============================] - 524s - loss: 0.3859 - acc: 0.8714 - val_loss: 0.5875 - val_acc: 0.8680
+Epoch 52/350
+ 255/1562 [===>..........................] - ETA: 423s - loss: 0.3718 - acc: 0.8782

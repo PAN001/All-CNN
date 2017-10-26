@@ -15,8 +15,7 @@ from keras.callbacks import ModelCheckpoint
 from shuffle import *
 from LSUV import *
 import argparse
-
-# import pandas
+import pandas
 # import cv2
 import numpy as np
 
@@ -52,111 +51,131 @@ class AllCNN(Sequential):
         self.add(GlobalAveragePooling2D())
         self.add(Activation('softmax'))
 
-def main():
-    parser = argparse.ArgumentParser()
-    # parser.add_argument('integers', metavar='N', type=int, nargs='+',
-    #                     help='an integer for the accumulator')
-    parser.add_argument("-batchsize", dest="batch_size", default=32, type=int,
-                        help='batch size')
+# def main():
+parser = argparse.ArgumentParser()
+parser.add_argument("-batchsize", dest="batch_size", default=32, type=int,
+                    help='batch size')
 
-    parser.add_argument("-epoches", dest="epoches", default=350, type=int,
-                        help='the numer of epoches')
+parser.add_argument("-epoches", dest="epoches", default=350, type=int,
+                    help='the numer of epoches')
 
-    parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
-                        help='whether to train from the benginning or read weights from the pretrained model')
+parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
+                    help='whether to train from the benginning or read weights from the pretrained model')
 
-    parser.add_argument("-weightspath", dest="weights_path", default="keras_allconv_LSUV.hdf5", type=str,
-                        help='weights path')
+parser.add_argument("-weightspath", dest="weights_path", default="keras_allconv_LSUV.hdf5", type=str,
+                    help='weights path')
 
-    parser.add_argument("-train", dest="is_training", action='store_true', default=False,
-                        help="whether to train or test")
-    args = parser.parse_args()
+parser.add_argument("-train", dest="is_training", action='store_true', default=False,
+                    help="whether to train or test")
+args = parser.parse_args()
 
-    K.set_image_dim_ordering('tf')
-    classes = 10
+K.set_image_dim_ordering('tf')
+classes = 10
 
-    # # parameters
-    # batch_size = 32
-    # classes = 10
-    # epoches = 350
-    # retrain = False
-    # is_training = False
-    # weights_path = "keras_allconv_LSUV.hdf5"
+# parameters
+# batch_size = args.batch_size
+# epoches = args.epoches
+# retrain = args.retrain
+# is_training = args.is_training
+# weights_path = args.weights_path
 
-    # load data
-    (X_train, y_train), (X_test, y_test) = cifar10.load_data()
-    print('X_train shape:', X_train.shape)
-    print(X_train.shape[0], 'train samples')
-    print(X_test.shape[0], 'test samples')
-    print(X_train.shape[1:])
+batch_size = 32
+epoches = 5
+retrain = False
+is_training = True
+id = "test"
+weights_path = "keras_allconv_best_weights_" + id + ".hdf5"
+final_weights_path = "keras_allconv_final_weights_" + id + ".h5"
+history_path = "keras_allconv_history" + id + ".csv"
+size = 1000
 
-    Y_train = np_utils.to_categorical(y_train, classes)
-    Y_test = np_utils.to_categorical(y_test, classes)
 
-    # normalize the images
-    X_train = X_train.astype('float32')
-    X_test = X_test.astype('float32')
-    X_train /= 255
-    X_test /= 255
+# load data
+(X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
+X_train = X_train[0:size]
+Y_train = Y_train[0:size]
+print('X_train shape:', X_train.shape)
+print(X_train.shape[0], 'train samples')
+print(X_test.shape[0], 'test samples')
+print(X_train.shape[1:])
 
-    # initialize the model
-    model = AllCNN()
+Y_train = np_utils.to_categorical(Y_train, classes)
+Y_test = np_utils.to_categorical(Y_test, classes)
 
-    # set training mode
-    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
-    print(model.summary())
+# normalize the images
+X_train = X_train.astype('float32')
+X_test = X_test.astype('float32')
+X_train /= 255
+X_test /= 255
 
-    if args.is_training:
-        if not args.retrain:
-            # load pretrainied model
-            print("read weights from the pretrained")
-            model.load_weights(args.weights_path)
-        else:
-            # initialize the model using LSUV
-            print("retrain the model")
-            training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-            batch_xs_init = training_data_shuffled[0:args.batch_size]
-            LSUV_init(model, batch_xs_init)
+# image preprocessing
+datagen = ImageDataGenerator(
+    featurewise_center=False,
+    # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
+    samplewise_center=True,  # set each sample mean to 0 (for each image each channel)
+    featurewise_std_normalization=False,  # divide inputs by std of the dataset
+    samplewise_std_normalization=True,  # divide each input by its std
+    zca_whitening=True,  # apply ZCA whitening
+    rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
+    width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+    height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+    horizontal_flip=True,  # randomly flip images
+    vertical_flip=False)
 
-        # prepare the training data flow
-        datagen = ImageDataGenerator(
-            featurewise_center=False,  # set input mean to 0 over the dataset
-            samplewise_center=False,  # set each sample mean to 0
-            featurewise_std_normalization=False,  # divide inputs by std of the dataset
-            samplewise_std_normalization=False,  # divide each input by its std
-            zca_whitening=False,  # apply ZCA whitening
-            rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
-            width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-            height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-            horizontal_flip=True,  # randomly flip images
-            vertical_flip=False)
+# initialize the model
+model = AllCNN()
 
-        datagen.fit(X_train)
-        checkpoint = ModelCheckpoint(args.weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
-                                     mode='max')
+# set training mode
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+print(model.summary())
 
-        callbacks_list = [checkpoint]
-        # Fit the model on the batches generated by datagen.flow().
-        history_callback = model.fit_generator(datagen.flow(X_train, Y_train,
-                                                            batch_size=args.batch_size),
-                                               steps_per_epoch=X_train.shape[0]/args.batch_size,
-                                               epochs=args.epoches, validation_data=(X_test, Y_test), callbacks=callbacks_list,
-                                               verbose=1)
-
-        # im = cv2.resize(cv2.imread('image.jpg'), (224, 224)).astype(np.float32)
-        # out = model.predict(im)
-        # print
-        # np.argmax(out)
-        #
-        # pandas.DataFrame(history_callback.history).to_csv("history.csv")
-
-        model.save('keras_allconv_LSUV.h5')
-
-    else:
+if is_training:
+    if not retrain:
+        # load pretrainied model
         print("read weights from the pretrained")
-        model.load_weights(args.weights_path)
-        print(model.evaluate(X_test, Y_test))
+        model.load_weights(weights_path)
+    else:
+        # initialize the model using LSUV
+        print("retrain the model")
+        training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+        batch_xs_init = training_data_shuffled[0:batch_size]
+        LSUV_init(model, batch_xs_init)
 
-if __name__ == "__main__":
-    main()
+    print("start training")
+    datagen.fit(X_train) # compute the internal data stats
+
+    # save the best model after every epoch
+    checkpoint = ModelCheckpoint(weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
+                                 mode='max')
+
+    callbacks_list = [checkpoint]
+
+    # fit the model on the batches generated by datagen.flow()
+    # it is real-time data augmentation
+    history_callback = model.fit_generator(datagen.flow(X_train, Y_train,batch_size=batch_size),
+                                           steps_per_epoch=X_train.shape[0]/batch_size,
+                                           epochs=epoches, validation_data=(X_test, Y_test), callbacks=callbacks_list,
+                                           verbose=1)
+
+    # im = cv2.resize(cv2.imread('image.jpg'), (224, 224)).astype(np.float32)
+    # out = model.predict(im)
+    # print
+    # np.argmax(out)
+    #
+    pandas.DataFrame(history_callback.history).to_csv(history_path)
+    model.save(final_weights_path)
+
+else:
+    print("read weights from the pretrained")
+    model.load_weights(weights_path)
+
+    datagen.fit(X_test)  # compute the internal data stats
+    loss, acc = model.evaluate_generator(datagen.flow(X_test, Y_test,batch_size=batch_size),
+                                           steps_per_epoch=X_train.shape[0]/batch_size,
+                                           epochs=epoches, verbose=1)
+    print("loss: ", loss)
+    print("acc: ", acc)
+
+# if __name__ == "__main__":
+#     main()
