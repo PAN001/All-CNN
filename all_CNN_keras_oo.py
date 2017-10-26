@@ -11,9 +11,7 @@ from keras.optimizers import SGD
 from keras import backend as K
 from keras.models import Model
 from keras.layers.core import Lambda
-from keras.callbacks import Callback
-from keras.callbacks import ModelCheckpoint
-from keras.callbacks import LambdaCallback
+from keras.callbacks import *
 from shuffle import *
 from LSUV import *
 import argparse
@@ -23,6 +21,7 @@ import matplotlib.pyplot as plt
 import pylab as pl
 import pickle
 import os
+import math
 
 # import cv2
 import numpy as np
@@ -92,6 +91,14 @@ class LossAccEveryBatch(Callback):
         self.losses_batch.append(logs.get('loss'))
         self.accs_batch.append(logs.get('acc'))
 
+# learning rate schedule
+def step_decay(epoch):
+    initial_lrate = 0.1
+    drop = 0.5
+    epochs_drop = 10.0
+    lrate = initial_lrate * math.pow(drop, math.floor((1 + epoch) / epochs_drop))
+    return lrate
+
 # def main():
 parser = argparse.ArgumentParser()
 parser.add_argument("-batchsize", dest="batch_size", default=32, type=int,
@@ -123,24 +130,25 @@ classes = 10
 # is_training = args.is_training
 # weights_path = args.weights_path
 
-initializer = "he_uniform"
+initializer = "LSUV"
 batch_size = 32
 epoches = 2
 retrain = True
 is_training = True
-id = "LSUV"
+is_bn = False
+id = "LSUV_nopp"
 old_weights_path = "all_cnn_best_weights_2.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = id + "/" + "all_cnn_final_weights_" + id + ".h5"
-history_path = id + "/" + "all_cnn_history" + id + ".csv"
+history_path = id + "/" + "all_cnn_history_" + id + ".csv"
 
 accs_epoch_path = id + "/" + "all_cnn_accs_epoch_" + id + ".acc"
 losses_epoch_path = id + "/" + "all_cnn_losses_epoch_" + id + ".loss"
 val_accs_epoch_path = id + "/" + "all_cnn_val_accs_epoch_" + id + ".acc"
 val_losses_epoch_path = id + "/" + "all_cnn_val_losses_epoch_" + id + ".acc"
 
-accs_batch_path = "all_cnn_accs_batch_" + id + ".acc"
-losses_batch_path = "all_cnn_losses_batch_" + id + ".loss"
+accs_batch_path = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+losses_batch_path = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
 size = 50000
 acc_figure_path = "acc_" + id + ".png"
@@ -165,8 +173,8 @@ Y_test = np_utils.to_categorical(Y_test, classes)
 # normalize the images
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
-X_train /= 255
-X_test /= 255
+# X_train /= 255
+# X_test /= 255
 
 # image preprocessing
 datagen_train = ImageDataGenerator(
@@ -174,21 +182,22 @@ datagen_train = ImageDataGenerator(
     # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
-    samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=True,  # apply ZCA whitening
-    rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
-    width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-    height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-    horizontal_flip=True,  # randomly flip images
-    vertical_flip=True)
+    samplewise_std_normalization=False  # divide each input by its std
+    # zca_whitening=True,  # apply ZCA whitening
+    # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
+    # width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+    # height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+    # horizontal_flip=True,  # randomly flip images
+    # vertical_flip=True
+)
 
 datagen_test = ImageDataGenerator(
     featurewise_center=False,
     # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
-    samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=True # apply ZCA whitening)
+    samplewise_std_normalization=False  # divide each input by its std
+    # zca_whitening=True # apply ZCA whitening)
 )
 
 # initialize the model
@@ -220,12 +229,16 @@ if is_training:
     print("start training")
 
     # initialize the callbacks
+
     # save the best model after every epoch
     checkpoint = ModelCheckpoint(new_best_weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
                                  mode='max')
 
     # # print the btach number every batch
     # batch_print_callback = LambdaCallback(on_batch_begin=lambda batch, logs: print(batch))
+
+    # learning schedule callback
+    lrate = LearningRateScheduler(step_decay)
 
 
     lossAcc = LossAccEveryBatch()

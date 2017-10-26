@@ -63,10 +63,19 @@ Due to the lack of GPU resources and long training process, I have no choice but
 3. Different training optimizers
 4. Different ways of image preprocessing    
 
-In my first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, 
-LSUV and normal weight initialization. 
+## Experiment: weight initialization
 
-- experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), width_shift_range=0.1, height_shift_range=0.1, horizontal_flip
+| Parameter    | Setting                                                                                       |
+|--------------|-----------------------------------------------------------------------------------------------|
+| Training     | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov                                              |
+| Optimizer    | dropout                                                                                       |
+| Prepocessing | horizontally and vertically shift within the range of 10%, horizontal flipping, zca whitening |
+
+In my first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared.
+
+LSUV and normal weight initialization. As figures shown below, xx achieves best performance in first 3000 batches.
+
+- experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
 
 # Reference
