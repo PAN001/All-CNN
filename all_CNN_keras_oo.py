@@ -123,7 +123,7 @@ classes = 10
 # is_training = args.is_training
 # weights_path = args.weights_path
 
-initializer = "LSUV"
+initializer = "he_uniform"
 batch_size = 32
 epoches = 2
 retrain = True
