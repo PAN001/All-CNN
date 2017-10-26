@@ -73,7 +73,7 @@ Conventional convolutional neural networks perform convolution in the lower laye
 However, the fully connected layers are prone to overfitting, thus hampering the generalization ability of the overall network. 
 
 The paper [3] proposed a global average pooling to replace the traditional fully connected layers in CNN. The idea is to generate one feature map for each corresponding category of the classification task in the last mlpconv layer. 
-![Global Average Pooling](gap.png)
+![Global Average Pooling](https://github.com/PAN001/Strided-CNN/blob/master/gap.png?raw=true "Global Average Pooling")
 
 For example, in the case of classification with 10 categories (CIFAR10, MNIST), and Tensorflow environment, if the output from the end of last convolution is a `3D 8,8,128` tensor, in the traditional method, it is flattened into a 1D vector of size `8x8x128`. And then one or several fully connected layers are added and at the end, a softmax layer that reduces the size to 10 classification categories and applies the softmax operator.
 
@@ -120,8 +120,8 @@ Due to the lack of GPU resources and long training process, I have no choice but
 
 1. Different ways of weight initialization
 2. Different ways of data augmentation   
-3. Different training strategies
-4. Different training optimizers
+3. Different training optimizers
+4. Different training strategies
 
 ## Experiment1: weight initialization
 
@@ -131,10 +131,10 @@ Due to the lack of GPU resources and long training process, I have no choice but
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Data Augmentation | horizontal and vertical shift within the range of 10%, horizontal flipping, zca whitening |
 
-In the first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared. As figures shown below, LSUV achieves best performance in first 3000 batches.
+In the first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared. As figures shown below, LSUV (blue) achieves best performance in first 3000 batches.
 
-![Experiment1: model accuracy on training set](exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
-![Experiment1: model loss on training set](exp1_loss.png?raw=true "Experiment1: model loss on training set")
+![Experiment1: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
+![Experiment1: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp1_loss.png?raw=true "Experiment1: model loss on training set")
 
 ## Experiment2: Data Augmentation
 
@@ -144,10 +144,22 @@ In the first experiment, I compared the effectiveness of different initializatio
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
 
-In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening helps the model coverge more quickly in first 3000 batches. 
+In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening (green) helps the model coverge more quickly in first 3000 batches. 
 
-![Experiment2: model accuracy on training set](exp2_acc.png?raw=true "Experiment1: model accuracy on training set")
-![Experiment2: model loss on training set](exp2_loss.png?raw=true "Experiment1: model loss on training set")
+![Experiment2: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_acc.png?raw=true "Experiment1: model accuracy on training set")
+![Experiment2: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_loss.png?raw=true "Experiment1: model loss on training set")
+
+
+## Experiment3: Optimizer
+
+| Parameter         | Setting                                               |
+|-------------------|-------------------------------------------------------|
+| Training          | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov      |
+| Data Augmentation | horizontal and vertical shift within the range of 10% |
+| Initializer       | LSUV                                                  |
+
+In the second experiment, I compared the effectiveness of different optimizations. Specifically, dropout are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening helps the model coverge more quickly in first 3000 batches. 
+
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
