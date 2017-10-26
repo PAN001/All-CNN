@@ -1,15 +1,20 @@
 # Introduction
-For the homework, the two netwrok architectures (i.e. Strided-CNN, and All-CNN) are both implemented. Additionally, the Layer-sequential unit-variance (LSUV) initialization is also implemented. I implemented them both in Tensorflow and Keras. 
+For the homework, the two netwrok architectures (i.e. `Strided-CNN,` and `All-CNN`) are both implemented. Additionally, the `Layer-sequential unit-variance (LSUV)` initialization is also implemented. I implemented them both in `Tensorflow` and `Keras`. 
 
 The implementations of Strided-CNN and LSUV in Tensorflow are mainly for the purpose of demonstration of knowledge of Tensorflow. For later training and optimization, they are done using Keras (as Prof. Bhiksha says it is ok to use Keras in this HW). The summary of each file is as follows:
 
-- strided_CNN_tf_LSUV.py
+- `strided_CNN_tf_LSUV.py`
     - implementation of Strided-CNN, All-CNN and LSUV
     - no further optimizations
     
-- strided_CNN_keras.py
+- `strided_CNN_keras.py`
     - implementation of Strided-CNN and All-CNN
-    - actual configurations for training including data agumentation, parameters choice, and 
+    - actual code for training including data agumentation, parameters choice, and initializations
+
+- `LSUV.py`
+
+# Running the code
+
 
 # Network Architecture
 My implementation of Strided CNN and All CNN follows the architecture of Strided-CNN-C and All-CNN-C in the paper. The summary of the architecture is shown in the table below:
@@ -71,7 +76,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 | Parameter    | Setting                                                                                       |
 |--------------|-----------------------------------------------------------------------------------------------|
 | Training     | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov                                              |
-| Optimizer    | dropout                                                                                       |
+| Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Data Augmentation | horizontal and vertical shift within the range of 10%, horizontal flipping, zca whitening |
 
 In the first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared. As figures shown below, LSUV achieves best performance in first 3000 batches.
@@ -84,7 +89,7 @@ In the first experiment, I compared the effectiveness of different initializatio
 | Parameter   | Setting                                          |
 |-------------|--------------------------------------------------|
 | Training    | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
-| Optimizer   | dropout                                          |
+| Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
 
 In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening helps the model coverge more quickly in first 3000 batches. 
@@ -94,6 +99,77 @@ In the second experiment, I compared the effectiveness of different image prepro
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
+
+# Conclusion
+The final model reveals `90.88%` accuracy on test set at epoch 339 with loss of `0.4994`. It is a typical `All-CNN` architecture summaried as follows:
+```
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    conv2d_1 (Conv2D)            (None, 32, 32, 96)        2688      
+    _________________________________________________________________
+    activation_1 (Activation)    (None, 32, 32, 96)        0         
+    _________________________________________________________________
+    conv2d_2 (Conv2D)            (None, 32, 32, 96)        83040     
+    _________________________________________________________________
+    activation_2 (Activation)    (None, 32, 32, 96)        0         
+    _________________________________________________________________
+    conv2d_3 (Conv2D)            (None, 16, 16, 96)        83040     
+    _________________________________________________________________
+    dropout_1 (Dropout)          (None, 16, 16, 96)        0         
+    _________________________________________________________________
+    conv2d_4 (Conv2D)            (None, 16, 16, 192)       166080    
+    _________________________________________________________________
+    activation_3 (Activation)    (None, 16, 16, 192)       0         
+    _________________________________________________________________
+    conv2d_5 (Conv2D)            (None, 16, 16, 192)       331968    
+    _________________________________________________________________
+    activation_4 (Activation)    (None, 16, 16, 192)       0         
+    _________________________________________________________________
+    conv2d_6 (Conv2D)            (None, 8, 8, 192)         331968    
+    _________________________________________________________________
+    dropout_2 (Dropout)          (None, 8, 8, 192)         0         
+    _________________________________________________________________
+    conv2d_7 (Conv2D)            (None, 8, 8, 192)         331968    
+    _________________________________________________________________
+    activation_5 (Activation)    (None, 8, 8, 192)         0         
+    _________________________________________________________________
+    conv2d_8 (Conv2D)            (None, 8, 8, 192)         37056     
+    _________________________________________________________________
+    activation_6 (Activation)    (None, 8, 8, 192)         0         
+    _________________________________________________________________
+    conv2d_9 (Conv2D)            (None, 8, 8, 10)          1930      
+    _________________________________________________________________
+    global_average_pooling2d_1 ( (None, 10)                0         
+    _________________________________________________________________
+    activation_7 (Activation)    (None, 10)                0         
+    =================================================================
+    Total params: 1,369,738
+    Trainable params: 1,369,738
+    Non-trainable params: 0
+```
+
+The parameter setting is as follows:
+
+| Parameter   | Setting                                          |
+|-------------|--------------------------------------------------|
+| Training    | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
+| Optimizer   | dropout with 0.5 after each "pooling" layer"     |
+| Initializer | LSUV                                             |
+
+Notice:
+This may not be the best parameter setting since in the later experiments, it is found that LSUV may help the model converge more quickly, and thus it may result in a better model. Moreover, more data augmentation may be helpfule as well. This is just a model that I get with the limited training time. 
+
+# Future Work
+## Use of Scheduler
+In the original paper learning rate of 'γ' and scheduler S = "e1 ,e2 , e3" were used in which γ is multiplied by a fixed multiplier of 0.1 after e1. e2 and e3 epochs respectively. (where e1 = 200, e2 = 250, e3 = 300). 
+
+But in my experiments, due to the long training time, I only experimented with a learning rate of 0.1, decay of 1e-6 and momentum of 0.9. 
+
+## Data Augmentation
+In the original paper very extensive data augmentation were used such as placing the cifar10 images of size 32 × 32 into larger 126 × 126 pixel images and can hence be heavily scaled, rotated and color augmented. 
+
+But in my experiments, due to the long training time, I only experimented with mild data augmentation.
 
 # Reference
 [1] Mishkin D, Matas J. All you need is a good init[J]. arXiv preprint arXiv:1511.06422, 2015.

@@ -42,14 +42,16 @@ class AllCNN(Sequential):
             self.add(Convolution2D(96, 3, 3, border_mode='same', kernel_initializer=initializer))
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
-            self.add(Dropout(0.5))
+            if is_dropout:
+                self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2), kernel_initializer=initializer))
-            self.add(Dropout(0.5))
+            if is_dropout:
+                self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same', kernel_initializer=initializer))
             self.add(Activation('relu'))
@@ -65,14 +67,16 @@ class AllCNN(Sequential):
             self.add(Convolution2D(96, 3, 3, border_mode='same'))
             self.add(Activation('relu'))
             self.add(Convolution2D(96, 3, 3, border_mode='same', subsample=(2, 2)))
-            self.add(Dropout(0.5))
+            if is_dropout:
+                self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
             self.add(Activation('relu'))
             self.add(Convolution2D(192, 3, 3, border_mode='same', subsample=(2, 2)))
-            self.add(Dropout(0.5))
+            if is_dropout:
+                self.add(Dropout(0.5))
 
             self.add(Convolution2D(192, 3, 3, border_mode='same'))
             self.add(Activation('relu'))
@@ -134,10 +138,11 @@ classes = 10
 initializer = "LSUV"
 batch_size = 32
 epoches = 2
-retrain = False
-is_training = False
+retrain = True
+is_training = True
 is_bn = False
-id = "LSUV_norm_shift_flip_zca"
+is_dropout = True
+id = "LSUV_dropout"
 old_weights_path = "all_cnn_weights_0.90_0.51.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 whole_model_path = id + "/" + "all_cnn_whole_model_" + id + ".h5"
@@ -189,8 +194,8 @@ datagen_train = ImageDataGenerator(
     # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
     height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-    horizontal_flip=True,  # randomly flip images
-    vertical_flip=True
+    horizontal_flip=False,  # randomly flip images
+    vertical_flip=False
 )
 
 datagen_test = ImageDataGenerator(
