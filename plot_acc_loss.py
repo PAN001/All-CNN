@@ -126,9 +126,9 @@ id = "LSUV_nopp"
 accs_batch_path_LSUV_nopp = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
 losses_batch_path_LSUV_nopp = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
-id = "glorot_uniform"
-accs_batch_path_glorot = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
-losses_batch_path_glorot = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
+id = "LSUV_norm_shift_flip"
+accs_batch_path_LSUV_nsf = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
+losses_batch_path_LSUV_nsf = id + "/" + "all_cnn_losses_batch_" + id + ".loss"
 
 id = "he_uniform"
 accs_batch_path_he = id + "/" + "all_cnn_accs_batch_" + id + ".acc"
@@ -141,11 +141,11 @@ with open(accs_batch_path_LSUV_nopp, "rb") as fp:
 with open(losses_batch_path_LSUV_nopp, "rb") as fp:
     losses_batch_LSUV_nopp = pickle.load(fp)
 
-with open(accs_batch_path_glorot, "rb") as fp:
-    accs_batch_glorot = pickle.load(fp)
+with open(accs_batch_path_LSUV_nsf, "rb") as fp:
+    accs_batch_LSUV_nsf = pickle.load(fp)
 
-with open(losses_batch_path_glorot, "rb") as fp:
-    losses_batch_glorot = pickle.load(fp)
+with open(losses_batch_path_LSUV_nsf, "rb") as fp:
+    losses_batch_LSUV_nsf = pickle.load(fp)
 
 with open(accs_batch_path_he, "rb") as fp:
     accs_batch_he = pickle.load(fp)
@@ -156,13 +156,13 @@ with open(losses_batch_path_he, "rb") as fp:
 # acc
 fig = plt.figure(1, figsize=(40, 5))
 plt.plot(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], accs_batch_LSUV_nopp[0:-1:5])
-# plt.plot(range(0, len(accs_batch_glorot))[0:-1:5], accs_batch_glorot[0:-1:5])
+plt.plot(range(0, len(accs_batch_LSUV_nsf))[0:-1:5], accs_batch_LSUV_nsf[0:-1:5])
 # plt.plot(range(0, len(accs_batch_he))[0:-1:5], accs_batch_he[0:-1:5])
 # plt.xticks(range(0, len(accs_batch_LSUV_nopp))[0:-1:5], range(0, len(accs_batch_LSUV_nopp))[0:-1:500])
 plt.title('Exp1: model accuracy per batch')
 plt.ylabel('acc')
 plt.xlabel('batch')
-# plt.legend(['LSUV', 'Glorot uniform', 'He uniform'], loc='upper left')
+plt.legend(['no preprocessing', 'shift, flip and normalization'], loc='upper left')
 plt.show()
 # plt.savefig("exp1_acc.png")
 
@@ -170,13 +170,13 @@ plt.show()
 # loss
 fig = plt.figure(2, figsize=(40, 5))
 plt.plot(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], losses_batch_LSUV_nopp[0:-1:5])
-# plt.plot(range(0, len(losses_batch_glorot))[0:-1:5], losses_batch_glorot[0:-1:5])
+plt.plot(range(0, len(losses_batch_LSUV_nsf))[0:-1:5], losses_batch_LSUV_nsf[0:-1:5])
 # plt.plot(range(0, len(losses_batch_he))[0:-1:5], losses_batch_he[0:-1:5])
 plt.xticks(range(0, len(losses_batch_LSUV_nopp))[0:-1:5], range(0, len(losses_batch_LSUV_nopp))[0:-1:5])
 plt.title('Exp1: model loss per batch')
 plt.ylabel('loss')
 plt.xlabel('batch')
-# plt.legend(['LSUV', 'Glorot uniform', 'He uniform'], loc='upper left')
+plt.legend(['no preprocessing', 'shift, flip and normalization'], loc='upper left')
 plt.show()
 # plt.savefig("exp1_loss.png")
 

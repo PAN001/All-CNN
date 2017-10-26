@@ -63,7 +63,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 3. Different training optimizers
 4. Different ways of image preprocessing    
 
-## Experiment: weight initialization
+## Experiment1: weight initialization
 
 | Parameter    | Setting                                                                                       |
 |--------------|-----------------------------------------------------------------------------------------------|
@@ -75,9 +75,10 @@ In my first experiment, I compared the effectiveness of different initialization
 
 LSUV and normal weight initialization. As figures shown below, LSUV achieves best performance in first 3000 batches.
 
-![](exp1_acc.png?raw=true "Title")
-![](exp1_loss.png)
+![Experiment1: model accuracy on training set](exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
+![Experiment1: model loss on training set](exp1_loss.png?raw=true "Experiment1: model loss on training set")
 
+## Experiment2: image preprocessing
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
