@@ -111,12 +111,12 @@ batch_size = 32
 epoches = 20
 retrain = True
 is_training = True
-id = "test"
+id = "2"
 old_weights_path = "keras_allconv_LSUV.hdf5"
 new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
 history_path = "all_cnn_history" + id + ".csv"
-size = 500
+size = 50000
 acc_path = "acc_" + id + ".png"
 loss_path = "loss_" + id + ".png"
 
@@ -183,7 +183,7 @@ if is_training:
         # training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
         # batch_xs_init = training_data_shuffled[0:batch_size]
 
-        for x_batch, y_batch in datagen_train.flow(X_train, Y_train, batch_size=batch_size):
+        for x_batch, y_batch in datagen_train.flow(X_train, Y_train, batch_size=batch_size): # make use of image processing utility provided by ImageDataGenerator
             LSUV_init(model, x_batch)
             break
 
