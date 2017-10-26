@@ -46,7 +46,7 @@ with open(losses_batch_path, "rb") as fp:
 # plt.show()
 # # plt.savefig(loss_figure_path)
 
-plt.plot(accs_batch)
+plt.plot(accs_batch[0:-1:5])
 plt.title('model accuracy per batch')
 plt.ylabel('acc')
 plt.xlabel('batch')
@@ -54,7 +54,7 @@ plt.xlabel('batch')
 plt.show()
 # plt.savefig(loss_figure_path)
 
-plt.plot(losses_batch)
+plt.plot(losses_batch[0:-1:5])
 plt.title('model loss per batch')
 plt.ylabel('loss')
 plt.xlabel('batch')

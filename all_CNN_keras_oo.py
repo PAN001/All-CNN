@@ -125,10 +125,10 @@ classes = 10
 
 initializer = "LSUV"
 batch_size = 32
-epoches = 80
-retrain = False
+epoches = 2
+retrain = True
 is_training = True
-id = "2"
+id = "LSUV"
 old_weights_path = "all_cnn_best_weights_2.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = id + "/" + "all_cnn_final_weights_" + id + ".h5"
