@@ -116,10 +116,21 @@ parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
                     help='whether to train from the benginning or read weights from the pretrained model')
 
 parser.add_argument("-weightspath", dest="weights_path", default="keras_allconv_LSUV.hdf5", type=str,
-                    help='weights path')
+                    help='the path of the pretrained model/weights')
 
 parser.add_argument("-train", dest="is_training", action='store_true', default=False,
                     help="whether to train or test")
+
+parser.add_argument("-bn", dest="is_bn", action='store_true', default=False,
+                    help="whether to perform batch normalization")
+
+parser.add_argument("-dropout", dest="is_dropout", action='store_true', default=False,
+                    help="whether to perform dropout with 0.5")
+
+parser.add_argument("-f", dest="is_plot", action='store_true', default=False,
+                    help="whether to plot the figure")
+
+
 args = parser.parse_args()
 
 # encironment configuration

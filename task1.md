@@ -13,11 +13,41 @@ The implementations of Strided-CNN and LSUV in Tensorflow are mainly for the pur
 
 - `LSUV.py`
 
-# Running the code
+# Code
+## Environment Set Up
+The running environment is set up in Python 2.7.10.
+By running `virtualenv`, it could help set up the environment based on the `requirements.txt` easily:
+```
+# Create and activate new virtual environment
+virtualenv venv
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+```
+
+## Code Description
+The All-CNN is encapsulated as a class All-CNN. The script `all_CNN_keras_oo.py` allows to train the model from the beginning or pretrained model, fit the data based on pretrained model, and plot figures. The detailed usage is as follows:
+
+
+## Test Model
+The best model with `90.88%` accuracy on Cifar10 test set at epoch 339 with loss of `0.4994` are stored as `all_cnn_weights_0.9088_0.4994.hdf5`. The following code loads the pretrained model and then fits the Cifar10 test data:
+```
+# load the pretrained model and then fit the Cifar10 test data:
+python all_CNN_keras_oo -weightspath all_cnn_weights_0.9088_0.4994.hdf5 -f
+```
 
 
 # Network Architecture
-My implementation of Strided CNN and All CNN follows the architecture of Strided-CNN-C and All-CNN-C in the paper. The summary of the architecture is shown in the table below:
+My implementation of Strided CNN and All CNN follows the architecture of Strided-CNN-C and All-CNN-C in the paper:
+
+- Strided-CNN:
+    A model in which max-pooling is removed and the stride of the convolution layers preceding the max-pool layers is increased by 1 (to ensure that the next layer covers the same spatial region of the input image as before). 
+
+- All-CNN:
+    A model in which max-pooling is replaced by a convolution layer.
+
+ The summary of the architecture is shown in the table below:
 
 |           | Strided-CNN-C                                                                       | All-CNN-C                                                                           |
 |-----------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
@@ -37,6 +67,18 @@ My implementation of Strided CNN and All CNN follows the architecture of Strided
      
 - (?, n, n, n) represents the output of each layer where ? is the number of input images
 
+## Global Average Pooling
+Conventional convolutional neural networks perform convolution in the lower layers of the network. For classification, the feature maps of the last convolutional layer are vectorized and fed into fully connected layers followed by a softmax logistic regression layer. This structure bridges the convolutional structure with traditional neural network classifiers. It treats the convolutional layers as feature extractors, and the resulting feature is classified in a traditional way.
+
+However, the fully connected layers are prone to overfitting, thus hampering the generalization ability of the overall network. 
+
+The paper [3] proposed a global average pooling to replace the traditional fully connected layers in CNN. The idea is to generate one feature map for each corresponding category of the classification task in the last mlpconv layer. 
+![Global Average Pooling](gap.png)
+
+For example, in the case of classification with 10 categories (CIFAR10, MNIST), and Tensorflow environment, if the output from the end of last convolution is a `3D 8,8,128` tensor, in the traditional method, it is flattened into a 1D vector of size `8x8x128`. And then one or several fully connected layers are added and at the end, a softmax layer that reduces the size to 10 classification categories and applies the softmax operator.
+
+The global average pooling is to compute the average over the 8,8 slices for a 3D 8,8,10 tensor, which ends up with a 3D tensor of shape 1,1,10. Then, reshape it into a 1D vector of shape 10. Finally, add a softmax operator without any operation in between. The tensor before the average pooling is supposed to have as many channels as the model has classification categories.
+
 # Weight Initialization
 When working with deep neural networks, initializing the network with the right weights can be the difference between the network converging in a reasonable amount of time and the network loss function not going anywhere even after hundreds of thousands of iterations.
 
@@ -52,7 +94,17 @@ Without knowing about the training data, one good way of initialization is to as
 The motivation for Xavier initialization in neural networks is to initialize the weights of the network so that the neuron activation functions are not starting out in saturated or dead regions. In other words, we want to initialize the weights with random values that are not "too small" and not "too large". Specifically, it draws samples from a truncated normal distribution centered on 0 with `stddev = sqrt(2 / (fan_in + fan_out))` where `fan_in is` the number of input units in the weight tensor and `fan_out` is the number of output units in the weight tensor.
 
 ## LSUV Initialization
-Layer-sequential unit-variance (LSUV) initialization is an extension of  orthonormal initialization Saxe et al. (2014) to an iterative procedure proposed by Mishkin et al. (2015)[1]. First, it fills the weights with Gaussian noise with unit variance. Second, decompose them to orthonormal basis with QR or SVD-decomposition and replace weights with one of the components. The LSUV process then estimates output variance of each convolution and inner product layer and scales the weight to make variance equal to one. The proposed scheme can be viewed as an orthonormal initialization combined with batch normal- ization performed only on the first mini-batch.
+After the success of CNNs in IVSRC 2012 (Krizhevsky et al. (2012)), initialization with Gaussian noise with mean equal to zero and standard deviation set to 0.01 and adding bias equal to one for some layers become very popular. However, it is not possible to train very deep network from scratch with it (Simonyan & Zisserman (2015)). The problem is caused by the activation (and/or) gradient magnitude in final layers (He et al. (2015)). If each layer, not properly initialized, scales input by k, the final scale would be kL, where L is a number of layers. Values of k > 1 lead to extremely large values of output layers, k < 1 leads to a diminishing signal and gradient.
+
+Glorot & Bengio (2010) proposed a formula for estimating the standard deviation on the basis of the number of input and output channels of the layers under assumption of no non-linearity between layers. 
+
+Layer-sequential unit-variance (LSUV) initialization is a data-driven weights initialization that extends the orthonormal initialization Saxe et al. (2014) to an iterative procedure. The proposed scheme can be viewed as an orthonormal initialization combined with batch normalization performed only on the first mini-batch. There are two main steps:
+
+1. First, fill the weights with Gaussian noise with unit variance. 
+2. Second, decompose them to orthonormal basis with QR or SVD-decomposition and replace weights with one of the components.
+3. Third, estimate output variance of each convolution and inner product layer and scale the weight to make variance equal to one.
+
+![](https://leanote.com/api/file/getImage?fileId=59dbf6c1ab6441555200040c)
 
 The idea of a data-driven weight initialization, rather than theoretical computation for all layer types, is very attractive: as ever more complex nonlinearities and network architectures are devised, it is more and more difficult to obtain clear theoretical results on the best initialization. This paper elegantly sidesteps the question by numerically rescaling each layer of weights until the output is approximately unit variance. The simplicity of the method makes it likely to be used in practice, although the absolute performance improvements from the method are quite small.
 
@@ -176,3 +228,5 @@ But in my experiments, due to the long training time, I only experimented with m
 
 [2] He K, Zhang X, Ren S, et al. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification[C]//Proceedings of the IEEE international conference on computer vision. 2015: 1026-1034.
 MLA 
+
+[3] Lin M, Chen Q, Yan S. Network in network[J]. arXiv preprint arXiv:1312.4400, 2013.
