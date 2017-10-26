@@ -80,7 +80,7 @@ classes = 10
 # weights_path = args.weights_path
 
 batch_size = 32
-epoches = 5
+epoches = 1
 retrain = False
 is_training = True
 id = "test"
