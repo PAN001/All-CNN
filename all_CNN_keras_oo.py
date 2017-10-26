@@ -75,7 +75,7 @@ args = parser.parse_args()
 
 # encironment configuration
 K.set_image_dim_ordering('tf')
-matplotlib.use('Agg') # for server using plt
+# matplotlib.use('Agg') # for server using plt
 
 classes = 10
 
@@ -87,7 +87,7 @@ classes = 10
 # weights_path = args.weights_path
 
 batch_size = 32
-epoches = 4
+epoches = 20
 retrain = True
 is_training = True
 id = "test"
@@ -95,7 +95,7 @@ old_weights_path = "keras_allconv_LSUV.hdf5"
 new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
 history_path = "all_cnn_history" + id + ".csv"
-size = 1000
+size = 5000
 acc_path = "acc_" + id + ".png"
 loss_path = "loss_" + id + ".png"
 
@@ -194,7 +194,7 @@ if is_training:
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
     # plt.show()
-    plt.savefig(acc_path)
+    # plt.savefig(acc_path)
 
     # summarize history for loss
     plt.plot(history_callback.history['loss'])
@@ -204,7 +204,7 @@ if is_training:
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
     # plt.show()
-    plt.savefig(loss_path)
+    # plt.savefig(loss_path)
 
 else:
     print("read weights from the pretrained")
