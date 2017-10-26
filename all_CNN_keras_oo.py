@@ -113,9 +113,9 @@ X_test /= 255
 datagen_train = ImageDataGenerator(
     featurewise_center=False,
     # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
-    samplewise_center=True,  # set each sample mean to 0 (for each image each channel)
+    samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
-    samplewise_std_normalization=True,  # divide each input by its std
+    samplewise_std_normalization=False,  # divide each input by its std
     zca_whitening=False,  # apply ZCA whitening
     rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
