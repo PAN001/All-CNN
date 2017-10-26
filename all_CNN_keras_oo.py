@@ -19,6 +19,7 @@ import pandas
 import matplotlib
 import matplotlib.pyplot as plt
 import pylab as pl
+from zca import *
 
 # import cv2
 import numpy as np
@@ -54,6 +55,27 @@ class AllCNN(Sequential):
 
         self.add(GlobalAveragePooling2D())
         self.add(Activation('softmax'))
+
+def zca_whitening_matrix(X):
+    """
+    Function to compute ZCA whitening matrix (aka Mahalanobis whitening).
+    INPUT:  X: [M x N] matrix.
+        Rows: Variables
+        Columns: Observations
+    OUTPUT: ZCAMatrix: [M x M] matrix
+    """
+    # Covariance matrix [column-wise variables]: Sigma = (X-mu)' * (X-mu) / N
+    sigma = np.cov(X, rowvar=True) # [M x M]
+    # Singular Value Decomposition. X = U * np.diag(S) * V
+    U,S,V = np.linalg.svd(sigma)
+        # U: [M x M] eigenvectors of sigma.
+        # S: [M x 1] eigenvalues of sigma.
+        # V: [M x M] transpose of U
+    # Whitening constant: prevents division by zero
+    epsilon = 1e-5
+    # ZCA Whitening matrix: U * Lambda * U'
+    ZCAMatrix = np.dot(U, np.dot(np.diag(1.0/np.sqrt(S + epsilon)), U.T)) # [M x M]
+    return ZCAMatrix
 
 # def main():
 parser = argparse.ArgumentParser()
@@ -95,7 +117,7 @@ old_weights_path = "keras_allconv_LSUV.hdf5"
 new_best_weights_path = "all_cnn_best_weights_" + id + ".hdf5"
 new_final_weights_path = "all_cnn_final_weights_" + id + ".h5"
 history_path = "all_cnn_history" + id + ".csv"
-size = 50000
+size = 500
 acc_path = "acc_" + id + ".png"
 loss_path = "loss_" + id + ".png"
 
@@ -150,6 +172,8 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 print(model.summary())
 
 if is_training:
+    datagen_train.fit(X_train) # compute the internal data stats
+    datagen_test.fit(X_test)
     if not retrain:
         # load pretrainied model
         print("read weights from the pretrained")
@@ -157,13 +181,14 @@ if is_training:
     else:
         # initialize the model using LSUV
         print("retrain the model")
-        training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
-        batch_xs_init = training_data_shuffled[0:batch_size]
-        LSUV_init(model, batch_xs_init)
+        # training_data_shuffled, training_labels_oh_shuffled = shuffle(X_train, Y_train)
+        # batch_xs_init = training_data_shuffled[0:batch_size]
+
+        for x_batch, y_batch in datagen_train.flow(X_train, Y_train, batch_size=batch_size):
+            LSUV_init(model, x_batch)
+            break
 
     print("start training")
-    datagen_train.fit(X_train) # compute the internal data stats
-    datagen_test.fit(X_test)
 
     # save the best model after every epoch
     checkpoint = ModelCheckpoint(new_best_weights_path, monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False,
