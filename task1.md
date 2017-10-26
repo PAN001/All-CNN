@@ -127,7 +127,7 @@ Due to the lack of GPU resources and long training process, I have no choice but
 
 | Parameter    | Setting                                                                                       |
 |--------------|-----------------------------------------------------------------------------------------------|
-| Training     | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov                                              |
+| Training     | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov                                              |
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Data Augmentation | horizontal and vertical shift within the range of 10%, horizontal flipping, zca whitening |
 
@@ -140,29 +140,31 @@ In the first experiment, I compared the effectiveness of different initializatio
 
 | Parameter   | Setting                                          |
 |-------------|--------------------------------------------------|
-| Training    | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
+| Training    | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
 
 In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening (green) helps the model coverge more quickly in first 3000 batches. 
 
-![Experiment2: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_acc.png?raw=true "Experiment1: model accuracy on training set")
-![Experiment2: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_loss.png?raw=true "Experiment1: model loss on training set")
+![Experiment2: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_acc.png?raw=true "Experiment2: model accuracy on training set")
+![Experiment2: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_loss.png?raw=true "Experiment2: model loss on training set")
 
 
 ## Experiment3: Optimizer
 
 | Parameter         | Setting                                               |
 |-------------------|-------------------------------------------------------|
-| Training          | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov      |
+| Training          | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov      |
 | Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer       | LSUV                                                  |
 
-In the second experiment, I compared the effectiveness of different optimizations. Specifically, dropout are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening helps the model coverge more quickly in first 3000 batches. 
+In the second experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
 
+![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
+![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
 
-- experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
-- experiment#2: zca_whitening
+<!-- - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
+- experiment#2: zca_whitening -->
 
 # Conclusion
 The final model reveals `90.88%` accuracy on test set at epoch 339 with loss of `0.4994`. It is a typical `All-CNN` architecture summaried as follows:
@@ -217,7 +219,7 @@ The parameter setting is as follows:
 
 | Parameter   | Setting                                          |
 |-------------|--------------------------------------------------|
-| Training    | SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
+| Training    | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
 

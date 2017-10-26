@@ -7,7 +7,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dropout, Activation, Convolution2D, GlobalAveragePooling2D, merge, BatchNormalization
 from keras.utils import np_utils
-from keras.optimizers import SGD
+from keras.optimizers import SGD, RMSprop
 from keras import backend as K
 from keras.models import Model
 from keras.layers.core import Lambda
@@ -175,9 +175,9 @@ batch_size = 32
 epoches = 2
 retrain = True
 is_training = True
-is_bn = True
+is_bn = False
 is_dropout = False
-id = "LSUV_bn"
+id = "LSUV_rmsp"
 old_weights_path = "all_cnn_weights_0.90_0.51.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
 whole_model_path = id + "/" + "all_cnn_whole_model_" + id + ".h5"
@@ -247,7 +247,8 @@ model = AllCNN(is_dropout)
 
 # set training mode
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+rmsp = RMSprop(lr=0.01, rho=0.9, epsilon=1e-08, decay=0.01)
+model.compile(loss='categorical_crossentropy', optimizer=rmsp, metrics=['accuracy'])
 print(model.summary())
 
 if is_training:
