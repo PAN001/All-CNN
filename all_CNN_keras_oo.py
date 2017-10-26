@@ -197,7 +197,7 @@ datagen_test = ImageDataGenerator(
     # set input mean to 0 over the dataset (featurewise subtract the mean image from every image in the dataset)
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
-    samplewise_std_normalization=False  # divide each input by its std
+    samplewise_std_normalization=False, # divide each input by its std
     zca_whitening=True # apply ZCA whitening)
 )
 
