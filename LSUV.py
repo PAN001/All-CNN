@@ -4,7 +4,6 @@ import numpy as np
 from keras.models import Model
 from keras.layers import Dense, Convolution2D
 
-# https://github.com/Lasagne/Lasagne/blob/master/lasagne/init.py
 def svd_orthonormal(shape):
     print(shape)
     if len(shape) < 2:

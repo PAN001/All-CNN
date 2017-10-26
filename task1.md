@@ -1,17 +1,21 @@
 # Introduction
 For the homework, the two netwrok architectures (i.e. `Strided-CNN,` and `All-CNN`) are both implemented. Additionally, the `Layer-sequential unit-variance (LSUV)` initialization is also implemented. I implemented them both in `Tensorflow` and `Keras`. 
 
-The implementations of Strided-CNN and LSUV in Tensorflow are mainly for the purpose of demonstration of knowledge of Tensorflow. For later training and optimization, they are done using Keras (as Prof. Bhiksha says it is ok to use Keras in this HW). The summary of each file is as follows:
+The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for the purpose of demonstration of knowledge of Tensorflow. For later training and optimization, they are done using Keras (as Prof. Bhiksha says it is ok to use Keras in this HW). The summary of each file is as follows:
 
-- `strided_CNN_tf_LSUV.py`
-    - implementation of Strided-CNN, All-CNN and LSUV
-    - no further optimizations
-    
-- `strided_CNN_keras.py`
-    - implementation of Strided-CNN and All-CNN
-    - actual code for training including data agumentation, parameters choice, and initializations
+- Tensorflow:
+    + `strided_CNN_tf_LSUV.py`
+        + implementation of Strided-CNN, All-CNN and LSUV
+        + no further optimizations
+    + `read_cifar10`
+        + read cifar10 images from dataset downloaded from the official website
+- Keras:
+    + `strided_CNN_keras.py`
+        + implementation of Strided-CNN and All-CNN
+        + actual code for training including data agumentation, parameters choice, and initializations
 
-- `LSUV.py`
+    + `LSUV.py`
+        + Keras implementation of LSUV 
 
 # Code
 ## Environment Set Up
@@ -106,6 +110,64 @@ Layer-sequential unit-variance (LSUV) initialization is a data-driven weights in
 
 ![](https://leanote.com/api/file/getImage?fileId=59dbf6c1ab6441555200040c)
 
+In `LSUV.py`, it is implemented as follows:
+```python
+def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
+    margin = 1e-6
+    max_iter = 10
+    layers_cnt = 0
+    for layer in model.layers:
+        if not any([type(layer) is class_name for class_name in layers_to_init]):
+            continue
+        print("cur layer is: ", layer.name)
+
+        # as layers with few weights tend to have a zero variance, only do LSUV for complicated layers
+        if np.prod(layer.get_output_shape_at(0)[1:]) < 32:
+            print(layer.name, 'with output shape fewer than 32, not inited with LSUV')
+            continue
+
+        print('LSUV initializing', layer.name)
+        layers_cnt += 1
+        weights_all = layer.get_weights();
+        weights = np.array(weights_all[0])
+
+        # pre-initialize with orthonormal matrices
+        weights = svd_orthonormal(weights.shape)
+        biases = np.array(weights_all[1])
+        weights_all_new = [weights, biases]
+        layer.set_weights(weights_all_new)
+
+        iter = 0
+        target_var = 1.0 # the targeted variance
+
+        layer_output = forward_prop_layer(model, layer, batch_xs)
+        var = np.var(layer_output)
+        print("cur var is: ", var)
+
+        while (abs(target_var - var) > margin):
+            # update weights based on the variance of the output
+            weights_all = layer.get_weights()
+            weights = np.array(weights_all[0])
+            # print(weights)
+            biases = np.array(weights_all[1])
+            # if np.abs(np.sqrt(var1)) < 1e-7: break  # avoid zero division
+
+            weights = weights / np.sqrt(var) # try to scale the variance to the target
+            weights_all_new = [weights, biases]
+            layer.set_weights(weights_all_new) # update new weights
+
+            layer_output = forward_prop_layer(model, layer, batch_xs)
+            var = np.var(layer_output)
+            print("cur var is: ", var)
+
+            iter = iter + 1
+            if iter > max_iter:
+                break
+
+    print('LSUV: total layers initialized', layers_cnt)
+    return model
+```
+
 The idea of a data-driven weight initialization, rather than theoretical computation for all layer types, is very attractive: as ever more complex nonlinearities and network architectures are devised, it is more and more difficult to obtain clear theoretical results on the best initialization. This paper elegantly sidesteps the question by numerically rescaling each layer of weights until the output is approximately unit variance. The simplicity of the method makes it likely to be used in practice, although the absolute performance improvements from the method are quite small.
 
 ## He Uniform Initialization
@@ -115,8 +177,19 @@ It draws samples from a uniform distribution within `[-limit, limit]` where `lim
 ## ZCA Whitening
 Whitening is a transformation of data in such a way that its covariance matrix is the identity matrix. Hence whitening decorrelates features. It is used as a preprocessing method.
 
+It is implemented in Python as follows:
+```python
+# Calculate principal components
+sigma = np.dot(flat_x.T, flat_x) / flat_x.shape[0]
+u, s, _ = linalg.svd(sigma)
+principal_components = np.dot(np.dot(u, np.diag(1. / np.sqrt(s + 10e-7))), u.T)
+
+# Apply ZCA whitening
+whitex = np.dot(flat_x, principal_components)
+```
+
 # Experiments
-Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epoches for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergency on test set. The experiments are mainly focued on the following three parameters:
+Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epoches for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergency on test set. The experiments are mainly focued on the following four:
 
 1. Different ways of weight initialization
 2. Different ways of data augmentation   
