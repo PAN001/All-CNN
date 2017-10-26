@@ -31,7 +31,7 @@ class AllCNN(Sequential):
     """AllCNN encapsulates the All-CNN.
     """
 
-    def __init__(self, seed = 24, initializer = "glorot_uniform", is_init_fixed = True):
+    def __init__(self, is_dropout = True, seed = 24, initializer = "glorot_uniform", is_init_fixed = True):
         Sequential.__init__(self)
         self.seed = seed
 
@@ -208,7 +208,7 @@ datagen_test = ImageDataGenerator(
 )
 
 # initialize the model
-model = AllCNN()
+model = AllCNN(is_dropout)
 
 # set training mode
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
