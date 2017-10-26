@@ -19,7 +19,6 @@ import pandas
 import matplotlib
 import matplotlib.pyplot as plt
 import pylab as pl
-from zca import *
 
 # import cv2
 import numpy as np
