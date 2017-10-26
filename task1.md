@@ -73,7 +73,11 @@ Due to the lack of GPU resources and long training process, I have no choice but
 
 In my first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared.
 
-LSUV and normal weight initialization. As figures shown below, xx achieves best performance in first 3000 batches.
+LSUV and normal weight initialization. As figures shown below, LSUV achieves best performance in first 3000 batches.
+
+![](exp1_acc.png?raw=true "Title")
+![](exp1_loss.png)
+
 
 - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening
