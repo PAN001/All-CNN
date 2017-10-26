@@ -22,6 +22,7 @@ import pylab as pl
 import pickle
 import os
 import math
+from keras.models import load_model
 
 # import cv2
 import numpy as np
@@ -137,9 +138,9 @@ retrain = False
 is_training = False
 is_bn = False
 id = "LSUV_norm_shift_flip_zca"
-old_weights_path = "all_cnn_best_so_far.hdf5"
+old_weights_path = "all_cnn_weights_0.90_0.51.hdf5"
 new_best_weights_path = id + "/" + "all_cnn_best_weights_" + id + ".hdf5"
-new_final_weights_path = id + "/" + "all_cnn_final_weights_" + id + ".h5"
+whole_model_path = id + "/" + "all_cnn_whole_model_" + id + ".h5"
 history_path = id + "/" + "all_cnn_history_" + id + ".csv"
 
 accs_epoch_path = id + "/" + "all_cnn_accs_epoch_" + id + ".acc"
@@ -184,7 +185,7 @@ datagen_train = ImageDataGenerator(
     samplewise_center=False,  # set each sample mean to 0 (for each image each channel)
     featurewise_std_normalization=False,  # divide inputs by std of the dataset
     samplewise_std_normalization=False,  # divide each input by its std
-    zca_whitening=True,  # apply ZCA whitening
+    zca_whitening=False,  # apply ZCA whitening
     # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
     width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
     height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
@@ -253,7 +254,7 @@ if is_training:
                                            verbose=1, validation_steps=X_train.shape[0]/batch_size)
 
     pandas.DataFrame(history_callback.history).to_csv(history_path)
-    model.save(new_final_weights_path)
+    model.save(whole_model_path)
 
     # get the stats and dump them for each epoch
     accs_epoch = history_callback.history['acc']
@@ -306,9 +307,12 @@ else:
     model.load_weights(old_weights_path)
 
     datagen_test.fit(X_test)  # compute the internal data stats
+    # loss, acc = model.evaluate_generator(datagen_test.flow(X_test, Y_test,batch_size=batch_size),
+    #                                        steps_per_epoch=X_test.shape[0]/batch_size,
+    #                                        epochs=epoches, verbose=1)
+
     loss, acc = model.evaluate_generator(datagen_test.flow(X_test, Y_test,batch_size=batch_size),
-                                           steps_per_epoch=X_train.shape[0]/batch_size,
-                                           epochs=epoches, verbose=1)
+                                           steps = X_test.shape[0]/batch_size)
     print("loss: ", loss)
     print("acc: ", acc)
 

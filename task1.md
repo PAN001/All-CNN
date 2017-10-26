@@ -62,9 +62,9 @@ It draws samples from a uniform distribution within `[-limit, limit]` where `lim
 Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epoches for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergency on test set. The experiments are mainly focued on the following three parameters:
 
 1. Different ways of weight initialization
-2. Different training strateies
-3. Different training optimizers
-4. Different ways of data augmentation   
+2. Different ways of data augmentation   
+3. Different training strategies
+4. Different training optimizers
 
 ## Experiment1: weight initialization
 

@@ -69,9 +69,9 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 
 print(model.summary())
 
-# load pretrainied model
-weights_path = "keras_allconv_LSUV.hdf5"
-model.load_weights(weights_path)
+# # load pretrainied model
+# weights_path = "keras_allconv_LSUV.hdf5"
+# model.load_weights(weights_path)
 
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
