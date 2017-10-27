@@ -25,7 +25,7 @@ def forward_prop_layer(model, layer, batch_xs):
     return activations
 
 def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D), seed = 20):
-    # np.random.seed(seed)
+    np.random.seed(seed)
     margin = 1e-6
     max_iter = 10
     layers_cnt = 0
