@@ -67,7 +67,7 @@ optional arguments:
 The best model with `90.88%` accuracy on Cifar10 test set at epoch 339 with loss of `0.4994` are stored as `all_cnn_weights_0.9088_0.4994.hdf5`. The following code loads the pretrained model and then fits the Cifar10 test data:
 ```
 # load the pretrained model and then fit the Cifar10 test data:
-python all_CNN_keras_oo -weightspath all_cnn_weights_0.9088_0.4994.hdf5 -f
+python strided_all_CNN_keras.py -weightspath all_cnn_weights_0.9088_0.4994.hdf5 -f
 ```
 
 
@@ -137,7 +137,8 @@ Layer-sequential unit-variance (LSUV) initialization is a data-driven weights in
 2. Second, decompose them to orthonormal basis with QR or SVD-decomposition and replace weights with one of the components.
 3. Third, estimate output variance of each convolution and inner product layer and scale the weight to make variance equal to one.
 
-![](https://leanote.com/api/file/getImage?fileId=59dbf6c1ab6441555200040c)
+
+![LSUV pseudo code](https://github.com/PAN001/Strided-CNN/blob/master/LSUV_pseudo_code.png?raw=true "LSUV_pseudo_code")
 
 In `LSUV.py`, it is implemented as follows:
 ```python

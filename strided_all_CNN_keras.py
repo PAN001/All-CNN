@@ -1,18 +1,13 @@
 from __future__ import print_function
 from __future__ import division
 import tensorflow as tf
-import h5py
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dropout, Activation, Convolution2D, GlobalAveragePooling2D, merge, BatchNormalization
 from keras.utils import np_utils
 from keras.optimizers import SGD, RMSprop, Adam
-from keras import backend as K
-from keras.models import Model
-from keras.layers.core import Lambda
 from keras.callbacks import *
-from shuffle import *
 from LSUV import *
 import argparse
 import pandas
@@ -22,7 +17,6 @@ import pylab as pl
 import pickle
 import os
 import math
-from keras.models import load_model
 import uuid
 
 # import cv2
