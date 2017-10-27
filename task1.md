@@ -10,7 +10,7 @@ The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for
     + `read_cifar10`
         + read cifar10 images from dataset downloaded from the official website
 - Keras:
-    + `strided_CNN_keras.py`
+    + `strided_all_CNN_keras.py`
         + implementation of Strided-CNN and All-CNN
         + actual code for training including data agumentation, parameters choice, and initializations
 
@@ -18,6 +18,11 @@ The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for
         + Keras implementation of LSUV 
 
 # Code
+For the sake of convenience, a test shell script `test.sh` is provided for testing the pretrained model on Cifar10 test set. Simply run the following, and it will help set up the environment and fit the model automatically:
+```shell
+sh test.sh
+```
+
 ## Environment Set Up
 The running environment is set up in Python 2.7.10.
 By running `virtualenv`, it could help set up the environment based on the `requirements.txt` easily:
@@ -31,10 +36,10 @@ pip install -r requirements.txt
 ```
 
 ## Code Description
-The All-CNN is encapsulated as a class All-CNN. The script `all_CNN_keras_oo.py` allows to train the model from the beginning or pretrained model, fit the data based on pretrained model, and plot figures. The detailed usage is as follows:
+The All-CNN is encapsulated as a class All-CNN based on Keras. The script `strided_all_CNN_keras.py` allows to train the model from the beginning or pretrained model, fit the data based on pretrained model, and plot figures. The detailed usage is as follows:
 
 
-## Test Model
+## Run the Code: Test Model
 The best model with `90.88%` accuracy on Cifar10 test set at epoch 339 with loss of `0.4994` are stored as `all_cnn_weights_0.9088_0.4994.hdf5`. The following code loads the pretrained model and then fits the Cifar10 test data:
 ```
 # load the pretrained model and then fit the Cifar10 test data:
@@ -231,7 +236,7 @@ In the second experiment, I compared the effectiveness of different image prepro
 | Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer       | LSUV                                                  |
 
-In the second experiment, I compared the effectiveness of different training modes. Specifically, sgd, RMSProp and Adam are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
+In the third experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
 
 ![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
 ![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
@@ -245,7 +250,13 @@ In the second experiment, I compared the effectiveness of different training mod
 | Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer       | LSUV                                                  |
 
-In the second experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
+In the last experiment, I compared the effectiveness of different training modes. Specifically, SGD, RMSProp and Adam are compared:
+
+- SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov
+- RMSprop: lr=0.001, rho=0.0, epsilon=1e-08, decay=0.001
+- Adam: lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0
+
+As figures shown below, the training process with RMSProp (orange) is very unstable and converge much slower than the other two.
 
 ![Experiment4: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_acc.png?raw=true "Experiment4: model accuracy on training set")
 ![Experiment4: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_loss.png?raw=true "Experiment4: model loss on training set")

@@ -54,7 +54,7 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
 
         layer_output = forward_prop_layer(model, layer, batch_xs)
         var = np.var(layer_output)
-        print("cur var is: ", var)
+        # print("cur var is: ", var)
 
         while (abs(target_var - var) > margin):
             # update weights based on the variance of the output
@@ -70,7 +70,7 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
 
             layer_output = forward_prop_layer(model, layer, batch_xs)
             var = np.var(layer_output)
-            print("cur var is: ", var)
+            # print("cur var is: ", var)
 
             iter = iter + 1
             if iter > max_iter:
