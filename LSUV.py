@@ -67,6 +67,7 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
             weights = weights / np.sqrt(var) # try to scale the variance to the target
             weights_all_new = [weights, biases]
             layer.set_weights(weights_all_new) # update new weights
+            print(weights_all_new)
 
             layer_output = forward_prop_layer(model, layer, batch_xs)
             var = np.var(layer_output)
