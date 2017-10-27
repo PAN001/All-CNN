@@ -37,7 +37,30 @@ pip install -r requirements.txt
 
 ## Code Description
 The All-CNN is encapsulated as a class All-CNN based on Keras. The script `strided_all_CNN_keras.py` allows to train the model from the beginning or pretrained model, fit the data based on pretrained model, and plot figures. The detailed usage is as follows:
+```
+python strided_all_CNN_keras.py --help
 
+usage: strided_all_CNN_keras.py [-h] [-id ID] [-batchsize BATCH_SIZE]
+                                [-epoches EPOCHES] [-init INITIALIZER]
+                                [-retrain RETRAIN] [-weightspath WEIGHTS_PATH]
+                                [-train] [-bn] [-dropout] [-f]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -id ID                the running instance id
+  -batchsize BATCH_SIZE
+                        batch size
+  -epoches EPOCHES      the numer of epoches
+  -init INITIALIZER     the weight initializer
+  -retrain RETRAIN      whether to train from the benginning or read weights
+                        from the pretrained model
+  -weightspath WEIGHTS_PATH
+                        the path of the pretrained model/weights
+  -train                whether to train or test
+  -bn                   whether to perform batch normalization
+  -dropout              whether to perform dropout with 0.5
+  -f                    whether to plot the figure
+```
 
 ## Run the Code: Test Model
 The best model with `90.88%` accuracy on Cifar10 test set at epoch 339 with loss of `0.4994` are stored as `all_cnn_weights_0.9088_0.4994.hdf5`. The following code loads the pretrained model and then fits the Cifar10 test data:

@@ -246,7 +246,7 @@ def main():
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     rmsp = RMSprop(lr=0.001, rho=0.0, epsilon=1e-08, decay=0.001)
     adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-    model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
     print(model.summary())
 
     if is_training:
