@@ -184,6 +184,7 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
             weights = np.array(weights_all[0])
             # print(weights)
             biases = np.array(weights_all[1])
+            if np.abs(np.sqrt(var)) < 1e-7: break  # avoid zero division
 
             weights = weights / np.sqrt(var) # try to scale the variance to the target
             weights_all_new = [weights, biases]
