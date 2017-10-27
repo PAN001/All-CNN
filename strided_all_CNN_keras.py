@@ -137,14 +137,14 @@ def main():
     parser.add_argument("-batchsize", dest="batch_size", default=32, type=int,
                         help='batch size')
 
-    parser.add_argument("-epoches", dest="epoches", default=350, type=int,
-                        help='the numer of epoches')
+    parser.add_argument("-epochs", dest="epochs", default=350, type=int,
+                        help='the numer of epochs')
 
     parser.add_argument("-init", dest="initializer", default="LSUV", type=str,
                         help='the weight initializer')
 
     parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
-                        help='whether to train from the benginning or read weights from the pretrained model')
+                        help='whether to train from the beginning or read weights from the pretrained model')
 
     parser.add_argument("-weightspath", dest="weights_path", default="all_cnn_weights_0.9088_0.4994.hdf5", type=str,
                         help='the path of the pretrained model/weights')
@@ -174,7 +174,7 @@ def main():
     id = args.id
     initializer = args.initializer
     batch_size = args.batch_size
-    epoches = args.epoches
+    epochs = args.epochs
     retrain = args.retrain
     is_training = args.is_training
     is_bn = args.is_bn
@@ -294,7 +294,7 @@ def main():
         # it is real-time data augmentation
         history_callback = model.fit_generator(datagen_train.flow(X_train, Y_train,batch_size=batch_size),
                                                steps_per_epoch=X_train.shape[0]/batch_size,
-                                               epochs=epoches, validation_data=datagen_test.flow(X_test, Y_test, batch_size=batch_size), callbacks=callbacks_list,
+                                               epochs=epochs, validation_data=datagen_test.flow(X_test, Y_test, batch_size=batch_size), callbacks=callbacks_list,
                                                verbose=1, validation_steps=X_train.shape[0]/batch_size)
 
         pandas.DataFrame(history_callback.history).to_csv(history_path)
@@ -353,7 +353,7 @@ def main():
         datagen_test.fit(X_test)  # compute the internal data stats
         # loss, acc = model.evaluate_generator(datagen_test.flow(X_test, Y_test,batch_size=batch_size),
         #                                        steps_per_epoch=X_test.shape[0]/batch_size,
-        #                                        epochs=epoches, verbose=1)
+        #                                        epochs=epochs, verbose=1)
 
         loss, acc = model.evaluate_generator(datagen_test.flow(X_test, Y_test,batch_size=batch_size),
                                                steps = X_test.shape[0]/batch_size)

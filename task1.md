@@ -1,5 +1,5 @@
 # Introduction
-For the homework, the two netwrok architectures (i.e. `Strided-CNN,` and `All-CNN`) are both implemented. Additionally, the `Layer-sequential unit-variance (LSUV)` initialization is also implemented. I implemented them both in `Tensorflow` and `Keras`. 
+For the homework, the two network architectures (i.e. `Strided-CNN,` and `All-CNN`) are both implemented. Additionally, the `Layer-sequential unit-variance (LSUV)` initialization is also implemented. I implemented them both in `Tensorflow` and `Keras`. 
 
 The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for the purpose of demonstration of knowledge of Tensorflow. For later training and optimization, they are done using Keras (as Prof. Bhiksha says it is ok to use Keras in this HW). The summary of each file is as follows:
 
@@ -42,7 +42,7 @@ The All-CNN is encapsulated as a class All-CNN based on Keras. The script `strid
 python strided_all_CNN_keras.py --help
 
 usage: strided_all_CNN_keras.py [-h] [-id ID] [-batchsize BATCH_SIZE]
-                                [-epoches EPOCHES] [-init INITIALIZER]
+                                [-epochs EPOCHES] [-init INITIALIZER]
                                 [-retrain RETRAIN] [-weightspath WEIGHTS_PATH]
                                 [-train] [-bn] [-dropout] [-f]
 
@@ -51,9 +51,9 @@ optional arguments:
   -id ID                the running instance id
   -batchsize BATCH_SIZE
                         batch size
-  -epoches EPOCHES      the numer of epoches
+  -epochs EPOCHES      the number of epoches
   -init INITIALIZER     the weight initializer
-  -retrain RETRAIN      whether to train from the benginning or read weights
+  -retrain RETRAIN      whether to train from the beginning or read weights
                         from the pretrained model
   -weightspath WEIGHTS_PATH
                         the path of the pretrained model/weights
@@ -72,7 +72,7 @@ python all_CNN_keras_oo -weightspath all_cnn_weights_0.9088_0.4994.hdf5 -f
 
 
 # Network Architecture
-My implementation of Strided CNN and All CNN follows the architecture of Strided-CNN-C and All-CNN-C in the paper:
+My implementation of Strided-CNN and All-CNN follows the architecture of Strided-CNN-C and All-CNN-C in the paper:
 
 - Strided-CNN:
     A model in which max-pooling is removed and the stride of the convolution layers preceding the max-pool layers is increased by 1 (to ensure that the next layer covers the same spatial region of the input image as before). 
@@ -87,11 +87,11 @@ My implementation of Strided CNN and All CNN follows the architecture of Strided
 | Conv1     | 3 input channel, 3*3 filter, 96 ReLU, stride = 1 (?, 32, 32, 96)                    | 3 input channel, 3*3 filter, 96 ReLU, stride = 1 (?, 32, 32, 96)                    |
 | Conv2     | 96 input channel, 3*3 filter, 96 ReLU, stride = 2 (?, 16, 16, 96)                   | 96 input channel, 3*3 filter, 96 ReLU, stride = 1 (?, 32, 32, 96)                   |
 | Conv3     | 96 input channel, 3*3 filter, 192 ReLU, stride = 1 (?, 16, 16, 192)                 | 96 input channel, 3*3 filter, 192 ReLU, stride = 2 (?, 16, 16, 192)                 |
-| Droupout1 | P(droupout) = 0.5                                                                   | P(droupout) = 0.5                                                                   |
+| Dropout1 | P(dropout) = 0.5                                                                   | P(dropout) = 0.5                                                                   |
 | Conv4     | 192 input channel, 3*3 filter, 192 ReLU, stride = 2 (?, 8, 8, 192)                  | 192 input channel, 3*3 filter, 192 ReLU, stride = 1 (?, 16, 16, 192)                |
 | Conv5     | 192 input channel, 3*3 filter, 192 ReLU, stride = 2, padding = valid (?, 6, 6, 192) | 192 input channel, 3*3 filter, 192 ReLU, stride = 1 (?, 16, 16, 192)                |
 | Conv6     | 192 input channel, 1*1 filter, 192 ReLU, stride = 1, padding = valid (?, 6, 6, 192) | 192 input channel, 3*3 filter, 192 ReLU, stride = 2 (?, 8, 8, 192)                  |
-| Droupout2 | P(droupout) = 0.5                                                                   | P(droupout) = 0.5                                                                   |
+| Dropout2 | P(dropout) = 0.5                                                                   | P(dropout) = 0.5                                                                   |
 | Conv7     | 192 input channel, 1*1 filter, 10 ReLU, stride = 1 (?, 6, 6, 10)                    | 192 input channel, 3*3 filter, 192 ReLU, stride = 1, padding = valid (?, 6, 6, 192) |
 | Conv8     |                                                                                     | 192 input channel, 1*1 filter, 192 ReLU, stride = 1 (?, 6, 6, 192)                  |
 | Conv9     |                                                                                     | 192 input channel, 1*1 filter, 10 ReLU, stride = 1 (?, 6, 6, 10)                    |
@@ -103,7 +103,7 @@ My implementation of Strided CNN and All CNN follows the architecture of Strided
 ## Global Average Pooling
 Conventional convolutional neural networks perform convolution in the lower layers of the network. For classification, the feature maps of the last convolutional layer are vectorized and fed into fully connected layers followed by a softmax logistic regression layer. This structure bridges the convolutional structure with traditional neural network classifiers. It treats the convolutional layers as feature extractors, and the resulting feature is classified in a traditional way.
 
-However, the fully connected layers are prone to overfitting, thus hampering the generalization ability of the overall network. 
+However, the fully connected layers are prone to over-fitting, thus hampering the generalization ability of the overall network. 
 
 The paper [3] proposed a global average pooling to replace the traditional fully connected layers in CNN. The idea is to generate one feature map for each corresponding category of the classification task in the last mlpconv layer. 
 ![Global Average Pooling](https://github.com/PAN001/Strided-CNN/blob/master/gap.png?raw=true "Global Average Pooling")
@@ -218,7 +218,7 @@ whitex = np.dot(flat_x, principal_components)
 ```
 
 # Experiments
-Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epoches for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergency on test set. The experiments are mainly focued on the following four:
+Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epochs for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergence on test set. The experiments are mainly focused on the following four:
 
 1. Different ways of weight initialization
 2. Different ways of data augmentation   
@@ -246,7 +246,7 @@ In the first experiment, I compared the effectiveness of different initializatio
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
 
-In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening (green) helps the model coverge more quickly in first 3000 batches. 
+In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening (green) helps the model converge more quickly in first 3000 batches. 
 
 ![Experiment2: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_acc.png?raw=true "Experiment2: model accuracy on training set")
 ![Experiment2: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_loss.png?raw=true "Experiment2: model loss on training set")
@@ -260,7 +260,7 @@ In the second experiment, I compared the effectiveness of different image prepro
 | Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer       | LSUV                                                  |
 
-In the third experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming overfitting can not be revealed in this early training stage.
+In the third experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming over-fitting can not be revealed in this early training stage.
 
 ![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
 ![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
@@ -289,7 +289,7 @@ As figures shown below, the training process with RMSProp (orange) is very unsta
 - experiment#2: zca_whitening -->
 
 # Conclusion
-The final model reveals `90.88%` accuracy on test set after 339 epoches with loss of `0.4994`. It is a typical `All-CNN` architecture summaried as follows:
+The final model reveals `90.88%` accuracy on test set after 339 epochs with loss of `0.4994`. It is a typical `All-CNN` architecture summarized as follows:
 ```
     _________________________________________________________________
     Layer (type)                 Output Shape              Param #   
@@ -343,13 +343,16 @@ The parameter setting is as follows:
 |-------------|--------------------------------------------------|
 | Training    | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
+| Data Augmentation | horizontal and vertical shift within the range of 10% |
 | Initializer | LSUV                                             |
 
-The accuracy plot on training () and testing () is shown below:
+The accuracy plot on training (blue) and testing (orange) is shown below:
 ![Final model: model accuracy on Cifar10 dataset](https://github.com/PAN001/Strided-CNN/blob/master/final_model_acc.png?raw=true "Final model: model accuracy on Cifar10 dataset")
 
+It can be seen from the figure, the divergence between training and testing performance becomes bigger and bigger, which indicates the over-fitting to some extent.
+
 Notice:
-This may not be the best parameter setting since in the later experiments, it is found that LSUV may help the model converge more quickly, and thus it may result in a better model. Moreover, more data augmentation may be helpfule as well. This is just a model that I get with the limited training time. 
+This may not be the best parameter setting since in the later experiments, it is found that LSUV may help the model converge more quickly, and thus it may result in a better model. Moreover, more data augmentation may be helpful as well. This is just a model that I get with the limited training time. 
 
 # Future Work
 ## Use of Scheduler
