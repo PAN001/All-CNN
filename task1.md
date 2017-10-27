@@ -13,6 +13,7 @@ The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for
     + `strided_all_CNN_keras.py`
         + implementation of Strided-CNN and All-CNN
         + actual code for training including data agumentation, parameters choice, and initializations
+        + support saving trained model as `h5` file, intermediate logs as `csv` file, and plotting accuracy and loss
 
     + `LSUV.py`
         + Keras implementation of LSUV 
@@ -288,7 +289,7 @@ As figures shown below, the training process with RMSProp (orange) is very unsta
 - experiment#2: zca_whitening -->
 
 # Conclusion
-The final model reveals `90.88%` accuracy on test set at epoch 339 with loss of `0.4994`. It is a typical `All-CNN` architecture summaried as follows:
+The final model reveals `90.88%` accuracy on test set after 339 epoches with loss of `0.4994`. It is a typical `All-CNN` architecture summaried as follows:
 ```
     _________________________________________________________________
     Layer (type)                 Output Shape              Param #   
@@ -343,6 +344,9 @@ The parameter setting is as follows:
 | Training    | batchsize = 32, SGD: lr=0.01, decay=1e-6, momentum=0.9, nesterov |
 | Optimizer   | dropout with 0.5 after each "pooling" layer"     |
 | Initializer | LSUV                                             |
+
+The accuracy plot on training () and testing () is shown below:
+![Final model: model accuracy on Cifar10 dataset](https://github.com/PAN001/Strided-CNN/blob/master/final_model_acc.png?raw=true "Final model: model accuracy on Cifar10 dataset")
 
 Notice:
 This may not be the best parameter setting since in the later experiments, it is found that LSUV may help the model converge more quickly, and thus it may result in a better model. Moreover, more data augmentation may be helpfule as well. This is just a model that I get with the limited training time. 
