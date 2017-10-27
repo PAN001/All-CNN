@@ -138,7 +138,7 @@ def main():
     parser.add_argument("-init", dest="initializer", default="LSUV", type=str,
                         help='the weight initializer')
 
-    parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
+    parser.add_argument("-retrain", dest="retrain", action='store_true', default=False,
                         help='whether to train from the beginning or read weights from the pretrained model')
 
     parser.add_argument("-weightspath", dest="weights_path", default="all_cnn_weights_0.9088_0.4994.hdf5", type=str,
