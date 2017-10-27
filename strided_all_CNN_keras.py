@@ -24,9 +24,10 @@ class AllCNN(Sequential):
     """AllCNN encapsulates the All-CNN.
     """
 
-    def __init__(self, is_dropout = True, is_bn = False, seed = 24, initializer = "glorot_uniform", is_init_fixed = True):
+    def __init__(self, is_dropout = True, is_bn = False, seed = 1, initializer = "glorot_uniform", is_init_fixed = True):
         Sequential.__init__(self)
         self.seed = seed
+        np.random.seed(seed)
 
         # build the network architecture
         if initializer != "LSUV":
