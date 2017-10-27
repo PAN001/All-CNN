@@ -27,7 +27,7 @@ class AllCNN(Sequential):
     def __init__(self, is_dropout = True, is_bn = False, seed = 20, initializer = "glorot_uniform", is_init_fixed = True):
         Sequential.__init__(self)
         self.seed = seed
-        np.random.seed(seed)
+        # np.random.seed(seed)
 
         # build the network architecture
         if initializer != "LSUV":
