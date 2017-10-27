@@ -135,7 +135,7 @@ def main():
     parser.add_argument("-epochs", dest="epochs", default=350, type=int,
                         help='the numer of epochs')
 
-    parser.add_argument("-init", dest="initializer", default="LSUV", type=str,
+    parser.add_argument("-init", dest="initializer", default="he_uniform", type=str,
                         help='the weight initializer')
 
     parser.add_argument("-retrain", dest="retrain", action='store_true', default=False,
