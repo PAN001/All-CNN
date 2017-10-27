@@ -253,7 +253,7 @@ for epoch in range(training_epochs):
     print"epoch: ", epoch
     for batch in range(0, total_batch):
         batch_xs, batch_ys = next_batch(training_data_shuffled_normalized, training_labels_shuffled, batch, batch_size) # Get data
-        print summary(batch_ys)
+        # print summary(batch_ys)
 
         # batch_ys_onehot = tf.one_hot(batch_ys, 10, axis=-1, name="targets", dtype="int64")
         sess.run(optimizer, feed_dict={X: batch_xs, Y: batch_ys})
