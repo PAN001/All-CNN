@@ -13,7 +13,7 @@ test_step = 50
 batch_size = 256
 seed = 1
 np.random.seed(seed)
-tf.set_random_seed(1)
+tf.set_random_seed(seed)
 
 def summary(labels):
     """ Output the summary infomation of the prediction to the standard output
@@ -49,7 +49,7 @@ def conv_relu(x, kernel_shape, bias_shape, stride=1, padding="SAME"):
     # Create variable named "weights".
     weights = tf.get_variable("weights",
         shape=kernel_shape,
-        initializer=tf.random_normal_initializer(mean = 0, stddev = 0.01))
+        initializer=tf.random_normal_initializer(mean = 0, stddev = 0.01, seed = seed))
     # Create variable named "biases".
     biases = tf.get_variable("biases",
         shape=bias_shape,
@@ -69,7 +69,7 @@ def fcl(x, input_size, output_size, dropout=0.0):
     weights = tf.get_variable("weights",
         # [input_size, output_size],
         input_size,
-        initializer = tf.random_normal_initializer())
+        initializer = tf.random_normal_initializer(seed = seed))
     # Create variable named "biases".
     biases = tf.get_variable("biases",
         output_size,

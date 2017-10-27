@@ -106,7 +106,7 @@ Conventional convolutional neural networks perform convolution in the lower laye
 However, the fully connected layers are prone to over-fitting, thus hampering the generalization ability of the overall network. 
 
 The paper [3] proposed a global average pooling to replace the traditional fully connected layers in CNN. The idea is to generate one feature map for each corresponding category of the classification task in the last mlpconv layer. 
-![Global Average Pooling](https://github.com/PAN001/Strided-CNN/blob/master/gap.png?raw=true "Global Average Pooling")
+![Global Average Pooling](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/gap.png?raw=true "Global Average Pooling")
 
 For example, in the case of classification with 10 categories (CIFAR10, MNIST), and Tensorflow environment, if the output from the end of last convolution is a `3D 8,8,128` tensor, in the traditional method, it is flattened into a 1D vector of size `8x8x128`. And then one or several fully connected layers are added and at the end, a softmax layer that reduces the size to 10 classification categories and applies the softmax operator.
 
@@ -138,7 +138,7 @@ Layer-sequential unit-variance (LSUV) initialization is a data-driven weights in
 3. Third, estimate output variance of each convolution and inner product layer and scale the weight to make variance equal to one.
 
 
-![LSUV pseudo code](https://github.com/PAN001/Strided-CNN/blob/master/LSUV_pseudo_code.png?raw=true "LSUV_pseudo_code")
+![LSUV pseudo code](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/LSUV_pseudo_code.png?raw=true "LSUV_pseudo_code")
 
 In `LSUV.py`, it is implemented as follows:
 ```python
@@ -236,8 +236,8 @@ Due to the lack of GPU resources and long training process, I have no choice but
 
 In the first experiment, I compared the effectiveness of different initialization strategies. Specifically, LSUV initialization, Glorot normal initialization, He uniform initialization, together with simple Gaussian distribution initialization are compared. As figures shown below, LSUV (blue) achieves best performance in first 3000 batches.
 
-![Experiment1: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
-![Experiment1: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp1_loss.png?raw=true "Experiment1: model loss on training set")
+![Experiment1: model accuracy on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp1_acc.png?raw=true "Experiment1: model accuracy on training set")
+![Experiment1: model loss on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp1_loss.png?raw=true "Experiment1: model loss on training set")
 
 ## Experiment2: Data Augmentation
 
@@ -249,8 +249,8 @@ In the first experiment, I compared the effectiveness of different initializatio
 
 In the second experiment, I compared the effectiveness of different image preprocessing. Specifically, shift, flipping, normalization and zca whitening are compared. As figures shown below, augmentation by shifting, flipping, normalization and zca whitening (green) helps the model converge more quickly in first 3000 batches. 
 
-![Experiment2: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_acc.png?raw=true "Experiment2: model accuracy on training set")
-![Experiment2: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp2_loss.png?raw=true "Experiment2: model loss on training set")
+![Experiment2: model accuracy on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp2_acc.png?raw=true "Experiment2: model accuracy on training set")
+![Experiment2: model loss on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp2_loss.png?raw=true "Experiment2: model loss on training set")
 
 
 ## Experiment3: Optimizer
@@ -263,8 +263,8 @@ In the second experiment, I compared the effectiveness of different image prepro
 
 In the third experiment, I compared the effectiveness of different optimizations. Specifically, dropout and batch normalization are compared. As figures shown below, the model with batch normalization (green) performs better in first 3000 batches. However, since the 3000 batches is a very small number, the power of dropout in overcoming over-fitting can not be revealed in this early training stage.
 
-![Experiment3: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
-![Experiment3: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp3_loss.png?raw=true "Experiment3: model loss on training set")
+![Experiment3: model accuracy on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp3_acc.png?raw=true "Experiment3: model accuracy on training set")
+![Experiment3: model loss on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp3_loss.png?raw=true "Experiment3: model loss on training set")
 
 
 ## Experiment4: Training Mode
@@ -283,8 +283,8 @@ In the last experiment, I compared the effectiveness of different training modes
 
 As figures shown below, the training process with RMSProp (orange) is very unstable and converge much slower than the other two.
 
-![Experiment4: model accuracy on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_acc.png?raw=true "Experiment4: model accuracy on training set")
-![Experiment4: model loss on training set](https://github.com/PAN001/Strided-CNN/blob/master/exp4_loss.png?raw=true "Experiment4: model loss on training set")
+![Experiment4: model accuracy on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp4_acc.png?raw=true "Experiment4: model accuracy on training set")
+![Experiment4: model loss on training set](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/exp4_loss.png?raw=true "Experiment4: model loss on training set")
 
 <!-- - experiment#1: LSUV, SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True), horizontally and vertically shift within the range of 10%, horizontal flipping
 - experiment#2: zca_whitening -->
@@ -348,7 +348,7 @@ The parameter setting is as follows:
 | Initializer | LSUV                                             |
 
 The accuracy plot on training (blue) and testing (orange) is shown below:
-![Final model: model accuracy on Cifar10 dataset](https://github.com/PAN001/Strided-CNN/blob/master/final_model_acc.png?raw=true "Final model: model accuracy on Cifar10 dataset")
+![Final model: model accuracy on Cifar10 dataset](https://github.com/PAN001/misc/blob/master/Strided-All-CNN/final_model_acc.png?raw=true "Final model: model accuracy on Cifar10 dataset")
 
 It can be seen from the figure, the divergence between training and testing performance becomes bigger and bigger, which indicates the over-fitting to some extent.
 
