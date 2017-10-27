@@ -1,11 +1,13 @@
 # Introduction
+There is a `task1.html` which is converted from this markdown file for demonstration.
+
 For the homework, the two network architectures (i.e. `Strided-CNN,` and `All-CNN`) are both implemented. Additionally, the `Layer-sequential unit-variance (LSUV)` initialization is also implemented. I implemented them both in `Tensorflow` and `Keras`. 
 
 The implementations of Strided-CNN/All-CNN and LSUV in Tensorflow are mainly for the purpose of demonstration of knowledge of Tensorflow. For later training and optimization, they are done using Keras (as Prof. Bhiksha says it is ok to use Keras in this HW). The summary of each file is as follows:
 
 - Tensorflow:
     + `strided_CNN_tf_LSUV.py`
-        + implementation of Strided-CNN, All-CNN and LSUV
+        + implementation of deterministic version Strided-CNN, All-CNN and LSUV
         + no further optimizations
     + `read_cifar10`
         + read cifar10 images from dataset downloaded from the official website
@@ -180,7 +182,6 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
             weights = np.array(weights_all[0])
             # print(weights)
             biases = np.array(weights_all[1])
-            # if np.abs(np.sqrt(var1)) < 1e-7: break  # avoid zero division
 
             weights = weights / np.sqrt(var) # try to scale the variance to the target
             weights_all_new = [weights, biases]
@@ -201,13 +202,13 @@ def LSUV_init(model, batch_xs, layers_to_init = (Dense, Convolution2D)):
 The idea of a data-driven weight initialization, rather than theoretical computation for all layer types, is very attractive: as ever more complex nonlinearities and network architectures are devised, it is more and more difficult to obtain clear theoretical results on the best initialization. This paper elegantly sidesteps the question by numerically rescaling each layer of weights until the output is approximately unit variance. The simplicity of the method makes it likely to be used in practice, although the absolute performance improvements from the method are quite small.
 
 ## He Uniform Initialization
-It draws samples from a uniform distribution within `[-limit, limit]` where `limit` is `sqrt(6 / fan_in)` where `fan_in` is the number of input units in the weight[2].
+It draws samples from a uniform distribution within `[-limit, limit]` where `limit` is `sqrt(6 / fan_in)` where `fan_in` is the number of input units in the weight [2].
 
 # Data Augmentation
 ## ZCA Whitening
 Whitening is a transformation of data in such a way that its covariance matrix is the identity matrix. Hence whitening decorrelates features. It is used as a preprocessing method.
 
-It is implemented in Python as follows:
+It is implemented as follows:
 ```python
 # Calculate principal components
 sigma = np.dot(flat_x.T, flat_x) / flat_x.shape[0]
@@ -219,7 +220,7 @@ whitex = np.dot(flat_x, principal_components)
 ```
 
 # Experiments
-Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epochs for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergence on test set. The experiments are mainly focused on the following four:
+Due to the lack of GPU resources and long training process, I have no choice but to only train fewer than 10 epochs for each different parameter setting for evaluation. The evaluation metrics include the accuracy, loss, and the speed of convergence on test set. The experiments are mainly focused on the following four topics:
 
 1. Different ways of weight initialization
 2. Different ways of data augmentation   

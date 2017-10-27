@@ -25,3 +25,4 @@ MNIST_data/
 MNIST_data/*
 *.tar
 *.tar.gz
+exp/*

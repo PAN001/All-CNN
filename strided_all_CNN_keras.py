@@ -18,8 +18,6 @@ import pickle
 import os
 import math
 import uuid
-
-# import cv2
 import numpy as np
 
 class AllCNN(Sequential):
@@ -107,6 +105,8 @@ class AllCNN(Sequential):
             self.add(Activation('softmax'))
 
 class LossAccEveryBatch(Callback):
+    """Callback class for saving intermediate acc and loss of each batch
+    """
     def on_train_begin(self, logs={}):
         self.losses_batch = []
         self.accs_batch = []
@@ -115,8 +115,9 @@ class LossAccEveryBatch(Callback):
         self.losses_batch.append(logs.get('loss'))
         self.accs_batch.append(logs.get('acc'))
 
-# learning rate schedule
 def step_decay(epoch):
+    """Learning rate scheduler
+    """
     initial_lrate = 0.1
     drop = 0.5
     epochs_drop = 10.0
