@@ -146,7 +146,7 @@ def main():
     parser.add_argument("-retrain", dest="retrain", default=False, type=bool,
                         help='whether to train from the benginning or read weights from the pretrained model')
 
-    parser.add_argument("-weightspath", dest="weights_path", default="all_cnn_model_0.9088_0.4994.h5", type=str,
+    parser.add_argument("-weightspath", dest="weights_path", default="all_cnn_weights_0.9088_0.4994.hdf5", type=str,
                         help='the path of the pretrained model/weights')
 
     parser.add_argument("-train", dest="is_training", action='store_true', default=False,
@@ -226,8 +226,8 @@ def main():
         # rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
         width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
         height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-        horizontal_flip=False,  # randomly flip images
-        vertical_flip=False
+        horizontal_flip=True,  # randomly flip images
+        vertical_flip=True
     )
 
     datagen_test = ImageDataGenerator(
@@ -246,7 +246,7 @@ def main():
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     rmsp = RMSprop(lr=0.001, rho=0.0, epsilon=1e-08, decay=0.001)
     adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-    model.compile(loss='categorical_crossentropy', optimizer=rmsp, metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
     print(model.summary())
 
     if is_training:
